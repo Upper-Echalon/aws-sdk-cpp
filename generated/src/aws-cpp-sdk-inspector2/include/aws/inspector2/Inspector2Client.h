@@ -79,14 +79,17 @@ namespace Inspector2
         virtual ~Inspector2Client();
 
         /**
-         * <p>Associates an Amazon Web Services account with an Amazon Inspector delegated
-         * administrator. An HTTP 200 response indicates the association was successfully
-         * started, but doesn’t indicate whether it was completed. You can check if the
-         * association completed by using <a
+         * <p> Associates an Amazon Web Services account with an Amazon Inspector delegated
+         * administrator. An HTTP 200 response indicates the association was started but
+         * doesn’t indicate whether it completed. You can check if the association
+         * completed using <a
          * href="https://docs.aws.amazon.com/inspector/v2/APIReference/API_ListMembers.html">ListMembers</a>
          * for multiple accounts or <a
          * href="https://docs.aws.amazon.com/inspector/v2/APIReference/API_GetMember.html">GetMembers</a>
-         * for a single account.</p><p><h3>See Also:</h3>   <a
+         * for a single account. An HTTP 402 response indicates the association failed
+         * because the organization size exceeded its limit. For information on limits, see
+         * <a href="https://docs.aws.amazon.com/inspector/latest/user/quotas.html">Amazon
+         * Inspector quotas</a>. </p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AssociateMember">AWS
          * API Reference</a></p>
          */
@@ -990,7 +993,7 @@ namespace Inspector2
         }
 
         /**
-         * <p>Lists coverage details for you environment.</p><p><h3>See Also:</h3>   <a
+         * <p>Lists coverage details for your environment.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListCoverage">AWS
          * API Reference</a></p>
          */
@@ -1358,7 +1361,7 @@ namespace Inspector2
         /**
          * <p> Stops a CIS session. This API is used by the Amazon Inspector SSM plugin to
          * communicate with the Amazon Inspector service. The Amazon Inspector SSM plugin
-         * calls this API to start a CIS scan session for the scan ID supplied by the
+         * calls this API to stop a CIS scan session for the scan ID supplied by the
          * service. </p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StopCisSession">AWS
          * API Reference</a></p>

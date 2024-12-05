@@ -41,8 +41,10 @@ namespace Model
      * in the <i>Amazon S3 User Guide</i>, the response includes this header. It
      * includes the <code>expiry-date</code> and <code>rule-id</code> key-value pairs
      * that provide information about object expiration. The value of the
-     * <code>rule-id</code> is URL-encoded.</p>  <p>This functionality is not
-     * supported for directory buckets.</p> 
+     * <code>rule-id</code> is URL-encoded.</p>  <p>Object expiration information
+     * is not returned in directory buckets and this header returns the value
+     * "<code>NotImplemented</code>" in all responses for directory buckets.</p>
+     * 
      */
     inline const Aws::String& GetExpiration() const{ return m_expiration; }
     inline void SetExpiration(const Aws::String& value) { m_expiration = value; }
@@ -262,6 +264,17 @@ namespace Model
     ///@}
 
     ///@{
+    /**
+     * <p> The size of the object in bytes. This will only be present if you append to
+     * an object. </p>  <p>This functionality is only supported for objects in
+     * the Amazon S3 Express One Zone storage class in directory buckets.</p> 
+     */
+    inline long long GetSize() const{ return m_size; }
+    inline void SetSize(long long value) { m_size = value; }
+    inline PutObjectResult& WithSize(long long value) { SetSize(value); return *this;}
+    ///@}
+
+    ///@{
     
     inline const RequestCharged& GetRequestCharged() const{ return m_requestCharged; }
     inline void SetRequestCharged(const RequestCharged& value) { m_requestCharged = value; }
@@ -307,6 +320,8 @@ namespace Model
     Aws::String m_sSEKMSEncryptionContext;
 
     bool m_bucketKeyEnabled;
+
+    long long m_size;
 
     RequestCharged m_requestCharged;
 

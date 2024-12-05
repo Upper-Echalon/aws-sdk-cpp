@@ -10,6 +10,7 @@
 #include <aws/core/utils/memory/stl/AWSVector.h>
 #include <aws/rds/model/CloudwatchLogsExportConfiguration.h>
 #include <aws/rds/model/ScalingConfiguration.h>
+#include <aws/rds/model/DatabaseInsightsMode.h>
 #include <aws/rds/model/ServerlessV2ScalingConfiguration.h>
 #include <utility>
 
@@ -82,8 +83,8 @@ namespace Model
 
     ///@{
     /**
-     * <p>Specifies whether the modifications in this request and any pending
-     * modifications are asynchronously applied as soon as possible, regardless of the
+     * <p>Specifies whether the modifications in this request are asynchronously
+     * applied as soon as possible, regardless of the
      * <code>PreferredMaintenanceWindow</code> setting for the DB cluster. If this
      * parameter is disabled, changes to the DB cluster are applied during the next
      * maintenance window.</p> <p>Most modifications can be applied immediately or
@@ -440,10 +441,9 @@ namespace Model
      * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using
      * RDS Data API</a> in the <i>Amazon Aurora User Guide</i>.</p>  <p>This
      * parameter applies only to Aurora Serverless v1 DB clusters. To enable or disable
-     * the HTTP endpoint for an Aurora PostgreSQL Serverless v2 or provisioned DB
-     * cluster, use the <code>EnableHttpEndpoint</code> and
-     * <code>DisableHttpEndpoint</code> operations.</p>  <p>Valid for Cluster
-     * Type: Aurora DB clusters only</p>
+     * the HTTP endpoint for an Aurora Serverless v2 or provisioned DB cluster, use the
+     * <code>EnableHttpEndpoint</code> and <code>DisableHttpEndpoint</code>
+     * operations.</p>  <p>Valid for Cluster Type: Aurora DB clusters only</p>
      */
     inline bool GetEnableHttpEndpoint() const{ return m_enableHttpEndpoint; }
     inline bool EnableHttpEndpointHasBeenSet() const { return m_enableHttpEndpointHasBeenSet; }
@@ -608,6 +608,18 @@ namespace Model
     inline ModifyDBClusterRequest& WithMonitoringRoleArn(const Aws::String& value) { SetMonitoringRoleArn(value); return *this;}
     inline ModifyDBClusterRequest& WithMonitoringRoleArn(Aws::String&& value) { SetMonitoringRoleArn(std::move(value)); return *this;}
     inline ModifyDBClusterRequest& WithMonitoringRoleArn(const char* value) { SetMonitoringRoleArn(value); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>Specifies the mode of Database Insights to enable for the cluster.</p>
+     */
+    inline const DatabaseInsightsMode& GetDatabaseInsightsMode() const{ return m_databaseInsightsMode; }
+    inline bool DatabaseInsightsModeHasBeenSet() const { return m_databaseInsightsModeHasBeenSet; }
+    inline void SetDatabaseInsightsMode(const DatabaseInsightsMode& value) { m_databaseInsightsModeHasBeenSet = true; m_databaseInsightsMode = value; }
+    inline void SetDatabaseInsightsMode(DatabaseInsightsMode&& value) { m_databaseInsightsModeHasBeenSet = true; m_databaseInsightsMode = std::move(value); }
+    inline ModifyDBClusterRequest& WithDatabaseInsightsMode(const DatabaseInsightsMode& value) { SetDatabaseInsightsMode(value); return *this;}
+    inline ModifyDBClusterRequest& WithDatabaseInsightsMode(DatabaseInsightsMode&& value) { SetDatabaseInsightsMode(std::move(value)); return *this;}
     ///@}
 
     ///@{
@@ -839,7 +851,9 @@ namespace Model
     /**
      * <p>Specifies whether to enable Aurora Limitless Database. You must enable Aurora
      * Limitless Database to create a DB shard group.</p> <p>Valid for: Aurora DB
-     * clusters only</p>
+     * clusters only</p>  <p>This setting is no longer used. Instead use the
+     * <code>ClusterScalabilityType</code> setting when you create your Aurora
+     * Limitless Database DB cluster.</p> 
      */
     inline bool GetEnableLimitlessDatabase() const{ return m_enableLimitlessDatabase; }
     inline bool EnableLimitlessDatabaseHasBeenSet() const { return m_enableLimitlessDatabaseHasBeenSet; }
@@ -958,6 +972,9 @@ namespace Model
 
     Aws::String m_monitoringRoleArn;
     bool m_monitoringRoleArnHasBeenSet = false;
+
+    DatabaseInsightsMode m_databaseInsightsMode;
+    bool m_databaseInsightsModeHasBeenSet = false;
 
     bool m_enablePerformanceInsights;
     bool m_enablePerformanceInsightsHasBeenSet = false;

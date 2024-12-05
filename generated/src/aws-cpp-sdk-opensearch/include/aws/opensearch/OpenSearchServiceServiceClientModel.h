@@ -20,14 +20,18 @@
 /* Service model headers required in OpenSearchServiceClient header */
 #include <aws/opensearch/model/AcceptInboundConnectionResult.h>
 #include <aws/opensearch/model/AddDataSourceResult.h>
+#include <aws/opensearch/model/AddDirectQueryDataSourceResult.h>
 #include <aws/opensearch/model/AssociatePackageResult.h>
+#include <aws/opensearch/model/AssociatePackagesResult.h>
 #include <aws/opensearch/model/AuthorizeVpcEndpointAccessResult.h>
 #include <aws/opensearch/model/CancelDomainConfigChangeResult.h>
 #include <aws/opensearch/model/CancelServiceSoftwareUpdateResult.h>
+#include <aws/opensearch/model/CreateApplicationResult.h>
 #include <aws/opensearch/model/CreateDomainResult.h>
 #include <aws/opensearch/model/CreateOutboundConnectionResult.h>
 #include <aws/opensearch/model/CreatePackageResult.h>
 #include <aws/opensearch/model/CreateVpcEndpointResult.h>
+#include <aws/opensearch/model/DeleteApplicationResult.h>
 #include <aws/opensearch/model/DeleteDataSourceResult.h>
 #include <aws/opensearch/model/DeleteDomainResult.h>
 #include <aws/opensearch/model/DeleteInboundConnectionResult.h>
@@ -50,13 +54,18 @@
 #include <aws/opensearch/model/DescribeReservedInstancesResult.h>
 #include <aws/opensearch/model/DescribeVpcEndpointsResult.h>
 #include <aws/opensearch/model/DissociatePackageResult.h>
+#include <aws/opensearch/model/DissociatePackagesResult.h>
+#include <aws/opensearch/model/GetApplicationResult.h>
 #include <aws/opensearch/model/GetCompatibleVersionsResult.h>
 #include <aws/opensearch/model/GetDataSourceResult.h>
+#include <aws/opensearch/model/GetDirectQueryDataSourceResult.h>
 #include <aws/opensearch/model/GetDomainMaintenanceStatusResult.h>
 #include <aws/opensearch/model/GetPackageVersionHistoryResult.h>
 #include <aws/opensearch/model/GetUpgradeHistoryResult.h>
 #include <aws/opensearch/model/GetUpgradeStatusResult.h>
+#include <aws/opensearch/model/ListApplicationsResult.h>
 #include <aws/opensearch/model/ListDataSourcesResult.h>
+#include <aws/opensearch/model/ListDirectQueryDataSourcesResult.h>
 #include <aws/opensearch/model/ListDomainMaintenancesResult.h>
 #include <aws/opensearch/model/ListDomainNamesResult.h>
 #include <aws/opensearch/model/ListDomainsForPackageResult.h>
@@ -73,14 +82,19 @@
 #include <aws/opensearch/model/RevokeVpcEndpointAccessResult.h>
 #include <aws/opensearch/model/StartDomainMaintenanceResult.h>
 #include <aws/opensearch/model/StartServiceSoftwareUpdateResult.h>
+#include <aws/opensearch/model/UpdateApplicationResult.h>
 #include <aws/opensearch/model/UpdateDataSourceResult.h>
+#include <aws/opensearch/model/UpdateDirectQueryDataSourceResult.h>
 #include <aws/opensearch/model/UpdateDomainConfigResult.h>
 #include <aws/opensearch/model/UpdatePackageResult.h>
+#include <aws/opensearch/model/UpdatePackageScopeResult.h>
 #include <aws/opensearch/model/UpdateScheduledActionResult.h>
 #include <aws/opensearch/model/UpdateVpcEndpointResult.h>
 #include <aws/opensearch/model/UpgradeDomainResult.h>
+#include <aws/opensearch/model/ListDirectQueryDataSourcesRequest.h>
 #include <aws/opensearch/model/DescribeReservedInstanceOfferingsRequest.h>
 #include <aws/opensearch/model/DescribeInboundConnectionsRequest.h>
+#include <aws/opensearch/model/ListApplicationsRequest.h>
 #include <aws/opensearch/model/DescribePackagesRequest.h>
 #include <aws/opensearch/model/ListDomainNamesRequest.h>
 #include <aws/opensearch/model/DescribeReservedInstancesRequest.h>
@@ -131,16 +145,21 @@ namespace Aws
       /* Service model forward declarations required in OpenSearchServiceClient header */
       class AcceptInboundConnectionRequest;
       class AddDataSourceRequest;
+      class AddDirectQueryDataSourceRequest;
       class AddTagsRequest;
       class AssociatePackageRequest;
+      class AssociatePackagesRequest;
       class AuthorizeVpcEndpointAccessRequest;
       class CancelDomainConfigChangeRequest;
       class CancelServiceSoftwareUpdateRequest;
+      class CreateApplicationRequest;
       class CreateDomainRequest;
       class CreateOutboundConnectionRequest;
       class CreatePackageRequest;
       class CreateVpcEndpointRequest;
+      class DeleteApplicationRequest;
       class DeleteDataSourceRequest;
+      class DeleteDirectQueryDataSourceRequest;
       class DeleteDomainRequest;
       class DeleteInboundConnectionRequest;
       class DeleteOutboundConnectionRequest;
@@ -162,13 +181,18 @@ namespace Aws
       class DescribeReservedInstancesRequest;
       class DescribeVpcEndpointsRequest;
       class DissociatePackageRequest;
+      class DissociatePackagesRequest;
+      class GetApplicationRequest;
       class GetCompatibleVersionsRequest;
       class GetDataSourceRequest;
+      class GetDirectQueryDataSourceRequest;
       class GetDomainMaintenanceStatusRequest;
       class GetPackageVersionHistoryRequest;
       class GetUpgradeHistoryRequest;
       class GetUpgradeStatusRequest;
+      class ListApplicationsRequest;
       class ListDataSourcesRequest;
+      class ListDirectQueryDataSourcesRequest;
       class ListDomainMaintenancesRequest;
       class ListDomainNamesRequest;
       class ListDomainsForPackageRequest;
@@ -186,9 +210,12 @@ namespace Aws
       class RevokeVpcEndpointAccessRequest;
       class StartDomainMaintenanceRequest;
       class StartServiceSoftwareUpdateRequest;
+      class UpdateApplicationRequest;
       class UpdateDataSourceRequest;
+      class UpdateDirectQueryDataSourceRequest;
       class UpdateDomainConfigRequest;
       class UpdatePackageRequest;
+      class UpdatePackageScopeRequest;
       class UpdateScheduledActionRequest;
       class UpdateVpcEndpointRequest;
       class UpgradeDomainRequest;
@@ -197,16 +224,21 @@ namespace Aws
       /* Service model Outcome class definitions */
       typedef Aws::Utils::Outcome<AcceptInboundConnectionResult, OpenSearchServiceError> AcceptInboundConnectionOutcome;
       typedef Aws::Utils::Outcome<AddDataSourceResult, OpenSearchServiceError> AddDataSourceOutcome;
+      typedef Aws::Utils::Outcome<AddDirectQueryDataSourceResult, OpenSearchServiceError> AddDirectQueryDataSourceOutcome;
       typedef Aws::Utils::Outcome<Aws::NoResult, OpenSearchServiceError> AddTagsOutcome;
       typedef Aws::Utils::Outcome<AssociatePackageResult, OpenSearchServiceError> AssociatePackageOutcome;
+      typedef Aws::Utils::Outcome<AssociatePackagesResult, OpenSearchServiceError> AssociatePackagesOutcome;
       typedef Aws::Utils::Outcome<AuthorizeVpcEndpointAccessResult, OpenSearchServiceError> AuthorizeVpcEndpointAccessOutcome;
       typedef Aws::Utils::Outcome<CancelDomainConfigChangeResult, OpenSearchServiceError> CancelDomainConfigChangeOutcome;
       typedef Aws::Utils::Outcome<CancelServiceSoftwareUpdateResult, OpenSearchServiceError> CancelServiceSoftwareUpdateOutcome;
+      typedef Aws::Utils::Outcome<CreateApplicationResult, OpenSearchServiceError> CreateApplicationOutcome;
       typedef Aws::Utils::Outcome<CreateDomainResult, OpenSearchServiceError> CreateDomainOutcome;
       typedef Aws::Utils::Outcome<CreateOutboundConnectionResult, OpenSearchServiceError> CreateOutboundConnectionOutcome;
       typedef Aws::Utils::Outcome<CreatePackageResult, OpenSearchServiceError> CreatePackageOutcome;
       typedef Aws::Utils::Outcome<CreateVpcEndpointResult, OpenSearchServiceError> CreateVpcEndpointOutcome;
+      typedef Aws::Utils::Outcome<DeleteApplicationResult, OpenSearchServiceError> DeleteApplicationOutcome;
       typedef Aws::Utils::Outcome<DeleteDataSourceResult, OpenSearchServiceError> DeleteDataSourceOutcome;
+      typedef Aws::Utils::Outcome<Aws::NoResult, OpenSearchServiceError> DeleteDirectQueryDataSourceOutcome;
       typedef Aws::Utils::Outcome<DeleteDomainResult, OpenSearchServiceError> DeleteDomainOutcome;
       typedef Aws::Utils::Outcome<DeleteInboundConnectionResult, OpenSearchServiceError> DeleteInboundConnectionOutcome;
       typedef Aws::Utils::Outcome<DeleteOutboundConnectionResult, OpenSearchServiceError> DeleteOutboundConnectionOutcome;
@@ -228,13 +260,18 @@ namespace Aws
       typedef Aws::Utils::Outcome<DescribeReservedInstancesResult, OpenSearchServiceError> DescribeReservedInstancesOutcome;
       typedef Aws::Utils::Outcome<DescribeVpcEndpointsResult, OpenSearchServiceError> DescribeVpcEndpointsOutcome;
       typedef Aws::Utils::Outcome<DissociatePackageResult, OpenSearchServiceError> DissociatePackageOutcome;
+      typedef Aws::Utils::Outcome<DissociatePackagesResult, OpenSearchServiceError> DissociatePackagesOutcome;
+      typedef Aws::Utils::Outcome<GetApplicationResult, OpenSearchServiceError> GetApplicationOutcome;
       typedef Aws::Utils::Outcome<GetCompatibleVersionsResult, OpenSearchServiceError> GetCompatibleVersionsOutcome;
       typedef Aws::Utils::Outcome<GetDataSourceResult, OpenSearchServiceError> GetDataSourceOutcome;
+      typedef Aws::Utils::Outcome<GetDirectQueryDataSourceResult, OpenSearchServiceError> GetDirectQueryDataSourceOutcome;
       typedef Aws::Utils::Outcome<GetDomainMaintenanceStatusResult, OpenSearchServiceError> GetDomainMaintenanceStatusOutcome;
       typedef Aws::Utils::Outcome<GetPackageVersionHistoryResult, OpenSearchServiceError> GetPackageVersionHistoryOutcome;
       typedef Aws::Utils::Outcome<GetUpgradeHistoryResult, OpenSearchServiceError> GetUpgradeHistoryOutcome;
       typedef Aws::Utils::Outcome<GetUpgradeStatusResult, OpenSearchServiceError> GetUpgradeStatusOutcome;
+      typedef Aws::Utils::Outcome<ListApplicationsResult, OpenSearchServiceError> ListApplicationsOutcome;
       typedef Aws::Utils::Outcome<ListDataSourcesResult, OpenSearchServiceError> ListDataSourcesOutcome;
+      typedef Aws::Utils::Outcome<ListDirectQueryDataSourcesResult, OpenSearchServiceError> ListDirectQueryDataSourcesOutcome;
       typedef Aws::Utils::Outcome<ListDomainMaintenancesResult, OpenSearchServiceError> ListDomainMaintenancesOutcome;
       typedef Aws::Utils::Outcome<ListDomainNamesResult, OpenSearchServiceError> ListDomainNamesOutcome;
       typedef Aws::Utils::Outcome<ListDomainsForPackageResult, OpenSearchServiceError> ListDomainsForPackageOutcome;
@@ -252,9 +289,12 @@ namespace Aws
       typedef Aws::Utils::Outcome<RevokeVpcEndpointAccessResult, OpenSearchServiceError> RevokeVpcEndpointAccessOutcome;
       typedef Aws::Utils::Outcome<StartDomainMaintenanceResult, OpenSearchServiceError> StartDomainMaintenanceOutcome;
       typedef Aws::Utils::Outcome<StartServiceSoftwareUpdateResult, OpenSearchServiceError> StartServiceSoftwareUpdateOutcome;
+      typedef Aws::Utils::Outcome<UpdateApplicationResult, OpenSearchServiceError> UpdateApplicationOutcome;
       typedef Aws::Utils::Outcome<UpdateDataSourceResult, OpenSearchServiceError> UpdateDataSourceOutcome;
+      typedef Aws::Utils::Outcome<UpdateDirectQueryDataSourceResult, OpenSearchServiceError> UpdateDirectQueryDataSourceOutcome;
       typedef Aws::Utils::Outcome<UpdateDomainConfigResult, OpenSearchServiceError> UpdateDomainConfigOutcome;
       typedef Aws::Utils::Outcome<UpdatePackageResult, OpenSearchServiceError> UpdatePackageOutcome;
+      typedef Aws::Utils::Outcome<UpdatePackageScopeResult, OpenSearchServiceError> UpdatePackageScopeOutcome;
       typedef Aws::Utils::Outcome<UpdateScheduledActionResult, OpenSearchServiceError> UpdateScheduledActionOutcome;
       typedef Aws::Utils::Outcome<UpdateVpcEndpointResult, OpenSearchServiceError> UpdateVpcEndpointOutcome;
       typedef Aws::Utils::Outcome<UpgradeDomainResult, OpenSearchServiceError> UpgradeDomainOutcome;
@@ -263,16 +303,21 @@ namespace Aws
       /* Service model Outcome callable definitions */
       typedef std::future<AcceptInboundConnectionOutcome> AcceptInboundConnectionOutcomeCallable;
       typedef std::future<AddDataSourceOutcome> AddDataSourceOutcomeCallable;
+      typedef std::future<AddDirectQueryDataSourceOutcome> AddDirectQueryDataSourceOutcomeCallable;
       typedef std::future<AddTagsOutcome> AddTagsOutcomeCallable;
       typedef std::future<AssociatePackageOutcome> AssociatePackageOutcomeCallable;
+      typedef std::future<AssociatePackagesOutcome> AssociatePackagesOutcomeCallable;
       typedef std::future<AuthorizeVpcEndpointAccessOutcome> AuthorizeVpcEndpointAccessOutcomeCallable;
       typedef std::future<CancelDomainConfigChangeOutcome> CancelDomainConfigChangeOutcomeCallable;
       typedef std::future<CancelServiceSoftwareUpdateOutcome> CancelServiceSoftwareUpdateOutcomeCallable;
+      typedef std::future<CreateApplicationOutcome> CreateApplicationOutcomeCallable;
       typedef std::future<CreateDomainOutcome> CreateDomainOutcomeCallable;
       typedef std::future<CreateOutboundConnectionOutcome> CreateOutboundConnectionOutcomeCallable;
       typedef std::future<CreatePackageOutcome> CreatePackageOutcomeCallable;
       typedef std::future<CreateVpcEndpointOutcome> CreateVpcEndpointOutcomeCallable;
+      typedef std::future<DeleteApplicationOutcome> DeleteApplicationOutcomeCallable;
       typedef std::future<DeleteDataSourceOutcome> DeleteDataSourceOutcomeCallable;
+      typedef std::future<DeleteDirectQueryDataSourceOutcome> DeleteDirectQueryDataSourceOutcomeCallable;
       typedef std::future<DeleteDomainOutcome> DeleteDomainOutcomeCallable;
       typedef std::future<DeleteInboundConnectionOutcome> DeleteInboundConnectionOutcomeCallable;
       typedef std::future<DeleteOutboundConnectionOutcome> DeleteOutboundConnectionOutcomeCallable;
@@ -294,13 +339,18 @@ namespace Aws
       typedef std::future<DescribeReservedInstancesOutcome> DescribeReservedInstancesOutcomeCallable;
       typedef std::future<DescribeVpcEndpointsOutcome> DescribeVpcEndpointsOutcomeCallable;
       typedef std::future<DissociatePackageOutcome> DissociatePackageOutcomeCallable;
+      typedef std::future<DissociatePackagesOutcome> DissociatePackagesOutcomeCallable;
+      typedef std::future<GetApplicationOutcome> GetApplicationOutcomeCallable;
       typedef std::future<GetCompatibleVersionsOutcome> GetCompatibleVersionsOutcomeCallable;
       typedef std::future<GetDataSourceOutcome> GetDataSourceOutcomeCallable;
+      typedef std::future<GetDirectQueryDataSourceOutcome> GetDirectQueryDataSourceOutcomeCallable;
       typedef std::future<GetDomainMaintenanceStatusOutcome> GetDomainMaintenanceStatusOutcomeCallable;
       typedef std::future<GetPackageVersionHistoryOutcome> GetPackageVersionHistoryOutcomeCallable;
       typedef std::future<GetUpgradeHistoryOutcome> GetUpgradeHistoryOutcomeCallable;
       typedef std::future<GetUpgradeStatusOutcome> GetUpgradeStatusOutcomeCallable;
+      typedef std::future<ListApplicationsOutcome> ListApplicationsOutcomeCallable;
       typedef std::future<ListDataSourcesOutcome> ListDataSourcesOutcomeCallable;
+      typedef std::future<ListDirectQueryDataSourcesOutcome> ListDirectQueryDataSourcesOutcomeCallable;
       typedef std::future<ListDomainMaintenancesOutcome> ListDomainMaintenancesOutcomeCallable;
       typedef std::future<ListDomainNamesOutcome> ListDomainNamesOutcomeCallable;
       typedef std::future<ListDomainsForPackageOutcome> ListDomainsForPackageOutcomeCallable;
@@ -318,9 +368,12 @@ namespace Aws
       typedef std::future<RevokeVpcEndpointAccessOutcome> RevokeVpcEndpointAccessOutcomeCallable;
       typedef std::future<StartDomainMaintenanceOutcome> StartDomainMaintenanceOutcomeCallable;
       typedef std::future<StartServiceSoftwareUpdateOutcome> StartServiceSoftwareUpdateOutcomeCallable;
+      typedef std::future<UpdateApplicationOutcome> UpdateApplicationOutcomeCallable;
       typedef std::future<UpdateDataSourceOutcome> UpdateDataSourceOutcomeCallable;
+      typedef std::future<UpdateDirectQueryDataSourceOutcome> UpdateDirectQueryDataSourceOutcomeCallable;
       typedef std::future<UpdateDomainConfigOutcome> UpdateDomainConfigOutcomeCallable;
       typedef std::future<UpdatePackageOutcome> UpdatePackageOutcomeCallable;
+      typedef std::future<UpdatePackageScopeOutcome> UpdatePackageScopeOutcomeCallable;
       typedef std::future<UpdateScheduledActionOutcome> UpdateScheduledActionOutcomeCallable;
       typedef std::future<UpdateVpcEndpointOutcome> UpdateVpcEndpointOutcomeCallable;
       typedef std::future<UpgradeDomainOutcome> UpgradeDomainOutcomeCallable;
@@ -332,16 +385,21 @@ namespace Aws
     /* Service model async handlers definitions */
     typedef std::function<void(const OpenSearchServiceClient*, const Model::AcceptInboundConnectionRequest&, const Model::AcceptInboundConnectionOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > AcceptInboundConnectionResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::AddDataSourceRequest&, const Model::AddDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > AddDataSourceResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::AddDirectQueryDataSourceRequest&, const Model::AddDirectQueryDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > AddDirectQueryDataSourceResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::AddTagsRequest&, const Model::AddTagsOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > AddTagsResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::AssociatePackageRequest&, const Model::AssociatePackageOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > AssociatePackageResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::AssociatePackagesRequest&, const Model::AssociatePackagesOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > AssociatePackagesResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::AuthorizeVpcEndpointAccessRequest&, const Model::AuthorizeVpcEndpointAccessOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > AuthorizeVpcEndpointAccessResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::CancelDomainConfigChangeRequest&, const Model::CancelDomainConfigChangeOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > CancelDomainConfigChangeResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::CancelServiceSoftwareUpdateRequest&, const Model::CancelServiceSoftwareUpdateOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > CancelServiceSoftwareUpdateResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::CreateApplicationRequest&, const Model::CreateApplicationOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > CreateApplicationResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::CreateDomainRequest&, const Model::CreateDomainOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > CreateDomainResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::CreateOutboundConnectionRequest&, const Model::CreateOutboundConnectionOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > CreateOutboundConnectionResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::CreatePackageRequest&, const Model::CreatePackageOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > CreatePackageResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::CreateVpcEndpointRequest&, const Model::CreateVpcEndpointOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > CreateVpcEndpointResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::DeleteApplicationRequest&, const Model::DeleteApplicationOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DeleteApplicationResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::DeleteDataSourceRequest&, const Model::DeleteDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DeleteDataSourceResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::DeleteDirectQueryDataSourceRequest&, const Model::DeleteDirectQueryDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DeleteDirectQueryDataSourceResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::DeleteDomainRequest&, const Model::DeleteDomainOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DeleteDomainResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::DeleteInboundConnectionRequest&, const Model::DeleteInboundConnectionOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DeleteInboundConnectionResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::DeleteOutboundConnectionRequest&, const Model::DeleteOutboundConnectionOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DeleteOutboundConnectionResponseReceivedHandler;
@@ -363,13 +421,18 @@ namespace Aws
     typedef std::function<void(const OpenSearchServiceClient*, const Model::DescribeReservedInstancesRequest&, const Model::DescribeReservedInstancesOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DescribeReservedInstancesResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::DescribeVpcEndpointsRequest&, const Model::DescribeVpcEndpointsOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DescribeVpcEndpointsResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::DissociatePackageRequest&, const Model::DissociatePackageOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DissociatePackageResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::DissociatePackagesRequest&, const Model::DissociatePackagesOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > DissociatePackagesResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::GetApplicationRequest&, const Model::GetApplicationOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetApplicationResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::GetCompatibleVersionsRequest&, const Model::GetCompatibleVersionsOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetCompatibleVersionsResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::GetDataSourceRequest&, const Model::GetDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetDataSourceResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::GetDirectQueryDataSourceRequest&, const Model::GetDirectQueryDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetDirectQueryDataSourceResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::GetDomainMaintenanceStatusRequest&, const Model::GetDomainMaintenanceStatusOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetDomainMaintenanceStatusResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::GetPackageVersionHistoryRequest&, const Model::GetPackageVersionHistoryOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetPackageVersionHistoryResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::GetUpgradeHistoryRequest&, const Model::GetUpgradeHistoryOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetUpgradeHistoryResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::GetUpgradeStatusRequest&, const Model::GetUpgradeStatusOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > GetUpgradeStatusResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::ListApplicationsRequest&, const Model::ListApplicationsOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > ListApplicationsResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::ListDataSourcesRequest&, const Model::ListDataSourcesOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > ListDataSourcesResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::ListDirectQueryDataSourcesRequest&, const Model::ListDirectQueryDataSourcesOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > ListDirectQueryDataSourcesResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::ListDomainMaintenancesRequest&, const Model::ListDomainMaintenancesOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > ListDomainMaintenancesResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::ListDomainNamesRequest&, const Model::ListDomainNamesOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > ListDomainNamesResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::ListDomainsForPackageRequest&, const Model::ListDomainsForPackageOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > ListDomainsForPackageResponseReceivedHandler;
@@ -387,9 +450,12 @@ namespace Aws
     typedef std::function<void(const OpenSearchServiceClient*, const Model::RevokeVpcEndpointAccessRequest&, const Model::RevokeVpcEndpointAccessOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > RevokeVpcEndpointAccessResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::StartDomainMaintenanceRequest&, const Model::StartDomainMaintenanceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > StartDomainMaintenanceResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::StartServiceSoftwareUpdateRequest&, const Model::StartServiceSoftwareUpdateOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > StartServiceSoftwareUpdateResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdateApplicationRequest&, const Model::UpdateApplicationOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdateApplicationResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdateDataSourceRequest&, const Model::UpdateDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdateDataSourceResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdateDirectQueryDataSourceRequest&, const Model::UpdateDirectQueryDataSourceOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdateDirectQueryDataSourceResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdateDomainConfigRequest&, const Model::UpdateDomainConfigOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdateDomainConfigResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdatePackageRequest&, const Model::UpdatePackageOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdatePackageResponseReceivedHandler;
+    typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdatePackageScopeRequest&, const Model::UpdatePackageScopeOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdatePackageScopeResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdateScheduledActionRequest&, const Model::UpdateScheduledActionOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdateScheduledActionResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::UpdateVpcEndpointRequest&, const Model::UpdateVpcEndpointOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpdateVpcEndpointResponseReceivedHandler;
     typedef std::function<void(const OpenSearchServiceClient*, const Model::UpgradeDomainRequest&, const Model::UpgradeDomainOutcome&, const std::shared_ptr<const Aws::Client::AsyncCallerContext>&) > UpgradeDomainResponseReceivedHandler;

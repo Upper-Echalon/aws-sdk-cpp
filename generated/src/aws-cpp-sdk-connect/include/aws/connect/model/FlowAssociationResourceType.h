@@ -16,7 +16,11 @@ namespace Model
   enum class FlowAssociationResourceType
   {
     NOT_SET,
-    SMS_PHONE_NUMBER
+    SMS_PHONE_NUMBER,
+    INBOUND_EMAIL,
+    OUTBOUND_EMAIL,
+    ANALYTICS_CONNECTOR,
+    WHATSAPP_MESSAGING_PHONE_NUMBER
   };
 
 namespace FlowAssociationResourceTypeMapper

@@ -13,6 +13,9 @@
 #include <aws/core/utils/DateTime.h>
 #include <aws/autoscaling/model/WarmPoolConfiguration.h>
 #include <aws/autoscaling/model/InstanceMaintenancePolicy.h>
+#include <aws/autoscaling/model/AvailabilityZoneDistribution.h>
+#include <aws/autoscaling/model/AvailabilityZoneImpairmentPolicy.h>
+#include <aws/autoscaling/model/CapacityReservationSpecification.h>
 #include <aws/autoscaling/model/Instance.h>
 #include <aws/autoscaling/model/SuspendedProcess.h>
 #include <aws/autoscaling/model/EnabledMetric.h>
@@ -499,6 +502,42 @@ namespace Model
     inline AutoScalingGroup& WithInstanceMaintenancePolicy(const InstanceMaintenancePolicy& value) { SetInstanceMaintenancePolicy(value); return *this;}
     inline AutoScalingGroup& WithInstanceMaintenancePolicy(InstanceMaintenancePolicy&& value) { SetInstanceMaintenancePolicy(std::move(value)); return *this;}
     ///@}
+
+    ///@{
+    /**
+     * <p> The instance capacity distribution across Availability Zones. </p>
+     */
+    inline const AvailabilityZoneDistribution& GetAvailabilityZoneDistribution() const{ return m_availabilityZoneDistribution; }
+    inline bool AvailabilityZoneDistributionHasBeenSet() const { return m_availabilityZoneDistributionHasBeenSet; }
+    inline void SetAvailabilityZoneDistribution(const AvailabilityZoneDistribution& value) { m_availabilityZoneDistributionHasBeenSet = true; m_availabilityZoneDistribution = value; }
+    inline void SetAvailabilityZoneDistribution(AvailabilityZoneDistribution&& value) { m_availabilityZoneDistributionHasBeenSet = true; m_availabilityZoneDistribution = std::move(value); }
+    inline AutoScalingGroup& WithAvailabilityZoneDistribution(const AvailabilityZoneDistribution& value) { SetAvailabilityZoneDistribution(value); return *this;}
+    inline AutoScalingGroup& WithAvailabilityZoneDistribution(AvailabilityZoneDistribution&& value) { SetAvailabilityZoneDistribution(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p> The Availability Zone impairment policy. </p>
+     */
+    inline const AvailabilityZoneImpairmentPolicy& GetAvailabilityZoneImpairmentPolicy() const{ return m_availabilityZoneImpairmentPolicy; }
+    inline bool AvailabilityZoneImpairmentPolicyHasBeenSet() const { return m_availabilityZoneImpairmentPolicyHasBeenSet; }
+    inline void SetAvailabilityZoneImpairmentPolicy(const AvailabilityZoneImpairmentPolicy& value) { m_availabilityZoneImpairmentPolicyHasBeenSet = true; m_availabilityZoneImpairmentPolicy = value; }
+    inline void SetAvailabilityZoneImpairmentPolicy(AvailabilityZoneImpairmentPolicy&& value) { m_availabilityZoneImpairmentPolicyHasBeenSet = true; m_availabilityZoneImpairmentPolicy = std::move(value); }
+    inline AutoScalingGroup& WithAvailabilityZoneImpairmentPolicy(const AvailabilityZoneImpairmentPolicy& value) { SetAvailabilityZoneImpairmentPolicy(value); return *this;}
+    inline AutoScalingGroup& WithAvailabilityZoneImpairmentPolicy(AvailabilityZoneImpairmentPolicy&& value) { SetAvailabilityZoneImpairmentPolicy(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p> The capacity reservation specification. </p>
+     */
+    inline const CapacityReservationSpecification& GetCapacityReservationSpecification() const{ return m_capacityReservationSpecification; }
+    inline bool CapacityReservationSpecificationHasBeenSet() const { return m_capacityReservationSpecificationHasBeenSet; }
+    inline void SetCapacityReservationSpecification(const CapacityReservationSpecification& value) { m_capacityReservationSpecificationHasBeenSet = true; m_capacityReservationSpecification = value; }
+    inline void SetCapacityReservationSpecification(CapacityReservationSpecification&& value) { m_capacityReservationSpecificationHasBeenSet = true; m_capacityReservationSpecification = std::move(value); }
+    inline AutoScalingGroup& WithCapacityReservationSpecification(const CapacityReservationSpecification& value) { SetCapacityReservationSpecification(value); return *this;}
+    inline AutoScalingGroup& WithCapacityReservationSpecification(CapacityReservationSpecification&& value) { SetCapacityReservationSpecification(std::move(value)); return *this;}
+    ///@}
   private:
 
     Aws::String m_autoScalingGroupName;
@@ -605,6 +644,15 @@ namespace Model
 
     InstanceMaintenancePolicy m_instanceMaintenancePolicy;
     bool m_instanceMaintenancePolicyHasBeenSet = false;
+
+    AvailabilityZoneDistribution m_availabilityZoneDistribution;
+    bool m_availabilityZoneDistributionHasBeenSet = false;
+
+    AvailabilityZoneImpairmentPolicy m_availabilityZoneImpairmentPolicy;
+    bool m_availabilityZoneImpairmentPolicyHasBeenSet = false;
+
+    CapacityReservationSpecification m_capacityReservationSpecification;
+    bool m_capacityReservationSpecificationHasBeenSet = false;
   };
 
 } // namespace Model

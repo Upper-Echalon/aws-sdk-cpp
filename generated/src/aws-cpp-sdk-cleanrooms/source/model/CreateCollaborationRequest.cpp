@@ -17,12 +17,15 @@ CreateCollaborationRequest::CreateCollaborationRequest() :
     m_nameHasBeenSet(false),
     m_descriptionHasBeenSet(false),
     m_creatorMemberAbilitiesHasBeenSet(false),
+    m_creatorMLMemberAbilitiesHasBeenSet(false),
     m_creatorDisplayNameHasBeenSet(false),
     m_dataEncryptionMetadataHasBeenSet(false),
     m_queryLogStatus(CollaborationQueryLogStatus::NOT_SET),
     m_queryLogStatusHasBeenSet(false),
     m_tagsHasBeenSet(false),
-    m_creatorPaymentConfigurationHasBeenSet(false)
+    m_creatorPaymentConfigurationHasBeenSet(false),
+    m_analyticsEngine(AnalyticsEngine::NOT_SET),
+    m_analyticsEngineHasBeenSet(false)
 {
 }
 
@@ -64,6 +67,12 @@ Aws::String CreateCollaborationRequest::SerializePayload() const
 
   }
 
+  if(m_creatorMLMemberAbilitiesHasBeenSet)
+  {
+   payload.WithObject("creatorMLMemberAbilities", m_creatorMLMemberAbilities.Jsonize());
+
+  }
+
   if(m_creatorDisplayNameHasBeenSet)
   {
    payload.WithString("creatorDisplayName", m_creatorDisplayName);
@@ -96,6 +105,11 @@ Aws::String CreateCollaborationRequest::SerializePayload() const
   {
    payload.WithObject("creatorPaymentConfiguration", m_creatorPaymentConfiguration.Jsonize());
 
+  }
+
+  if(m_analyticsEngineHasBeenSet)
+  {
+   payload.WithString("analyticsEngine", AnalyticsEngineMapper::GetNameForAnalyticsEngine(m_analyticsEngine));
   }
 
   return payload.View().WriteReadable();

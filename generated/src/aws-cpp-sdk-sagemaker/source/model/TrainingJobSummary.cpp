@@ -26,7 +26,10 @@ TrainingJobSummary::TrainingJobSummary() :
     m_lastModifiedTimeHasBeenSet(false),
     m_trainingJobStatus(TrainingJobStatus::NOT_SET),
     m_trainingJobStatusHasBeenSet(false),
-    m_warmPoolStatusHasBeenSet(false)
+    m_secondaryStatus(SecondaryStatus::NOT_SET),
+    m_secondaryStatusHasBeenSet(false),
+    m_warmPoolStatusHasBeenSet(false),
+    m_trainingPlanArnHasBeenSet(false)
 {
 }
 
@@ -80,11 +83,25 @@ TrainingJobSummary& TrainingJobSummary::operator =(JsonView jsonValue)
     m_trainingJobStatusHasBeenSet = true;
   }
 
+  if(jsonValue.ValueExists("SecondaryStatus"))
+  {
+    m_secondaryStatus = SecondaryStatusMapper::GetSecondaryStatusForName(jsonValue.GetString("SecondaryStatus"));
+
+    m_secondaryStatusHasBeenSet = true;
+  }
+
   if(jsonValue.ValueExists("WarmPoolStatus"))
   {
     m_warmPoolStatus = jsonValue.GetObject("WarmPoolStatus");
 
     m_warmPoolStatusHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("TrainingPlanArn"))
+  {
+    m_trainingPlanArn = jsonValue.GetString("TrainingPlanArn");
+
+    m_trainingPlanArnHasBeenSet = true;
   }
 
   return *this;
@@ -126,9 +143,20 @@ JsonValue TrainingJobSummary::Jsonize() const
    payload.WithString("TrainingJobStatus", TrainingJobStatusMapper::GetNameForTrainingJobStatus(m_trainingJobStatus));
   }
 
+  if(m_secondaryStatusHasBeenSet)
+  {
+   payload.WithString("SecondaryStatus", SecondaryStatusMapper::GetNameForSecondaryStatus(m_secondaryStatus));
+  }
+
   if(m_warmPoolStatusHasBeenSet)
   {
    payload.WithObject("WarmPoolStatus", m_warmPoolStatus.Jsonize());
+
+  }
+
+  if(m_trainingPlanArnHasBeenSet)
+  {
+   payload.WithString("TrainingPlanArn", m_trainingPlanArn);
 
   }
 
