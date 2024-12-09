@@ -132,14 +132,11 @@ namespace Model
 
     ///@{
     /**
-     * <p>The name that's used for the port mapping. This parameter only applies to
-     * Service Connect. This parameter is the name that you use in the
-     * <code>serviceConnectConfiguration</code> of a service. The name can include up
-     * to 64 characters. The characters can include lowercase letters, numbers,
-     * underscores (_), and hyphens (-). The name can't start with a hyphen.</p> <p>For
-     * more information, see <a
-     * href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html">Service
-     * Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>
+     * <p>The name that's used for the port mapping. This parameter is the name that
+     * you use in the <code>serviceConnectConfiguration</code> and the
+     * <code>vpcLatticeConfigurations</code> of a service. The name can include up to
+     * 64 characters. The characters can include lowercase letters, numbers,
+     * underscores (_), and hyphens (-). The name can't start with a hyphen.</p>
      */
     inline const Aws::String& GetName() const{ return m_name; }
     inline bool NameHasBeenSet() const { return m_nameHasBeenSet; }

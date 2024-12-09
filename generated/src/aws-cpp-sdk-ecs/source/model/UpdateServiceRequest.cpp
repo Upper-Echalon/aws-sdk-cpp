@@ -20,6 +20,8 @@ UpdateServiceRequest::UpdateServiceRequest() :
     m_taskDefinitionHasBeenSet(false),
     m_capacityProviderStrategyHasBeenSet(false),
     m_deploymentConfigurationHasBeenSet(false),
+    m_availabilityZoneRebalancing(AvailabilityZoneRebalancing::NOT_SET),
+    m_availabilityZoneRebalancingHasBeenSet(false),
     m_networkConfigurationHasBeenSet(false),
     m_placementConstraintsHasBeenSet(false),
     m_placementStrategyHasBeenSet(false),
@@ -37,7 +39,8 @@ UpdateServiceRequest::UpdateServiceRequest() :
     m_propagateTagsHasBeenSet(false),
     m_serviceRegistriesHasBeenSet(false),
     m_serviceConnectConfigurationHasBeenSet(false),
-    m_volumeConfigurationsHasBeenSet(false)
+    m_volumeConfigurationsHasBeenSet(false),
+    m_vpcLatticeConfigurationsHasBeenSet(false)
 {
 }
 
@@ -84,6 +87,11 @@ Aws::String UpdateServiceRequest::SerializePayload() const
   {
    payload.WithObject("deploymentConfiguration", m_deploymentConfiguration.Jsonize());
 
+  }
+
+  if(m_availabilityZoneRebalancingHasBeenSet)
+  {
+   payload.WithString("availabilityZoneRebalancing", AvailabilityZoneRebalancingMapper::GetNameForAvailabilityZoneRebalancing(m_availabilityZoneRebalancing));
   }
 
   if(m_networkConfigurationHasBeenSet)
@@ -185,6 +193,17 @@ Aws::String UpdateServiceRequest::SerializePayload() const
      volumeConfigurationsJsonList[volumeConfigurationsIndex].AsObject(m_volumeConfigurations[volumeConfigurationsIndex].Jsonize());
    }
    payload.WithArray("volumeConfigurations", std::move(volumeConfigurationsJsonList));
+
+  }
+
+  if(m_vpcLatticeConfigurationsHasBeenSet)
+  {
+   Aws::Utils::Array<JsonValue> vpcLatticeConfigurationsJsonList(m_vpcLatticeConfigurations.size());
+   for(unsigned vpcLatticeConfigurationsIndex = 0; vpcLatticeConfigurationsIndex < vpcLatticeConfigurationsJsonList.GetLength(); ++vpcLatticeConfigurationsIndex)
+   {
+     vpcLatticeConfigurationsJsonList[vpcLatticeConfigurationsIndex].AsObject(m_vpcLatticeConfigurations[vpcLatticeConfigurationsIndex].Jsonize());
+   }
+   payload.WithArray("vpcLatticeConfigurations", std::move(vpcLatticeConfigurationsJsonList));
 
   }
 

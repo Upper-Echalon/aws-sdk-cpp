@@ -29,6 +29,7 @@ static const int CLOUD_WATCH_LOGS_DELIVERY_UNAVAILABLE_HASH = HashingUtils::Hash
 static const int INVALID_NEXT_TOKEN_HASH = HashingUtils::HashString("InvalidNextTokenException");
 static const int INVALID_TRAIL_NAME_HASH = HashingUtils::HashString("InvalidTrailNameException");
 static const int ORGANIZATIONS_NOT_IN_USE_HASH = HashingUtils::HashString("OrganizationsNotInUseException");
+static const int SERVICE_QUOTA_EXCEEDED_HASH = HashingUtils::HashString("ServiceQuotaExceededException");
 static const int INVALID_SNS_TOPIC_NAME_HASH = HashingUtils::HashString("InvalidSnsTopicNameException");
 static const int TRAIL_NOT_FOUND_HASH = HashingUtils::HashString("TrailNotFoundException");
 static const int NOT_ORGANIZATION_MASTER_ACCOUNT_HASH = HashingUtils::HashString("NotOrganizationMasterAccountException");
@@ -62,6 +63,7 @@ static const int CHANNEL_A_R_N_INVALID_HASH = HashingUtils::HashString("ChannelA
 static const int INVALID_TOKEN_HASH = HashingUtils::HashString("InvalidTokenException");
 static const int INSUFFICIENT_DEPENDENCY_SERVICE_ACCESS_PERMISSION_HASH = HashingUtils::HashString("InsufficientDependencyServiceAccessPermissionException");
 static const int EVENT_DATA_STORE_TERMINATION_PROTECTED_HASH = HashingUtils::HashString("EventDataStoreTerminationProtectedException");
+static const int GENERATE_RESPONSE_HASH = HashingUtils::HashString("GenerateResponseException");
 static const int CONCURRENT_MODIFICATION_HASH = HashingUtils::HashString("ConcurrentModificationException");
 static const int EVENT_DATA_STORE_MAX_LIMIT_EXCEEDED_HASH = HashingUtils::HashString("EventDataStoreMaxLimitExceededException");
 static const int INSUFFICIENT_SNS_TOPIC_POLICY_HASH = HashingUtils::HashString("InsufficientSnsTopicPolicyException");
@@ -146,6 +148,10 @@ AWSError<CoreErrors> GetErrorForName(const char* errorName)
   else if (hashCode == ORGANIZATIONS_NOT_IN_USE_HASH)
   {
     return AWSError<CoreErrors>(static_cast<CoreErrors>(CloudTrailErrors::ORGANIZATIONS_NOT_IN_USE), RetryableType::NOT_RETRYABLE);
+  }
+  else if (hashCode == SERVICE_QUOTA_EXCEEDED_HASH)
+  {
+    return AWSError<CoreErrors>(static_cast<CoreErrors>(CloudTrailErrors::SERVICE_QUOTA_EXCEEDED), RetryableType::NOT_RETRYABLE);
   }
   else if (hashCode == INVALID_SNS_TOPIC_NAME_HASH)
   {
@@ -278,6 +284,10 @@ AWSError<CoreErrors> GetErrorForName(const char* errorName)
   else if (hashCode == EVENT_DATA_STORE_TERMINATION_PROTECTED_HASH)
   {
     return AWSError<CoreErrors>(static_cast<CoreErrors>(CloudTrailErrors::EVENT_DATA_STORE_TERMINATION_PROTECTED), RetryableType::NOT_RETRYABLE);
+  }
+  else if (hashCode == GENERATE_RESPONSE_HASH)
+  {
+    return AWSError<CoreErrors>(static_cast<CoreErrors>(CloudTrailErrors::GENERATE_RESPONSE), RetryableType::NOT_RETRYABLE);
   }
   else if (hashCode == CONCURRENT_MODIFICATION_HASH)
   {

@@ -959,6 +959,39 @@ namespace EC2
         }
 
         /**
+         * <p>Associates a security group with another VPC in the same Region. This enables
+         * you to use the same security group with network interfaces and instances in the
+         * specified VPC.</p>  <ul> <li> <p>The VPC you want to associate the
+         * security group with must be in the same Region.</p> </li> <li> <p>You can
+         * associate the security group with another VPC if your account owns the VPC or if
+         * the VPC was shared with you.</p> </li> <li> <p>You must own the security group
+         * and the VPC that it was created in.</p> </li> <li> <p>You cannot use this
+         * feature with default security groups.</p> </li> <li> <p>You cannot use this
+         * feature with the default VPC.</p> </li> </ul> <p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSecurityGroupVpc">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::AssociateSecurityGroupVpcOutcome AssociateSecurityGroupVpc(const Model::AssociateSecurityGroupVpcRequest& request) const;
+
+        /**
+         * A Callable wrapper for AssociateSecurityGroupVpc that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename AssociateSecurityGroupVpcRequestT = Model::AssociateSecurityGroupVpcRequest>
+        Model::AssociateSecurityGroupVpcOutcomeCallable AssociateSecurityGroupVpcCallable(const AssociateSecurityGroupVpcRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::AssociateSecurityGroupVpc, request);
+        }
+
+        /**
+         * An Async wrapper for AssociateSecurityGroupVpc that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename AssociateSecurityGroupVpcRequestT = Model::AssociateSecurityGroupVpcRequest>
+        void AssociateSecurityGroupVpcAsync(const AssociateSecurityGroupVpcRequestT& request, const AssociateSecurityGroupVpcResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::AssociateSecurityGroupVpc, request, handler, context);
+        }
+
+        /**
          * <p>Associates a CIDR block with your subnet. You can only associate a single
          * IPv6 CIDR block with your subnet.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AssociateSubnetCidrBlock">AWS
@@ -1490,12 +1523,18 @@ namespace EC2
         /**
          * <p>Cancels the specified Capacity Reservation, releases the reserved capacity,
          * and changes the Capacity Reservation's state to <code>cancelled</code>.</p>
-         * <p>Instances running in the reserved capacity continue running until you stop
-         * them. Stopped instances that target the Capacity Reservation can no longer
-         * launch. Modify these instances to either target a different Capacity
-         * Reservation, launch On-Demand Instance capacity, or run in any open Capacity
-         * Reservation that has matching attributes and sufficient capacity.</p><p><h3>See
-         * Also:</h3>   <a
+         * <p>You can cancel a Capacity Reservation that is in the following states:</p>
+         * <ul> <li> <p> <code>assessing</code> </p> </li> <li> <p> <code>active</code> and
+         * there is no commitment duration or the commitment duration has elapsed. You
+         * can't cancel a future-dated Capacity Reservation during the commitment
+         * duration.</p> </li> </ul> <p>If a future-dated Capacity Reservation enters the
+         * <code>delayed</code> state, the commitment duration is waived, and you can
+         * cancel it as soon as it enters the <code>active</code> state.</p> <p>Instances
+         * running in the reserved capacity continue running until you stop them. Stopped
+         * instances that target the Capacity Reservation can no longer launch. Modify
+         * these instances to either target a different Capacity Reservation, launch
+         * On-Demand Instance capacity, or run in any open Capacity Reservation that has
+         * matching attributes and sufficient capacity.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelCapacityReservation">AWS
          * API Reference</a></p>
          */
@@ -1577,6 +1616,37 @@ namespace EC2
         void CancelConversionTaskAsync(const CancelConversionTaskRequestT& request, const CancelConversionTaskResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::CancelConversionTask, request, handler, context);
+        }
+
+        /**
+         * <p>Cancels the generation of an account status report.</p> <p>You can only
+         * cancel a report while it has the <code>running</code> status. Reports with other
+         * statuses (<code>complete</code>, <code>cancelled</code>, or <code>error</code>)
+         * can't be canceled.</p> <p>For more information, see <a
+         * href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html">Generating
+         * the account status report for declarative policies</a> in the <i>Amazon Web
+         * Services Organizations User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CancelDeclarativePoliciesReport">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::CancelDeclarativePoliciesReportOutcome CancelDeclarativePoliciesReport(const Model::CancelDeclarativePoliciesReportRequest& request) const;
+
+        /**
+         * A Callable wrapper for CancelDeclarativePoliciesReport that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename CancelDeclarativePoliciesReportRequestT = Model::CancelDeclarativePoliciesReportRequest>
+        Model::CancelDeclarativePoliciesReportOutcomeCallable CancelDeclarativePoliciesReportCallable(const CancelDeclarativePoliciesReportRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::CancelDeclarativePoliciesReport, request);
+        }
+
+        /**
+         * An Async wrapper for CancelDeclarativePoliciesReport that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename CancelDeclarativePoliciesReportRequestT = Model::CancelDeclarativePoliciesReportRequest>
+        void CancelDeclarativePoliciesReportAsync(const CancelDeclarativePoliciesReportRequestT& request, const CancelDeclarativePoliciesReportResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::CancelDeclarativePoliciesReport, request, handler, context);
         }
 
         /**
@@ -1892,28 +1962,25 @@ namespace EC2
         }
 
         /**
-         * <p>Creates a new Capacity Reservation with the specified attributes.</p>
-         * <p>Capacity Reservations enable you to reserve capacity for your Amazon EC2
-         * instances in a specific Availability Zone for any duration. This gives you the
-         * flexibility to selectively add capacity reservations and still get the Regional
-         * RI discounts for that usage. By creating Capacity Reservations, you ensure that
-         * you always have access to Amazon EC2 capacity when you need it, for as long as
-         * you need it. For more information, see <a
-         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">Capacity
-         * Reservations</a> in the <i>Amazon EC2 User Guide</i>.</p> <p>Your request to
-         * create a Capacity Reservation could fail if Amazon EC2 does not have sufficient
-         * capacity to fulfill the request. If your request fails due to Amazon EC2
-         * capacity constraints, either try again at a later time, try in a different
-         * Availability Zone, or request a smaller capacity reservation. If your
-         * application is flexible across instance types and sizes, try to create a
-         * Capacity Reservation with different instance attributes.</p> <p>Your request
-         * could also fail if the requested quantity exceeds your On-Demand Instance limit
-         * for the selected instance type. If your request fails due to limit constraints,
-         * increase your On-Demand Instance limit for the required instance type and try
-         * again. For more information about increasing your instance limits, see <a
-         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon
-         * EC2 Service Quotas</a> in the <i>Amazon EC2 User Guide</i>.</p><p><h3>See
-         * Also:</h3>   <a
+         * <p>Creates a new Capacity Reservation with the specified attributes. Capacity
+         * Reservations enable you to reserve capacity for your Amazon EC2 instances in a
+         * specific Availability Zone for any duration.</p> <p>You can create a Capacity
+         * Reservation at any time, and you can choose when it starts. You can create a
+         * Capacity Reservation for immediate use or you can request a Capacity Reservation
+         * for a future date.</p> <p>For more information, see <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">
+         * Reserve compute capacity with On-Demand Capacity Reservations</a> in the
+         * <i>Amazon EC2 User Guide</i>.</p> <p>Your request to create a Capacity
+         * Reservation could fail if:</p> <ul> <li> <p>Amazon EC2 does not have sufficient
+         * capacity. In this case, try again at a later time, try in a different
+         * Availability Zone, or request a smaller Capacity Reservation. If your workload
+         * is flexible across instance types and sizes, try with different instance
+         * attributes.</p> </li> <li> <p>The requested quantity exceeds your On-Demand
+         * Instance quota. In this case, increase your On-Demand Instance quota for the
+         * requested instance type and try again. For more information, see <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">
+         * Amazon EC2 Service Quotas</a> in the <i>Amazon EC2 User Guide</i>.</p> </li>
+         * </ul><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservation">AWS
          * API Reference</a></p>
          */
@@ -1938,11 +2005,11 @@ namespace EC2
         }
 
         /**
-         * <p> Create a new Capacity Reservation by splitting the available capacity of the
-         * source Capacity Reservation. The new Capacity Reservation will have the same
-         * attributes as the source Capacity Reservation except for tags. The source
-         * Capacity Reservation must be <code>active</code> and owned by your Amazon Web
-         * Services account. </p><p><h3>See Also:</h3>   <a
+         * <p> Create a new Capacity Reservation by splitting the capacity of the source
+         * Capacity Reservation. The new Capacity Reservation will have the same attributes
+         * as the source Capacity Reservation except for tags. The source Capacity
+         * Reservation must be <code>active</code> and owned by your Amazon Web Services
+         * account. </p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationBySplitting">AWS
          * API Reference</a></p>
          */
@@ -2741,18 +2808,18 @@ namespace EC2
 
         /**
          * <p>Creates an ED25519 or 2048-bit RSA key pair with the specified name and in
-         * the specified PEM or PPK format. Amazon EC2 stores the public key and displays
-         * the private key for you to save to a file. The private key is returned as an
-         * unencrypted PEM encoded PKCS#1 private key or an unencrypted PPK formatted
-         * private key for use with PuTTY. If a key with the specified name already exists,
-         * Amazon EC2 returns an error.</p> <p>The key pair returned to you is available
-         * only in the Amazon Web Services Region in which you create it. If you prefer,
-         * you can create your own key pair using a third-party tool and upload it to any
-         * Region using <a>ImportKeyPair</a>.</p> <p>You can have up to 5,000 key pairs per
-         * Amazon Web Services Region.</p> <p>For more information, see <a
+         * the specified format. Amazon EC2 stores the public key and displays the private
+         * key for you to save to a file. The private key is returned as an unencrypted PEM
+         * encoded PKCS#1 private key or an unencrypted PPK formatted private key for use
+         * with PuTTY. If a key with the specified name already exists, Amazon EC2 returns
+         * an error.</p> <p>The key pair returned to you is available only in the Amazon
+         * Web Services Region in which you create it. If you prefer, you can create your
+         * own key pair using a third-party tool and upload it to any Region using
+         * <a>ImportKeyPair</a>.</p> <p>You can have up to 5,000 key pairs per Amazon Web
+         * Services Region.</p> <p>For more information, see <a
          * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon
-         * EC2 key pairs</a> in the <i>Amazon Elastic Compute Cloud User
-         * Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * EC2 key pairs</a> in the <i>Amazon EC2 User Guide</i>.</p><p><h3>See Also:</h3> 
+         * <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPair">AWS
          * API Reference</a></p>
          */
@@ -3460,17 +3527,16 @@ namespace EC2
          * for your instance to control inbound and outbound traffic. For more information,
          * see <a
          * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html">Amazon
-         * EC2 security groups</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>
-         * and <a
+         * EC2 security groups</a> in the <i>Amazon EC2 User Guide</i> and <a
          * href="https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html">Security
-         * groups for your VPC</a> in the <i>Amazon Virtual Private Cloud User
-         * Guide</i>.</p> <p>When you create a security group, you specify a friendly name
-         * of your choice. You can't have two security groups for the same VPC with the
-         * same name.</p> <p>You have a default security group for use in your VPC. If you
-         * don't specify a security group when you launch an instance, the instance is
-         * launched into the appropriate default security group. A default security group
-         * includes a default rule that grants instances unrestricted network access to
-         * each other.</p> <p>You can add or remove rules from your security groups using
+         * groups for your VPC</a> in the <i>Amazon VPC User Guide</i>.</p> <p>When you
+         * create a security group, you specify a friendly name of your choice. You can't
+         * have two security groups for the same VPC with the same name.</p> <p>You have a
+         * default security group for use in your VPC. If you don't specify a security
+         * group when you launch an instance, the instance is launched into the appropriate
+         * default security group. A default security group includes a default rule that
+         * grants instances unrestricted network access to each other.</p> <p>You can add
+         * or remove rules from your security groups using
          * <a>AuthorizeSecurityGroupIngress</a>, <a>AuthorizeSecurityGroupEgress</a>,
          * <a>RevokeSecurityGroupIngress</a>, and <a>RevokeSecurityGroupEgress</a>.</p>
          * <p>For more information about VPC security group limits, see <a
@@ -3829,7 +3895,7 @@ namespace EC2
          * Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a
          * different VPC connected via VPC peering or a transit gateway. </p> <p>By
          * default, no traffic is mirrored. Use <a
-         * href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.htm">CreateTrafficMirrorFilter</a>
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorFilter.html">CreateTrafficMirrorFilter</a>
          * to create filter rules that specify the traffic to mirror.</p><p><h3>See
          * Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorSession">AWS
@@ -4398,6 +4464,39 @@ namespace EC2
         void CreateVpcAsync(const CreateVpcResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const CreateVpcRequestT& request = {}) const
         {
             return SubmitAsync(&EC2Client::CreateVpc, request, handler, context);
+        }
+
+        /**
+         * <p>Create a VPC Block Public Access (BPA) exclusion. A VPC BPA exclusion is a
+         * mode that can be applied to a single VPC or subnet that exempts it from the
+         * account’s BPA mode and will allow bidirectional or egress-only access. You can
+         * create BPA exclusions for VPCs and subnets even when BPA is not enabled on the
+         * account to ensure that there is no traffic disruption to the exclusions when VPC
+         * BPA is turned on. To learn more about VPC BPA, see <a
+         * href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block
+         * public access to VPCs and subnets</a> in the <i>Amazon VPC User
+         * Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcBlockPublicAccessExclusion">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::CreateVpcBlockPublicAccessExclusionOutcome CreateVpcBlockPublicAccessExclusion(const Model::CreateVpcBlockPublicAccessExclusionRequest& request) const;
+
+        /**
+         * A Callable wrapper for CreateVpcBlockPublicAccessExclusion that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename CreateVpcBlockPublicAccessExclusionRequestT = Model::CreateVpcBlockPublicAccessExclusionRequest>
+        Model::CreateVpcBlockPublicAccessExclusionOutcomeCallable CreateVpcBlockPublicAccessExclusionCallable(const CreateVpcBlockPublicAccessExclusionRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::CreateVpcBlockPublicAccessExclusion, request);
+        }
+
+        /**
+         * An Async wrapper for CreateVpcBlockPublicAccessExclusion that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename CreateVpcBlockPublicAccessExclusionRequestT = Model::CreateVpcBlockPublicAccessExclusionRequest>
+        void CreateVpcBlockPublicAccessExclusionAsync(const CreateVpcBlockPublicAccessExclusionRequestT& request, const CreateVpcBlockPublicAccessExclusionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::CreateVpcBlockPublicAccessExclusion, request, handler, context);
         }
 
         /**
@@ -5765,9 +5864,9 @@ namespace EC2
 
         /**
          * <p>Deletes a security group.</p> <p>If you attempt to delete a security group
-         * that is associated with an instance or network interface or is referenced by
-         * another security group in the same VPC, the operation fails with
-         * <code>DependencyViolation</code>.</p><p><h3>See Also:</h3>   <a
+         * that is associated with an instance or network interface, is referenced by
+         * another security group in the same VPC, or has a VPC association, the operation
+         * fails with <code>DependencyViolation</code>.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteSecurityGroup">AWS
          * API Reference</a></p>
          */
@@ -6488,6 +6587,39 @@ namespace EC2
         void DeleteVpcAsync(const DeleteVpcRequestT& request, const DeleteVpcResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::DeleteVpc, request, handler, context);
+        }
+
+        /**
+         * <p>Delete a VPC Block Public Access (BPA) exclusion. A VPC BPA exclusion is a
+         * mode that can be applied to a single VPC or subnet that exempts it from the
+         * account’s BPA mode and will allow bidirectional or egress-only access. You can
+         * create BPA exclusions for VPCs and subnets even when BPA is not enabled on the
+         * account to ensure that there is no traffic disruption to the exclusions when VPC
+         * BPA is turned on. To learn more about VPC BPA, see <a
+         * href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block
+         * public access to VPCs and subnets</a> in the <i>Amazon VPC User
+         * Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteVpcBlockPublicAccessExclusion">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DeleteVpcBlockPublicAccessExclusionOutcome DeleteVpcBlockPublicAccessExclusion(const Model::DeleteVpcBlockPublicAccessExclusionRequest& request) const;
+
+        /**
+         * A Callable wrapper for DeleteVpcBlockPublicAccessExclusion that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DeleteVpcBlockPublicAccessExclusionRequestT = Model::DeleteVpcBlockPublicAccessExclusionRequest>
+        Model::DeleteVpcBlockPublicAccessExclusionOutcomeCallable DeleteVpcBlockPublicAccessExclusionCallable(const DeleteVpcBlockPublicAccessExclusionRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::DeleteVpcBlockPublicAccessExclusion, request);
+        }
+
+        /**
+         * An Async wrapper for DeleteVpcBlockPublicAccessExclusion that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DeleteVpcBlockPublicAccessExclusionRequestT = Model::DeleteVpcBlockPublicAccessExclusionRequest>
+        void DeleteVpcBlockPublicAccessExclusionAsync(const DeleteVpcBlockPublicAccessExclusionRequestT& request, const DeleteVpcBlockPublicAccessExclusionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::DeleteVpcBlockPublicAccessExclusion, request, handler, context);
         }
 
         /**
@@ -7227,6 +7359,59 @@ namespace EC2
         }
 
         /**
+         * <p>Describes the events for the specified Capacity Block extension during the
+         * specified time.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockExtensionHistory">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeCapacityBlockExtensionHistoryOutcome DescribeCapacityBlockExtensionHistory(const Model::DescribeCapacityBlockExtensionHistoryRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for DescribeCapacityBlockExtensionHistory that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeCapacityBlockExtensionHistoryRequestT = Model::DescribeCapacityBlockExtensionHistoryRequest>
+        Model::DescribeCapacityBlockExtensionHistoryOutcomeCallable DescribeCapacityBlockExtensionHistoryCallable(const DescribeCapacityBlockExtensionHistoryRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::DescribeCapacityBlockExtensionHistory, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeCapacityBlockExtensionHistory that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeCapacityBlockExtensionHistoryRequestT = Model::DescribeCapacityBlockExtensionHistoryRequest>
+        void DescribeCapacityBlockExtensionHistoryAsync(const DescribeCapacityBlockExtensionHistoryResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeCapacityBlockExtensionHistoryRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::DescribeCapacityBlockExtensionHistory, request, handler, context);
+        }
+
+        /**
+         * <p>Describes Capacity Block extension offerings available for purchase in the
+         * Amazon Web Services Region that you're currently using.</p><p><h3>See Also:</h3>
+         * <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityBlockExtensionOfferings">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeCapacityBlockExtensionOfferingsOutcome DescribeCapacityBlockExtensionOfferings(const Model::DescribeCapacityBlockExtensionOfferingsRequest& request) const;
+
+        /**
+         * A Callable wrapper for DescribeCapacityBlockExtensionOfferings that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeCapacityBlockExtensionOfferingsRequestT = Model::DescribeCapacityBlockExtensionOfferingsRequest>
+        Model::DescribeCapacityBlockExtensionOfferingsOutcomeCallable DescribeCapacityBlockExtensionOfferingsCallable(const DescribeCapacityBlockExtensionOfferingsRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::DescribeCapacityBlockExtensionOfferings, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeCapacityBlockExtensionOfferings that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeCapacityBlockExtensionOfferingsRequestT = Model::DescribeCapacityBlockExtensionOfferingsRequest>
+        void DescribeCapacityBlockExtensionOfferingsAsync(const DescribeCapacityBlockExtensionOfferingsRequestT& request, const DescribeCapacityBlockExtensionOfferingsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::DescribeCapacityBlockExtensionOfferings, request, handler, context);
+        }
+
+        /**
          * <p>Describes Capacity Block offerings available for purchase in the Amazon Web
          * Services Region that you're currently using. With Capacity Blocks, you purchase
          * a specific instance type for a period of time.</p><p><h3>See Also:</h3>   <a
@@ -7603,6 +7788,42 @@ namespace EC2
         void DescribeCustomerGatewaysAsync(const DescribeCustomerGatewaysResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeCustomerGatewaysRequestT& request = {}) const
         {
             return SubmitAsync(&EC2Client::DescribeCustomerGateways, request, handler, context);
+        }
+
+        /**
+         * <p>Describes the metadata of an account status report, including the status of
+         * the report.</p> <p>To view the full report, download it from the Amazon S3
+         * bucket where it was saved. Reports are accessible only when they have the
+         * <code>complete</code> status. Reports with other statuses (<code>running</code>,
+         * <code>cancelled</code>, or <code>error</code>) are not available in the S3
+         * bucket. For more information about downloading objects from an S3 bucket, see <a
+         * href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/download-objects.html">Downloading
+         * objects</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>For
+         * more information, see <a
+         * href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html">Generating
+         * the account status report for declarative policies</a> in the <i>Amazon Web
+         * Services Organizations User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeDeclarativePoliciesReports">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeDeclarativePoliciesReportsOutcome DescribeDeclarativePoliciesReports(const Model::DescribeDeclarativePoliciesReportsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for DescribeDeclarativePoliciesReports that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeDeclarativePoliciesReportsRequestT = Model::DescribeDeclarativePoliciesReportsRequest>
+        Model::DescribeDeclarativePoliciesReportsOutcomeCallable DescribeDeclarativePoliciesReportsCallable(const DescribeDeclarativePoliciesReportsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::DescribeDeclarativePoliciesReports, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeDeclarativePoliciesReports that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeDeclarativePoliciesReportsRequestT = Model::DescribeDeclarativePoliciesReportsRequest>
+        void DescribeDeclarativePoliciesReportsAsync(const DescribeDeclarativePoliciesReportsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeDeclarativePoliciesReportsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::DescribeDeclarativePoliciesReports, request, handler, context);
         }
 
         /**
@@ -8221,8 +8442,14 @@ namespace EC2
          * <p>Recently deregistered images appear in the returned results for a short
          * interval and then return empty results. After all instances that reference a
          * deregistered AMI are terminated, specifying the ID of the image will eventually
-         * return an error indicating that the AMI ID cannot be found.</p> 
-         * <p>We strongly recommend using only paginated requests. Unpaginated requests are
+         * return an error indicating that the AMI ID cannot be found.</p> <p>When Allowed
+         * AMIs is set to <code>enabled</code>, only allowed images are returned in the
+         * results, with the <code>imageAllowed</code> field set to <code>true</code> for
+         * each image. In <code>audit-mode</code>, the <code>imageAllowed</code> field is
+         * set to <code>true</code> for images that meet the account's Allowed AMIs
+         * criteria, and <code>false</code> for images that don't meet the criteria. For
+         * more information, see <a>EnableAllowedImagesSettings</a>.</p>  <p>We
+         * strongly recommend using only paginated requests. Unpaginated requests are
          * susceptible to throttling and timeouts.</p>   <p>The order of
          * the elements in the response, including those within nested structures, might
          * vary. Applications should not assume the elements appear in a particular
@@ -8466,22 +8693,22 @@ namespace EC2
 
         /**
          * <p>Describes the AMI that was used to launch an instance, even if the AMI is
-         * deprecated, deregistered, or made private (no longer public or shared with your
-         * account).</p> <p>If you specify instance IDs, the output includes information
-         * for only the specified instances. If you specify filters, the output includes
-         * information for only those instances that meet the filter criteria. If you do
-         * not specify instance IDs or filters, the output includes information for all
-         * instances, which can affect performance.</p> <p>If you specify an instance ID
-         * that is not valid, an instance that doesn't exist, or an instance that you do
-         * not own, an error (<code>InvalidInstanceID.NotFound</code>) is returned.</p>
-         * <p>Recently terminated instances might appear in the returned results. This
-         * interval is usually less than one hour.</p> <p>In the rare case where an
-         * Availability Zone is experiencing a service disruption and you specify instance
-         * IDs that are in the affected Availability Zone, or do not specify any instance
-         * IDs at all, the call fails. If you specify only instance IDs that are in an
-         * unaffected Availability Zone, the call works normally.</p>  <p>The order
-         * of the elements in the response, including those within nested structures, might
-         * vary. Applications should not assume the elements appear in a particular
+         * deprecated, deregistered, made private (no longer public or shared with your
+         * account), or not allowed.</p> <p>If you specify instance IDs, the output
+         * includes information for only the specified instances. If you specify filters,
+         * the output includes information for only those instances that meet the filter
+         * criteria. If you do not specify instance IDs or filters, the output includes
+         * information for all instances, which can affect performance.</p> <p>If you
+         * specify an instance ID that is not valid, an instance that doesn't exist, or an
+         * instance that you do not own, an error (<code>InvalidInstanceID.NotFound</code>)
+         * is returned.</p> <p>Recently terminated instances might appear in the returned
+         * results. This interval is usually less than one hour.</p> <p>In the rare case
+         * where an Availability Zone is experiencing a service disruption and you specify
+         * instance IDs that are in the affected Availability Zone, or do not specify any
+         * instance IDs at all, the call fails. If you specify only instance IDs that are
+         * in an unaffected Availability Zone, the call works normally.</p>  <p>The
+         * order of the elements in the response, including those within nested structures,
+         * might vary. Applications should not assume the elements appear in a particular
          * order.</p> <p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceImageMetadata">AWS
          * API Reference</a></p>
@@ -8566,10 +8793,10 @@ namespace EC2
          * <code>hpc7g.4xlarge</code> | <code>hpc7g.8xlarge</code> |
          * <code>hpc7g.16xlarge</code> </p> </li> <li> <p> <code>p3dn.24xlarge</code> |
          * <code>p4d.24xlarge</code> | <code>p4de.24xlarge</code> |
-         * <code>p5.48xlarge</code> | <code>p5e.48xlarge</code> </p> </li> <li> <p>
-         * <code>trn1.2xlarge</code> | <code>trn1.32xlarge</code> |
-         * <code>trn1n.32xlarge</code> </p> </li> </ul> </li> </ul> <p>For more
-         * information, see <a
+         * <code>p5.48xlarge</code> | <code>p5e.48xlarge</code> |
+         * <code>p5en.48xlarge</code> </p> </li> <li> <p> <code>trn1.2xlarge</code> |
+         * <code>trn1.32xlarge</code> | <code>trn1n.32xlarge</code> </p> </li> </ul> </li>
+         * </ul> <p>For more information, see <a
          * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html">Amazon
          * EC2 instance topology</a> in the <i>Amazon EC2 User Guide</i>.</p><p><h3>See
          * Also:</h3>   <a
@@ -8941,8 +9168,8 @@ namespace EC2
          * <p>Describes the specified key pairs or all of your key pairs.</p> <p>For more
          * information about key pairs, see <a
          * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon
-         * EC2 key pairs</a> in the <i>Amazon Elastic Compute Cloud User
-         * Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * EC2 key pairs</a> in the <i>Amazon EC2 User Guide</i>.</p><p><h3>See Also:</h3> 
+         * <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairs">AWS
          * API Reference</a></p>
          */
@@ -9955,9 +10182,9 @@ namespace EC2
         }
 
         /**
-         * <p>Describes the VPCs on the other side of a VPC peering connection that are
-         * referencing the security groups you've specified in this request.</p><p><h3>See
-         * Also:</h3>   <a
+         * <p>Describes the VPCs on the other side of a VPC peering or Transit Gateway
+         * connection that are referencing the security groups you've specified in this
+         * request.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupReferences">AWS
          * API Reference</a></p>
          */
@@ -10005,6 +10232,33 @@ namespace EC2
         void DescribeSecurityGroupRulesAsync(const DescribeSecurityGroupRulesResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeSecurityGroupRulesRequestT& request = {}) const
         {
             return SubmitAsync(&EC2Client::DescribeSecurityGroupRules, request, handler, context);
+        }
+
+        /**
+         * <p>Describes security group VPC associations made with <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateSecurityGroupVpc.html">AssociateSecurityGroupVpc</a>.</p><p><h3>See
+         * Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeSecurityGroupVpcAssociations">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeSecurityGroupVpcAssociationsOutcome DescribeSecurityGroupVpcAssociations(const Model::DescribeSecurityGroupVpcAssociationsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for DescribeSecurityGroupVpcAssociations that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeSecurityGroupVpcAssociationsRequestT = Model::DescribeSecurityGroupVpcAssociationsRequest>
+        Model::DescribeSecurityGroupVpcAssociationsOutcomeCallable DescribeSecurityGroupVpcAssociationsCallable(const DescribeSecurityGroupVpcAssociationsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::DescribeSecurityGroupVpcAssociations, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeSecurityGroupVpcAssociations that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeSecurityGroupVpcAssociationsRequestT = Model::DescribeSecurityGroupVpcAssociationsRequest>
+        void DescribeSecurityGroupVpcAssociationsAsync(const DescribeSecurityGroupVpcAssociationsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeSecurityGroupVpcAssociationsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::DescribeSecurityGroupVpcAssociations, request, handler, context);
         }
 
         /**
@@ -10337,11 +10591,16 @@ namespace EC2
         }
 
         /**
-         * <p>Describes the stale security group rules for security groups in a specified
-         * VPC. Rules are stale when they reference a deleted security group in a peered
-         * VPC. Rules can also be stale if they reference a security group in a peer VPC
-         * for which the VPC peering connection has been deleted.</p><p><h3>See Also:</h3> 
-         * <a
+         * <p>Describes the stale security group rules for security groups referenced
+         * across a VPC peering connection, transit gateway connection, or with a security
+         * group VPC association. Rules are stale when they reference a deleted security
+         * group. Rules can also be stale if they reference a security group in a peer VPC
+         * for which the VPC peering connection has been deleted, across a transit gateway
+         * where the transit gateway has been deleted (or <a
+         * href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html#vpc-attachment-security">the
+         * transit gateway security group referencing feature</a> has been disabled), or if
+         * a security group VPC association has been disassociated.</p><p><h3>See
+         * Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeStaleSecurityGroups">AWS
          * API Reference</a></p>
          */
@@ -11171,6 +11430,70 @@ namespace EC2
         }
 
         /**
+         * <p>Describe VPC Block Public Access (BPA) exclusions. A VPC BPA exclusion is a
+         * mode that can be applied to a single VPC or subnet that exempts it from the
+         * account’s BPA mode and will allow bidirectional or egress-only access. You can
+         * create BPA exclusions for VPCs and subnets even when BPA is not enabled on the
+         * account to ensure that there is no traffic disruption to the exclusions when VPC
+         * BPA is turned on. To learn more about VPC BPA, see <a
+         * href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block
+         * public access to VPCs and subnets</a> in the <i>Amazon VPC User
+         * Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcBlockPublicAccessExclusions">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeVpcBlockPublicAccessExclusionsOutcome DescribeVpcBlockPublicAccessExclusions(const Model::DescribeVpcBlockPublicAccessExclusionsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for DescribeVpcBlockPublicAccessExclusions that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeVpcBlockPublicAccessExclusionsRequestT = Model::DescribeVpcBlockPublicAccessExclusionsRequest>
+        Model::DescribeVpcBlockPublicAccessExclusionsOutcomeCallable DescribeVpcBlockPublicAccessExclusionsCallable(const DescribeVpcBlockPublicAccessExclusionsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::DescribeVpcBlockPublicAccessExclusions, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeVpcBlockPublicAccessExclusions that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeVpcBlockPublicAccessExclusionsRequestT = Model::DescribeVpcBlockPublicAccessExclusionsRequest>
+        void DescribeVpcBlockPublicAccessExclusionsAsync(const DescribeVpcBlockPublicAccessExclusionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeVpcBlockPublicAccessExclusionsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::DescribeVpcBlockPublicAccessExclusions, request, handler, context);
+        }
+
+        /**
+         * <p>Describe VPC Block Public Access (BPA) options. VPC Block Public Access (BPA)
+         * enables you to block resources in VPCs and subnets that you own in a Region from
+         * reaching or being reached from the internet through internet gateways and
+         * egress-only internet gateways. To learn more about VPC BPA, see <a
+         * href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block
+         * public access to VPCs and subnets</a> in the <i>Amazon VPC User
+         * Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcBlockPublicAccessOptions">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeVpcBlockPublicAccessOptionsOutcome DescribeVpcBlockPublicAccessOptions(const Model::DescribeVpcBlockPublicAccessOptionsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for DescribeVpcBlockPublicAccessOptions that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeVpcBlockPublicAccessOptionsRequestT = Model::DescribeVpcBlockPublicAccessOptionsRequest>
+        Model::DescribeVpcBlockPublicAccessOptionsOutcomeCallable DescribeVpcBlockPublicAccessOptionsCallable(const DescribeVpcBlockPublicAccessOptionsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::DescribeVpcBlockPublicAccessOptions, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeVpcBlockPublicAccessOptions that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeVpcBlockPublicAccessOptionsRequestT = Model::DescribeVpcBlockPublicAccessOptionsRequest>
+        void DescribeVpcBlockPublicAccessOptionsAsync(const DescribeVpcBlockPublicAccessOptionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeVpcBlockPublicAccessOptionsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::DescribeVpcBlockPublicAccessOptions, request, handler, context);
+        }
+
+        /**
          *  <p>This action is deprecated.</p>  <p>Describes the ClassicLink
          * status of the specified VPCs.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcClassicLink">AWS
@@ -11224,6 +11547,33 @@ namespace EC2
         void DescribeVpcClassicLinkDnsSupportAsync(const DescribeVpcClassicLinkDnsSupportResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeVpcClassicLinkDnsSupportRequestT& request = {}) const
         {
             return SubmitAsync(&EC2Client::DescribeVpcClassicLinkDnsSupport, request, handler, context);
+        }
+
+        /**
+         * <p>Describes the VPC resources, VPC endpoint services, Amazon Lattice services,
+         * or service networks associated with the VPC endpoint.</p><p><h3>See Also:</h3>  
+         * <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointAssociations">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeVpcEndpointAssociationsOutcome DescribeVpcEndpointAssociations(const Model::DescribeVpcEndpointAssociationsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for DescribeVpcEndpointAssociations that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeVpcEndpointAssociationsRequestT = Model::DescribeVpcEndpointAssociationsRequest>
+        Model::DescribeVpcEndpointAssociationsOutcomeCallable DescribeVpcEndpointAssociationsCallable(const DescribeVpcEndpointAssociationsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::DescribeVpcEndpointAssociations, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeVpcEndpointAssociations that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeVpcEndpointAssociationsRequestT = Model::DescribeVpcEndpointAssociationsRequest>
+        void DescribeVpcEndpointAssociationsAsync(const DescribeVpcEndpointAssociationsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DescribeVpcEndpointAssociationsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::DescribeVpcEndpointAssociations, request, handler, context);
         }
 
         /**
@@ -11708,6 +12058,41 @@ namespace EC2
         void DisableAddressTransferAsync(const DisableAddressTransferRequestT& request, const DisableAddressTransferResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::DisableAddressTransfer, request, handler, context);
+        }
+
+        /**
+         * <p>Disables Allowed AMIs for your account in the specified Amazon Web Services
+         * Region. When set to <code>disabled</code>, the image criteria in your Allowed
+         * AMIs settings do not apply, and no restrictions are placed on AMI
+         * discoverability or usage. Users in your account can launch instances using any
+         * public AMI or AMI shared with your account.</p>  <p>The Allowed AMIs
+         * feature does not restrict the AMIs owned by your account. Regardless of the
+         * criteria you set, the AMIs created by your account will always be discoverable
+         * and usable by users in your account.</p>  <p>For more information, see <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html">Control
+         * the discovery and use of AMIs in Amazon EC2 with Allowed AMIs</a> in <i>Amazon
+         * EC2 User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableAllowedImagesSettings">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DisableAllowedImagesSettingsOutcome DisableAllowedImagesSettings(const Model::DisableAllowedImagesSettingsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for DisableAllowedImagesSettings that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DisableAllowedImagesSettingsRequestT = Model::DisableAllowedImagesSettingsRequest>
+        Model::DisableAllowedImagesSettingsOutcomeCallable DisableAllowedImagesSettingsCallable(const DisableAllowedImagesSettingsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::DisableAllowedImagesSettings, request);
+        }
+
+        /**
+         * An Async wrapper for DisableAllowedImagesSettings that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DisableAllowedImagesSettingsRequestT = Model::DisableAllowedImagesSettingsRequest>
+        void DisableAllowedImagesSettingsAsync(const DisableAllowedImagesSettingsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const DisableAllowedImagesSettingsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::DisableAllowedImagesSettings, request, handler, context);
         }
 
         /**
@@ -12461,6 +12846,36 @@ namespace EC2
         }
 
         /**
+         * <p>Disassociates a security group from a VPC. You cannot disassociate the
+         * security group if any Elastic network interfaces in the associated VPC are still
+         * associated with the security group. Note that the disassociation is asynchronous
+         * and you can check the status of the request with <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroupVpcAssociations.html">DescribeSecurityGroupVpcAssociations</a>.</p><p><h3>See
+         * Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisassociateSecurityGroupVpc">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DisassociateSecurityGroupVpcOutcome DisassociateSecurityGroupVpc(const Model::DisassociateSecurityGroupVpcRequest& request) const;
+
+        /**
+         * A Callable wrapper for DisassociateSecurityGroupVpc that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DisassociateSecurityGroupVpcRequestT = Model::DisassociateSecurityGroupVpcRequest>
+        Model::DisassociateSecurityGroupVpcOutcomeCallable DisassociateSecurityGroupVpcCallable(const DisassociateSecurityGroupVpcRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::DisassociateSecurityGroupVpc, request);
+        }
+
+        /**
+         * An Async wrapper for DisassociateSecurityGroupVpc that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DisassociateSecurityGroupVpcRequestT = Model::DisassociateSecurityGroupVpcRequest>
+        void DisassociateSecurityGroupVpcAsync(const DisassociateSecurityGroupVpcRequestT& request, const DisassociateSecurityGroupVpcResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::DisassociateSecurityGroupVpc, request, handler, context);
+        }
+
+        /**
          * <p>Disassociates a CIDR block from a subnet. Currently, you can disassociate an
          * IPv6 CIDR block only. You must detach or delete all gateways and resources that
          * are associated with the CIDR block before you can disassociate it.
@@ -12648,6 +13063,49 @@ namespace EC2
         void EnableAddressTransferAsync(const EnableAddressTransferRequestT& request, const EnableAddressTransferResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::EnableAddressTransfer, request, handler, context);
+        }
+
+        /**
+         * <p>Enables Allowed AMIs for your account in the specified Amazon Web Services
+         * Region. Two values are accepted:</p> <ul> <li> <p> <code>enabled</code>: The
+         * image criteria in your Allowed AMIs settings are applied. As a result, only AMIs
+         * matching these criteria are discoverable and can be used by your account to
+         * launch instances.</p> </li> <li> <p> <code>audit-mode</code>: The image criteria
+         * in your Allowed AMIs settings are not applied. No restrictions are placed on AMI
+         * discoverability or usage. Users in your account can launch instances using any
+         * public AMI or AMI shared with your account.</p> <p>The purpose of
+         * <code>audit-mode</code> is to indicate which AMIs will be affected when Allowed
+         * AMIs is <code>enabled</code>. In <code>audit-mode</code>, each AMI displays
+         * either <code>"ImageAllowed": true</code> or <code>"ImageAllowed": false</code>
+         * to indicate whether the AMI will be discoverable and available to users in the
+         * account when Allowed AMIs is enabled.</p> </li> </ul>  <p>The Allowed AMIs
+         * feature does not restrict the AMIs owned by your account. Regardless of the
+         * criteria you set, the AMIs created by your account will always be discoverable
+         * and usable by users in your account.</p>  <p>For more information, see <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html">Control
+         * the discovery and use of AMIs in Amazon EC2 with Allowed AMIs</a> in <i>Amazon
+         * EC2 User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableAllowedImagesSettings">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::EnableAllowedImagesSettingsOutcome EnableAllowedImagesSettings(const Model::EnableAllowedImagesSettingsRequest& request) const;
+
+        /**
+         * A Callable wrapper for EnableAllowedImagesSettings that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename EnableAllowedImagesSettingsRequestT = Model::EnableAllowedImagesSettingsRequest>
+        Model::EnableAllowedImagesSettingsOutcomeCallable EnableAllowedImagesSettingsCallable(const EnableAllowedImagesSettingsRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::EnableAllowedImagesSettings, request);
+        }
+
+        /**
+         * An Async wrapper for EnableAllowedImagesSettings that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename EnableAllowedImagesSettingsRequestT = Model::EnableAllowedImagesSettingsRequest>
+        void EnableAllowedImagesSettingsAsync(const EnableAllowedImagesSettingsRequestT& request, const EnableAllowedImagesSettingsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::EnableAllowedImagesSettings, request, handler, context);
         }
 
         /**
@@ -13295,6 +13753,65 @@ namespace EC2
         }
 
         /**
+         * <p>Exports the client configuration for a Verified Access
+         * instance.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ExportVerifiedAccessInstanceClientConfiguration">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ExportVerifiedAccessInstanceClientConfigurationOutcome ExportVerifiedAccessInstanceClientConfiguration(const Model::ExportVerifiedAccessInstanceClientConfigurationRequest& request) const;
+
+        /**
+         * A Callable wrapper for ExportVerifiedAccessInstanceClientConfiguration that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ExportVerifiedAccessInstanceClientConfigurationRequestT = Model::ExportVerifiedAccessInstanceClientConfigurationRequest>
+        Model::ExportVerifiedAccessInstanceClientConfigurationOutcomeCallable ExportVerifiedAccessInstanceClientConfigurationCallable(const ExportVerifiedAccessInstanceClientConfigurationRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::ExportVerifiedAccessInstanceClientConfiguration, request);
+        }
+
+        /**
+         * An Async wrapper for ExportVerifiedAccessInstanceClientConfiguration that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ExportVerifiedAccessInstanceClientConfigurationRequestT = Model::ExportVerifiedAccessInstanceClientConfigurationRequest>
+        void ExportVerifiedAccessInstanceClientConfigurationAsync(const ExportVerifiedAccessInstanceClientConfigurationRequestT& request, const ExportVerifiedAccessInstanceClientConfigurationResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::ExportVerifiedAccessInstanceClientConfiguration, request, handler, context);
+        }
+
+        /**
+         * <p>Gets the current state of the Allowed AMIs setting and the list of Allowed
+         * AMIs criteria at the account level in the specified Region.</p>  <p>The
+         * Allowed AMIs feature does not restrict the AMIs owned by your account.
+         * Regardless of the criteria you set, the AMIs created by your account will always
+         * be discoverable and usable by users in your account.</p>  <p>For more
+         * information, see <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html">Control
+         * the discovery and use of AMIs in Amazon EC2 with Allowed AMIs</a> in <i>Amazon
+         * EC2 User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAllowedImagesSettings">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::GetAllowedImagesSettingsOutcome GetAllowedImagesSettings(const Model::GetAllowedImagesSettingsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for GetAllowedImagesSettings that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename GetAllowedImagesSettingsRequestT = Model::GetAllowedImagesSettingsRequest>
+        Model::GetAllowedImagesSettingsOutcomeCallable GetAllowedImagesSettingsCallable(const GetAllowedImagesSettingsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::GetAllowedImagesSettings, request);
+        }
+
+        /**
+         * An Async wrapper for GetAllowedImagesSettings that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename GetAllowedImagesSettingsRequestT = Model::GetAllowedImagesSettingsRequest>
+        void GetAllowedImagesSettingsAsync(const GetAllowedImagesSettingsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const GetAllowedImagesSettingsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::GetAllowedImagesSettings, request, handler, context);
+        }
+
+        /**
          * <p>Returns the IAM roles that are associated with the specified ACM (ACM)
          * certificate. It also returns the name of the Amazon S3 bucket and the Amazon S3
          * object key where the certificate, certificate chain, and encrypted private key
@@ -13489,6 +14006,42 @@ namespace EC2
         void GetConsoleScreenshotAsync(const GetConsoleScreenshotRequestT& request, const GetConsoleScreenshotResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::GetConsoleScreenshot, request, handler, context);
+        }
+
+        /**
+         * <p>Retrieves a summary of the account status report.</p> <p>To view the full
+         * report, download it from the Amazon S3 bucket where it was saved. Reports are
+         * accessible only when they have the <code>complete</code> status. Reports with
+         * other statuses (<code>running</code>, <code>cancelled</code>, or
+         * <code>error</code>) are not available in the S3 bucket. For more information
+         * about downloading objects from an S3 bucket, see <a
+         * href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/download-objects.html">Downloading
+         * objects</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> <p>For
+         * more information, see <a
+         * href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html">Generating
+         * the account status report for declarative policies</a> in the <i>Amazon Web
+         * Services Organizations User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetDeclarativePoliciesReportSummary">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::GetDeclarativePoliciesReportSummaryOutcome GetDeclarativePoliciesReportSummary(const Model::GetDeclarativePoliciesReportSummaryRequest& request) const;
+
+        /**
+         * A Callable wrapper for GetDeclarativePoliciesReportSummary that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename GetDeclarativePoliciesReportSummaryRequestT = Model::GetDeclarativePoliciesReportSummaryRequest>
+        Model::GetDeclarativePoliciesReportSummaryOutcomeCallable GetDeclarativePoliciesReportSummaryCallable(const GetDeclarativePoliciesReportSummaryRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::GetDeclarativePoliciesReportSummary, request);
+        }
+
+        /**
+         * An Async wrapper for GetDeclarativePoliciesReportSummary that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename GetDeclarativePoliciesReportSummaryRequestT = Model::GetDeclarativePoliciesReportSummaryRequest>
+        void GetDeclarativePoliciesReportSummaryAsync(const GetDeclarativePoliciesReportSummaryRequestT& request, const GetDeclarativePoliciesReportSummaryResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::GetDeclarativePoliciesReportSummary, request, handler, context);
         }
 
         /**
@@ -14597,6 +15150,32 @@ namespace EC2
         }
 
         /**
+         * <p>Gets the targets for the specified network CIDR endpoint for Verified
+         * Access.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVerifiedAccessEndpointTargets">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::GetVerifiedAccessEndpointTargetsOutcome GetVerifiedAccessEndpointTargets(const Model::GetVerifiedAccessEndpointTargetsRequest& request) const;
+
+        /**
+         * A Callable wrapper for GetVerifiedAccessEndpointTargets that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename GetVerifiedAccessEndpointTargetsRequestT = Model::GetVerifiedAccessEndpointTargetsRequest>
+        Model::GetVerifiedAccessEndpointTargetsOutcomeCallable GetVerifiedAccessEndpointTargetsCallable(const GetVerifiedAccessEndpointTargetsRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::GetVerifiedAccessEndpointTargets, request);
+        }
+
+        /**
+         * An Async wrapper for GetVerifiedAccessEndpointTargets that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename GetVerifiedAccessEndpointTargetsRequestT = Model::GetVerifiedAccessEndpointTargetsRequest>
+        void GetVerifiedAccessEndpointTargetsAsync(const GetVerifiedAccessEndpointTargetsRequestT& request, const GetVerifiedAccessEndpointTargetsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::GetVerifiedAccessEndpointTargets, request, handler, context);
+        }
+
+        /**
          * <p>Shows the contents of the Verified Access policy associated with the
          * group.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetVerifiedAccessGroupPolicy">AWS
@@ -14811,15 +15390,12 @@ namespace EC2
         }
 
         /**
-         * <p>Imports the public key from an RSA or ED25519 key pair that you created with
-         * a third-party tool. Compare this with <a>CreateKeyPair</a>, in which Amazon Web
-         * Services creates the key pair and gives the keys to you (Amazon Web Services
-         * keeps a copy of the public key). With ImportKeyPair, you create the key pair and
-         * give Amazon Web Services just the public key. The private key is never
-         * transferred between you and Amazon Web Services.</p> <p>For more information
-         * about key pairs, see <a
-         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html">Amazon
-         * EC2 key pairs</a> in the <i>Amazon Elastic Compute Cloud User
+         * <p>Imports the public key from an RSA or ED25519 key pair that you created using
+         * a third-party tool. You give Amazon Web Services only the public key. The
+         * private key is never transferred between you and Amazon Web Services.</p> <p>For
+         * more information about the requirements for importing a key pair, see <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/create-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws">Create
+         * a key pair and import the public key to Amazon EC2</a> in the <i>Amazon EC2 User
          * Guide</i>.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImportKeyPair">AWS
          * API Reference</a></p>
@@ -15055,8 +15631,19 @@ namespace EC2
          * settings, Availability Zone, or tenancy. If you need to modify any of these
          * attributes, we recommend that you cancel the Capacity Reservation, and then
          * create a new one with the required attributes. For more information, see <a
-         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html">Modify
-         * an active Capacity Reservation</a>.</p><p><h3>See Also:</h3>   <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html">
+         * Modify an active Capacity Reservation</a>.</p> <p>The allowed modifications
+         * depend on the state of the Capacity Reservation:</p> <ul> <li> <p>
+         * <code>assessing</code> or <code>scheduled</code> state - You can modify the tags
+         * only.</p> </li> <li> <p> <code>pending</code> state - You can't modify the
+         * Capacity Reservation in any way.</p> </li> <li> <p> <code>active</code> state
+         * but still within the commitment duration - You can't decrease the instance count
+         * or set an end date that is within the commitment duration. All other
+         * modifications are allowed.</p> </li> <li> <p> <code>active</code> state with no
+         * commitment duration or elapsed commitment duration - All modifications are
+         * allowed.</p> </li> <li> <p> <code>expired</code>, <code>cancelled</code>,
+         * <code>unsupported</code>, or <code>failed</code> state - You can't modify the
+         * Capacity Reservation in any way.</p> </li> </ul><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservation">AWS
          * API Reference</a></p>
          */
@@ -15493,8 +16080,9 @@ namespace EC2
         /**
          * <p>Modifies the Capacity Reservation settings for a stopped instance. Use this
          * action to configure an instance to target a specific Capacity Reservation, run
-         * in any <code>open</code> Capacity Reservation with matching attributes, or run
-         * On-Demand Instance capacity.</p><p><h3>See Also:</h3>   <a
+         * in any <code>open</code> Capacity Reservation with matching attributes, run in
+         * On-Demand Instance capacity, or only run in a Capacity
+         * Reservation.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceCapacityReservationAttributes">AWS
          * API Reference</a></p>
          */
@@ -15738,6 +16326,32 @@ namespace EC2
         void ModifyInstanceMetadataOptionsAsync(const ModifyInstanceMetadataOptionsRequestT& request, const ModifyInstanceMetadataOptionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::ModifyInstanceMetadataOptions, request, handler, context);
+        }
+
+        /**
+         * <p>Change the configuration of the network performance options for an existing
+         * instance.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceNetworkPerformanceOptions">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ModifyInstanceNetworkPerformanceOptionsOutcome ModifyInstanceNetworkPerformanceOptions(const Model::ModifyInstanceNetworkPerformanceOptionsRequest& request) const;
+
+        /**
+         * A Callable wrapper for ModifyInstanceNetworkPerformanceOptions that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ModifyInstanceNetworkPerformanceOptionsRequestT = Model::ModifyInstanceNetworkPerformanceOptionsRequest>
+        Model::ModifyInstanceNetworkPerformanceOptionsOutcomeCallable ModifyInstanceNetworkPerformanceOptionsCallable(const ModifyInstanceNetworkPerformanceOptionsRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::ModifyInstanceNetworkPerformanceOptions, request);
+        }
+
+        /**
+         * An Async wrapper for ModifyInstanceNetworkPerformanceOptions that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ModifyInstanceNetworkPerformanceOptionsRequestT = Model::ModifyInstanceNetworkPerformanceOptionsRequest>
+        void ModifyInstanceNetworkPerformanceOptionsAsync(const ModifyInstanceNetworkPerformanceOptionsRequestT& request, const ModifyInstanceNetworkPerformanceOptionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::ModifyInstanceNetworkPerformanceOptions, request, handler, context);
         }
 
         /**
@@ -16709,6 +17323,67 @@ namespace EC2
         }
 
         /**
+         * <p>Modify VPC Block Public Access (BPA) exclusions. A VPC BPA exclusion is a
+         * mode that can be applied to a single VPC or subnet that exempts it from the
+         * account’s BPA mode and will allow bidirectional or egress-only access. You can
+         * create BPA exclusions for VPCs and subnets even when BPA is not enabled on the
+         * account to ensure that there is no traffic disruption to the exclusions when VPC
+         * BPA is turned on.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcBlockPublicAccessExclusion">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ModifyVpcBlockPublicAccessExclusionOutcome ModifyVpcBlockPublicAccessExclusion(const Model::ModifyVpcBlockPublicAccessExclusionRequest& request) const;
+
+        /**
+         * A Callable wrapper for ModifyVpcBlockPublicAccessExclusion that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ModifyVpcBlockPublicAccessExclusionRequestT = Model::ModifyVpcBlockPublicAccessExclusionRequest>
+        Model::ModifyVpcBlockPublicAccessExclusionOutcomeCallable ModifyVpcBlockPublicAccessExclusionCallable(const ModifyVpcBlockPublicAccessExclusionRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::ModifyVpcBlockPublicAccessExclusion, request);
+        }
+
+        /**
+         * An Async wrapper for ModifyVpcBlockPublicAccessExclusion that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ModifyVpcBlockPublicAccessExclusionRequestT = Model::ModifyVpcBlockPublicAccessExclusionRequest>
+        void ModifyVpcBlockPublicAccessExclusionAsync(const ModifyVpcBlockPublicAccessExclusionRequestT& request, const ModifyVpcBlockPublicAccessExclusionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::ModifyVpcBlockPublicAccessExclusion, request, handler, context);
+        }
+
+        /**
+         * <p>Modify VPC Block Public Access (BPA) options. VPC Block Public Access (BPA)
+         * enables you to block resources in VPCs and subnets that you own in a Region from
+         * reaching or being reached from the internet through internet gateways and
+         * egress-only internet gateways. To learn more about VPC BPA, see <a
+         * href="https://docs.aws.amazon.com/vpc/latest/userguide/security-vpc-bpa.html">Block
+         * public access to VPCs and subnets</a> in the <i>Amazon VPC User
+         * Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcBlockPublicAccessOptions">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ModifyVpcBlockPublicAccessOptionsOutcome ModifyVpcBlockPublicAccessOptions(const Model::ModifyVpcBlockPublicAccessOptionsRequest& request) const;
+
+        /**
+         * A Callable wrapper for ModifyVpcBlockPublicAccessOptions that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ModifyVpcBlockPublicAccessOptionsRequestT = Model::ModifyVpcBlockPublicAccessOptionsRequest>
+        Model::ModifyVpcBlockPublicAccessOptionsOutcomeCallable ModifyVpcBlockPublicAccessOptionsCallable(const ModifyVpcBlockPublicAccessOptionsRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::ModifyVpcBlockPublicAccessOptions, request);
+        }
+
+        /**
+         * An Async wrapper for ModifyVpcBlockPublicAccessOptions that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ModifyVpcBlockPublicAccessOptionsRequestT = Model::ModifyVpcBlockPublicAccessOptionsRequest>
+        void ModifyVpcBlockPublicAccessOptionsAsync(const ModifyVpcBlockPublicAccessOptionsRequestT& request, const ModifyVpcBlockPublicAccessOptionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::ModifyVpcBlockPublicAccessOptions, request, handler, context);
+        }
+
+        /**
          * <p>Modifies attributes of a specified VPC endpoint. The attributes that you can
          * modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load
          * Balancer). For more information, see the <a
@@ -16765,12 +17440,9 @@ namespace EC2
         }
 
         /**
-         * <p>Modifies the attributes of your VPC endpoint service configuration. You can
-         * change the Network Load Balancers or Gateway Load Balancers for your service,
-         * and you can specify whether acceptance is required for requests to connect to
-         * your endpoint service through an interface VPC endpoint.</p> <p>If you set or
-         * modify the private DNS name, you must prove that you own the private DNS domain
-         * name.</p><p><h3>See Also:</h3>   <a
+         * <p>Modifies the attributes of the specified VPC endpoint service
+         * configuration.</p> <p>If you set or modify the private DNS name, you must prove
+         * that you own the private DNS domain name.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfiguration">AWS
          * API Reference</a></p>
          */
@@ -17340,6 +18012,33 @@ namespace EC2
         void PurchaseCapacityBlockAsync(const PurchaseCapacityBlockRequestT& request, const PurchaseCapacityBlockResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::PurchaseCapacityBlock, request, handler, context);
+        }
+
+        /**
+         * <p>Purchase the Capacity Block extension for use with your account. You must
+         * specify the ID of the Capacity Block extension offering you are
+         * purchasing.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PurchaseCapacityBlockExtension">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::PurchaseCapacityBlockExtensionOutcome PurchaseCapacityBlockExtension(const Model::PurchaseCapacityBlockExtensionRequest& request) const;
+
+        /**
+         * A Callable wrapper for PurchaseCapacityBlockExtension that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename PurchaseCapacityBlockExtensionRequestT = Model::PurchaseCapacityBlockExtensionRequest>
+        Model::PurchaseCapacityBlockExtensionOutcomeCallable PurchaseCapacityBlockExtensionCallable(const PurchaseCapacityBlockExtensionRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::PurchaseCapacityBlockExtension, request);
+        }
+
+        /**
+         * An Async wrapper for PurchaseCapacityBlockExtension that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename PurchaseCapacityBlockExtensionRequestT = Model::PurchaseCapacityBlockExtensionRequest>
+        void PurchaseCapacityBlockExtensionAsync(const PurchaseCapacityBlockExtensionRequestT& request, const PurchaseCapacityBlockExtensionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::PurchaseCapacityBlockExtension, request, handler, context);
         }
 
         /**
@@ -17943,6 +18642,37 @@ namespace EC2
         void ReplaceIamInstanceProfileAssociationAsync(const ReplaceIamInstanceProfileAssociationRequestT& request, const ReplaceIamInstanceProfileAssociationResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::ReplaceIamInstanceProfileAssociation, request, handler, context);
+        }
+
+        /**
+         * <p>Sets or replaces the criteria for Allowed AMIs.</p>  <p>The Allowed
+         * AMIs feature does not restrict the AMIs owned by your account. Regardless of the
+         * criteria you set, the AMIs created by your account will always be discoverable
+         * and usable by users in your account.</p>  <p>For more information, see <a
+         * href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html">Control
+         * the discovery and use of AMIs in Amazon EC2 with Allowed AMIs</a> in <i>Amazon
+         * EC2 User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ReplaceImageCriteriaInAllowedImagesSettings">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ReplaceImageCriteriaInAllowedImagesSettingsOutcome ReplaceImageCriteriaInAllowedImagesSettings(const Model::ReplaceImageCriteriaInAllowedImagesSettingsRequest& request = {}) const;
+
+        /**
+         * A Callable wrapper for ReplaceImageCriteriaInAllowedImagesSettings that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ReplaceImageCriteriaInAllowedImagesSettingsRequestT = Model::ReplaceImageCriteriaInAllowedImagesSettingsRequest>
+        Model::ReplaceImageCriteriaInAllowedImagesSettingsOutcomeCallable ReplaceImageCriteriaInAllowedImagesSettingsCallable(const ReplaceImageCriteriaInAllowedImagesSettingsRequestT& request = {}) const
+        {
+            return SubmitCallable(&EC2Client::ReplaceImageCriteriaInAllowedImagesSettings, request);
+        }
+
+        /**
+         * An Async wrapper for ReplaceImageCriteriaInAllowedImagesSettings that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ReplaceImageCriteriaInAllowedImagesSettingsRequestT = Model::ReplaceImageCriteriaInAllowedImagesSettingsRequest>
+        void ReplaceImageCriteriaInAllowedImagesSettingsAsync(const ReplaceImageCriteriaInAllowedImagesSettingsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const ReplaceImageCriteriaInAllowedImagesSettingsRequestT& request = {}) const
+        {
+            return SubmitAsync(&EC2Client::ReplaceImageCriteriaInAllowedImagesSettings, request, handler, context);
         }
 
         /**
@@ -18889,6 +19619,62 @@ namespace EC2
         void SendDiagnosticInterruptAsync(const SendDiagnosticInterruptRequestT& request, const SendDiagnosticInterruptResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&EC2Client::SendDiagnosticInterrupt, request, handler, context);
+        }
+
+        /**
+         * <p>Generates an account status report. The report is generated asynchronously,
+         * and can take several hours to complete.</p> <p>The report provides the current
+         * status of all attributes supported by declarative policies for the accounts
+         * within the specified scope. The scope is determined by the specified
+         * <code>TargetId</code>, which can represent an individual account, or all the
+         * accounts that fall under the specified organizational unit (OU) or root (the
+         * entire Amazon Web Services Organization).</p> <p>The report is saved to your
+         * specified S3 bucket, using the following path structure (with the <i>italicized
+         * placeholders</i> representing your specific values):</p> <p>
+         * <code>s3://<i>amzn-s3-demo-bucket</i>/<i>your-optional-s3-prefix</i>/ec2_<i>targetId</i>_<i>reportId</i>_<i>yyyyMMdd</i>T<i>hhmm</i>Z.csv</code>
+         * </p> <p class="title"> <b>Prerequisites for generating a report</b> </p> <ul>
+         * <li> <p>The <code>StartDeclarativePoliciesReport</code> API can only be called
+         * by the management account or delegated administrators for the organization.</p>
+         * </li> <li> <p>An S3 bucket must be available before generating the report (you
+         * can create a new one or use an existing one), and it must have an appropriate
+         * bucket policy. For a sample S3 policy, see <i>Sample Amazon S3 policy</i> under
+         * .</p> </li> <li> <p>Trusted access must be enabled for the service for which the
+         * declarative policy will enforce a baseline configuration. If you use the Amazon
+         * Web Services Organizations console, this is done automatically when you enable
+         * declarative policies. The API uses the following service principal to identify
+         * the EC2 service: <code>ec2.amazonaws.com</code>. For more information on how to
+         * enable trusted access with the Amazon Web Services CLI and Amazon Web Services
+         * SDKs, see <a
+         * href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html">Using
+         * Organizations with other Amazon Web Services services</a> in the <i>Amazon Web
+         * Services Organizations User Guide</i>.</p> </li> <li> <p>Only one report per
+         * organization can be generated at a time. Attempting to generate a report while
+         * another is in progress will result in an error.</p> </li> </ul> <p>For more
+         * information, including the required IAM permissions to run this API, see <a
+         * href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_declarative_status-report.html">Generating
+         * the account status report for declarative policies</a> in the <i>Amazon Web
+         * Services Organizations User Guide</i>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/StartDeclarativePoliciesReport">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::StartDeclarativePoliciesReportOutcome StartDeclarativePoliciesReport(const Model::StartDeclarativePoliciesReportRequest& request) const;
+
+        /**
+         * A Callable wrapper for StartDeclarativePoliciesReport that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename StartDeclarativePoliciesReportRequestT = Model::StartDeclarativePoliciesReportRequest>
+        Model::StartDeclarativePoliciesReportOutcomeCallable StartDeclarativePoliciesReportCallable(const StartDeclarativePoliciesReportRequestT& request) const
+        {
+            return SubmitCallable(&EC2Client::StartDeclarativePoliciesReport, request);
+        }
+
+        /**
+         * An Async wrapper for StartDeclarativePoliciesReport that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename StartDeclarativePoliciesReportRequestT = Model::StartDeclarativePoliciesReportRequest>
+        void StartDeclarativePoliciesReportAsync(const StartDeclarativePoliciesReportRequestT& request, const StartDeclarativePoliciesReportResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&EC2Client::StartDeclarativePoliciesReport, request, handler, context);
         }
 
         /**

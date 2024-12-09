@@ -56,7 +56,9 @@ ResponseLaunchTemplateData::ResponseLaunchTemplateData() :
     m_privateDnsNameOptionsHasBeenSet(false),
     m_maintenanceOptionsHasBeenSet(false),
     m_disableApiStop(false),
-    m_disableApiStopHasBeenSet(false)
+    m_disableApiStopHasBeenSet(false),
+    m_operatorHasBeenSet(false),
+    m_networkPerformanceOptionsHasBeenSet(false)
 {
 }
 
@@ -306,6 +308,18 @@ ResponseLaunchTemplateData& ResponseLaunchTemplateData::operator =(const XmlNode
       m_disableApiStop = StringUtils::ConvertToBool(StringUtils::Trim(Aws::Utils::Xml::DecodeEscapedXmlText(disableApiStopNode.GetText()).c_str()).c_str());
       m_disableApiStopHasBeenSet = true;
     }
+    XmlNode operatorNode = resultNode.FirstChild("operator");
+    if(!operatorNode.IsNull())
+    {
+      m_operator = operatorNode;
+      m_operatorHasBeenSet = true;
+    }
+    XmlNode networkPerformanceOptionsNode = resultNode.FirstChild("networkPerformanceOptions");
+    if(!networkPerformanceOptionsNode.IsNull())
+    {
+      m_networkPerformanceOptions = networkPerformanceOptionsNode;
+      m_networkPerformanceOptionsHasBeenSet = true;
+    }
   }
 
   return *this;
@@ -538,6 +552,20 @@ void ResponseLaunchTemplateData::OutputToStream(Aws::OStream& oStream, const cha
       oStream << location << index << locationValue << ".DisableApiStop=" << std::boolalpha << m_disableApiStop << "&";
   }
 
+  if(m_operatorHasBeenSet)
+  {
+      Aws::StringStream operatorLocationAndMemberSs;
+      operatorLocationAndMemberSs << location << index << locationValue << ".Operator";
+      m_operator.OutputToStream(oStream, operatorLocationAndMemberSs.str().c_str());
+  }
+
+  if(m_networkPerformanceOptionsHasBeenSet)
+  {
+      Aws::StringStream networkPerformanceOptionsLocationAndMemberSs;
+      networkPerformanceOptionsLocationAndMemberSs << location << index << locationValue << ".NetworkPerformanceOptions";
+      m_networkPerformanceOptions.OutputToStream(oStream, networkPerformanceOptionsLocationAndMemberSs.str().c_str());
+  }
+
 }
 
 void ResponseLaunchTemplateData::OutputToStream(Aws::OStream& oStream, const char* location) const
@@ -735,6 +763,18 @@ void ResponseLaunchTemplateData::OutputToStream(Aws::OStream& oStream, const cha
   if(m_disableApiStopHasBeenSet)
   {
       oStream << location << ".DisableApiStop=" << std::boolalpha << m_disableApiStop << "&";
+  }
+  if(m_operatorHasBeenSet)
+  {
+      Aws::String operatorLocationAndMember(location);
+      operatorLocationAndMember += ".Operator";
+      m_operator.OutputToStream(oStream, operatorLocationAndMember.c_str());
+  }
+  if(m_networkPerformanceOptionsHasBeenSet)
+  {
+      Aws::String networkPerformanceOptionsLocationAndMember(location);
+      networkPerformanceOptionsLocationAndMember += ".NetworkPerformanceOptions";
+      m_networkPerformanceOptions.OutputToStream(oStream, networkPerformanceOptionsLocationAndMember.c_str());
   }
 }
 

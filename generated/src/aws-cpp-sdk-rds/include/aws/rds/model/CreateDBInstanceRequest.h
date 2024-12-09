@@ -8,6 +8,7 @@
 #include <aws/rds/RDSRequest.h>
 #include <aws/core/utils/memory/stl/AWSString.h>
 #include <aws/core/utils/memory/stl/AWSVector.h>
+#include <aws/rds/model/DatabaseInsightsMode.h>
 #include <aws/rds/model/Tag.h>
 #include <aws/rds/model/ProcessorFeature.h>
 #include <utility>
@@ -49,22 +50,24 @@ namespace Model
      * create when the primary DB instance of the Aurora MySQL DB cluster is created.
      * If this parameter isn't specified for an Aurora MySQL DB cluster, no database is
      * created in the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1
-     * to 64 alphanumeric characters.</p> </li> <li> <p>Can't be a word reserved by the
-     * database engine.</p> </li> </ul> </dd> <dt>Amazon Aurora PostgreSQL</dt> <dd>
-     * <p>The name of the database to create when the primary DB instance of the Aurora
-     * PostgreSQL DB cluster is created. A database named <code>postgres</code> is
-     * always created. If this parameter is specified, an additional database with this
-     * name is created.</p> <p>Constraints:</p> <ul> <li> <p>It must contain 1 to 63
-     * alphanumeric characters.</p> </li> <li> <p>Must begin with a letter. Subsequent
-     * characters can be letters, underscores, or digits (0 to 9).</p> </li> <li>
+     * to 64 alphanumeric characters.</p> </li> <li> <p>Must begin with a letter.
+     * Subsequent characters can be letters, underscores, or digits (0-9).</p> </li>
+     * <li> <p>Can't be a word reserved by the database engine.</p> </li> </ul> </dd>
+     * <dt>Amazon Aurora PostgreSQL</dt> <dd> <p>The name of the database to create
+     * when the primary DB instance of the Aurora PostgreSQL DB cluster is created. A
+     * database named <code>postgres</code> is always created. If this parameter is
+     * specified, an additional database with this name is created.</p>
+     * <p>Constraints:</p> <ul> <li> <p>It must contain 1 to 63 alphanumeric
+     * characters.</p> </li> <li> <p>Must begin with a letter. Subsequent characters
+     * can be letters, underscores, or digits (0 to 9).</p> </li> <li> <p>Can't be a
+     * word reserved by the database engine.</p> </li> </ul> </dd> <dt>Amazon RDS
+     * Custom for Oracle</dt> <dd> <p>The Oracle System ID (SID) of the created RDS
+     * Custom DB instance. If you don't specify a value, the default value is
+     * <code>ORCL</code> for non-CDBs and <code>RDSCDB</code> for CDBs.</p> <p>Default:
+     * <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 8
+     * alphanumeric characters.</p> </li> <li> <p>Must contain a letter.</p> </li> <li>
      * <p>Can't be a word reserved by the database engine.</p> </li> </ul> </dd>
-     * <dt>Amazon RDS Custom for Oracle</dt> <dd> <p>The Oracle System ID (SID) of the
-     * created RDS Custom DB instance. If you don't specify a value, the default value
-     * is <code>ORCL</code> for non-CDBs and <code>RDSCDB</code> for CDBs.</p>
-     * <p>Default: <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Must contain
-     * 1 to 8 alphanumeric characters.</p> </li> <li> <p>Must contain a letter.</p>
-     * </li> <li> <p>Can't be a word reserved by the database engine.</p> </li> </ul>
-     * </dd> <dt>Amazon RDS Custom for SQL Server</dt> <dd> <p>Not applicable. Must be
+     * <dt>Amazon RDS Custom for SQL Server</dt> <dd> <p>Not applicable. Must be
      * null.</p> </dd> <dt>RDS for Db2</dt> <dd> <p>The name of the database to create
      * when the DB instance is created. If this parameter isn't specified, no database
      * is created in the DB instance. In some cases, we recommend that you don't add a
@@ -1019,6 +1022,18 @@ namespace Model
 
     ///@{
     /**
+     * <p>Specifies the mode of Database Insights to enable for the instance.</p>
+     */
+    inline const DatabaseInsightsMode& GetDatabaseInsightsMode() const{ return m_databaseInsightsMode; }
+    inline bool DatabaseInsightsModeHasBeenSet() const { return m_databaseInsightsModeHasBeenSet; }
+    inline void SetDatabaseInsightsMode(const DatabaseInsightsMode& value) { m_databaseInsightsModeHasBeenSet = true; m_databaseInsightsMode = value; }
+    inline void SetDatabaseInsightsMode(DatabaseInsightsMode&& value) { m_databaseInsightsModeHasBeenSet = true; m_databaseInsightsMode = std::move(value); }
+    inline CreateDBInstanceRequest& WithDatabaseInsightsMode(const DatabaseInsightsMode& value) { SetDatabaseInsightsMode(value); return *this;}
+    inline CreateDBInstanceRequest& WithDatabaseInsightsMode(DatabaseInsightsMode&& value) { SetDatabaseInsightsMode(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
      * <p>Specifies whether to enable Performance Insights for the DB instance. For
      * more information, see <a
      * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html">Using
@@ -1517,6 +1532,9 @@ namespace Model
 
     bool m_enableIAMDatabaseAuthentication;
     bool m_enableIAMDatabaseAuthenticationHasBeenSet = false;
+
+    DatabaseInsightsMode m_databaseInsightsMode;
+    bool m_databaseInsightsModeHasBeenSet = false;
 
     bool m_enablePerformanceInsights;
     bool m_enablePerformanceInsightsHasBeenSet = false;

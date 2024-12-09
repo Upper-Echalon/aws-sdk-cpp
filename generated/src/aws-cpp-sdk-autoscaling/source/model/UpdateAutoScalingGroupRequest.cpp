@@ -41,7 +41,12 @@ UpdateAutoScalingGroupRequest::UpdateAutoScalingGroupRequest() :
     m_desiredCapacityTypeHasBeenSet(false),
     m_defaultInstanceWarmup(0),
     m_defaultInstanceWarmupHasBeenSet(false),
-    m_instanceMaintenancePolicyHasBeenSet(false)
+    m_instanceMaintenancePolicyHasBeenSet(false),
+    m_availabilityZoneDistributionHasBeenSet(false),
+    m_availabilityZoneImpairmentPolicyHasBeenSet(false),
+    m_skipZonalShiftValidation(false),
+    m_skipZonalShiftValidationHasBeenSet(false),
+    m_capacityReservationSpecificationHasBeenSet(false)
 {
 }
 
@@ -183,6 +188,26 @@ Aws::String UpdateAutoScalingGroupRequest::SerializePayload() const
   if(m_instanceMaintenancePolicyHasBeenSet)
   {
     m_instanceMaintenancePolicy.OutputToStream(ss, "InstanceMaintenancePolicy");
+  }
+
+  if(m_availabilityZoneDistributionHasBeenSet)
+  {
+    m_availabilityZoneDistribution.OutputToStream(ss, "AvailabilityZoneDistribution");
+  }
+
+  if(m_availabilityZoneImpairmentPolicyHasBeenSet)
+  {
+    m_availabilityZoneImpairmentPolicy.OutputToStream(ss, "AvailabilityZoneImpairmentPolicy");
+  }
+
+  if(m_skipZonalShiftValidationHasBeenSet)
+  {
+    ss << "SkipZonalShiftValidation=" << std::boolalpha << m_skipZonalShiftValidation << "&";
+  }
+
+  if(m_capacityReservationSpecificationHasBeenSet)
+  {
+    m_capacityReservationSpecification.OutputToStream(ss, "CapacityReservationSpecification");
   }
 
   ss << "Version=2011-01-01";
