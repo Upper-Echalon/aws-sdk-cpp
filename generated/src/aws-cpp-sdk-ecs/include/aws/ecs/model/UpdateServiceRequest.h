@@ -9,6 +9,7 @@
 #include <aws/core/utils/memory/stl/AWSString.h>
 #include <aws/core/utils/memory/stl/AWSVector.h>
 #include <aws/ecs/model/DeploymentConfiguration.h>
+#include <aws/ecs/model/AvailabilityZoneRebalancing.h>
 #include <aws/ecs/model/NetworkConfiguration.h>
 #include <aws/ecs/model/PropagateTags.h>
 #include <aws/ecs/model/ServiceConnectConfiguration.h>
@@ -18,6 +19,7 @@
 #include <aws/ecs/model/LoadBalancer.h>
 #include <aws/ecs/model/ServiceRegistry.h>
 #include <aws/ecs/model/ServiceVolumeConfiguration.h>
+#include <aws/ecs/model/VpcLatticeConfiguration.h>
 #include <utility>
 
 namespace Aws
@@ -157,6 +159,22 @@ namespace Model
 
     ///@{
     /**
+     * <p>Indicates whether to use Availability Zone rebalancing for the service.</p>
+     * <p>For more information, see <a
+     * href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-rebalancing.html">Balancing
+     * an Amazon ECS service across Availability Zones</a> in the <i>Amazon Elastic
+     * Container Service Developer Guide</i>.</p>
+     */
+    inline const AvailabilityZoneRebalancing& GetAvailabilityZoneRebalancing() const{ return m_availabilityZoneRebalancing; }
+    inline bool AvailabilityZoneRebalancingHasBeenSet() const { return m_availabilityZoneRebalancingHasBeenSet; }
+    inline void SetAvailabilityZoneRebalancing(const AvailabilityZoneRebalancing& value) { m_availabilityZoneRebalancingHasBeenSet = true; m_availabilityZoneRebalancing = value; }
+    inline void SetAvailabilityZoneRebalancing(AvailabilityZoneRebalancing&& value) { m_availabilityZoneRebalancingHasBeenSet = true; m_availabilityZoneRebalancing = std::move(value); }
+    inline UpdateServiceRequest& WithAvailabilityZoneRebalancing(const AvailabilityZoneRebalancing& value) { SetAvailabilityZoneRebalancing(value); return *this;}
+    inline UpdateServiceRequest& WithAvailabilityZoneRebalancing(AvailabilityZoneRebalancing&& value) { SetAvailabilityZoneRebalancing(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
      * <p>An object representing the network configuration for the service.</p>
      */
     inline const NetworkConfiguration& GetNetworkConfiguration() const{ return m_networkConfiguration; }
@@ -244,14 +262,16 @@ namespace Model
     ///@{
     /**
      * <p>The period of time, in seconds, that the Amazon ECS service scheduler ignores
-     * unhealthy Elastic Load Balancing target health checks after a task has first
-     * started. This is only valid if your service is configured to use a load
-     * balancer. If your service's tasks take a while to start and respond to Elastic
-     * Load Balancing health checks, you can specify a health check grace period of up
-     * to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler
-     * ignores the Elastic Load Balancing health check status. This grace period can
-     * prevent the ECS service scheduler from marking tasks as unhealthy and stopping
-     * them before they have time to come up.</p>
+     * unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after
+     * a task has first started. If you don't specify a health check grace period
+     * value, the default value of <code>0</code> is used. If you don't use any of the
+     * health checks, then <code>healthCheckGracePeriodSeconds</code> is unused.</p>
+     * <p>If your service's tasks take a while to start and respond to health checks,
+     * you can specify a health check grace period of up to 2,147,483,647 seconds
+     * (about 69 years). During that time, the Amazon ECS service scheduler ignores
+     * health check status. This grace period can prevent the service scheduler from
+     * marking tasks as unhealthy and stopping them before they have time to come
+     * up.</p>
      */
     inline int GetHealthCheckGracePeriodSeconds() const{ return m_healthCheckGracePeriodSeconds; }
     inline bool HealthCheckGracePeriodSecondsHasBeenSet() const { return m_healthCheckGracePeriodSecondsHasBeenSet; }
@@ -403,6 +423,21 @@ namespace Model
     inline UpdateServiceRequest& AddVolumeConfigurations(const ServiceVolumeConfiguration& value) { m_volumeConfigurationsHasBeenSet = true; m_volumeConfigurations.push_back(value); return *this; }
     inline UpdateServiceRequest& AddVolumeConfigurations(ServiceVolumeConfiguration&& value) { m_volumeConfigurationsHasBeenSet = true; m_volumeConfigurations.push_back(std::move(value)); return *this; }
     ///@}
+
+    ///@{
+    /**
+     * <p>An object representing the VPC Lattice configuration for the service being
+     * updated.</p>
+     */
+    inline const Aws::Vector<VpcLatticeConfiguration>& GetVpcLatticeConfigurations() const{ return m_vpcLatticeConfigurations; }
+    inline bool VpcLatticeConfigurationsHasBeenSet() const { return m_vpcLatticeConfigurationsHasBeenSet; }
+    inline void SetVpcLatticeConfigurations(const Aws::Vector<VpcLatticeConfiguration>& value) { m_vpcLatticeConfigurationsHasBeenSet = true; m_vpcLatticeConfigurations = value; }
+    inline void SetVpcLatticeConfigurations(Aws::Vector<VpcLatticeConfiguration>&& value) { m_vpcLatticeConfigurationsHasBeenSet = true; m_vpcLatticeConfigurations = std::move(value); }
+    inline UpdateServiceRequest& WithVpcLatticeConfigurations(const Aws::Vector<VpcLatticeConfiguration>& value) { SetVpcLatticeConfigurations(value); return *this;}
+    inline UpdateServiceRequest& WithVpcLatticeConfigurations(Aws::Vector<VpcLatticeConfiguration>&& value) { SetVpcLatticeConfigurations(std::move(value)); return *this;}
+    inline UpdateServiceRequest& AddVpcLatticeConfigurations(const VpcLatticeConfiguration& value) { m_vpcLatticeConfigurationsHasBeenSet = true; m_vpcLatticeConfigurations.push_back(value); return *this; }
+    inline UpdateServiceRequest& AddVpcLatticeConfigurations(VpcLatticeConfiguration&& value) { m_vpcLatticeConfigurationsHasBeenSet = true; m_vpcLatticeConfigurations.push_back(std::move(value)); return *this; }
+    ///@}
   private:
 
     Aws::String m_cluster;
@@ -422,6 +457,9 @@ namespace Model
 
     DeploymentConfiguration m_deploymentConfiguration;
     bool m_deploymentConfigurationHasBeenSet = false;
+
+    AvailabilityZoneRebalancing m_availabilityZoneRebalancing;
+    bool m_availabilityZoneRebalancingHasBeenSet = false;
 
     NetworkConfiguration m_networkConfiguration;
     bool m_networkConfigurationHasBeenSet = false;
@@ -461,6 +499,9 @@ namespace Model
 
     Aws::Vector<ServiceVolumeConfiguration> m_volumeConfigurations;
     bool m_volumeConfigurationsHasBeenSet = false;
+
+    Aws::Vector<VpcLatticeConfiguration> m_vpcLatticeConfigurations;
+    bool m_vpcLatticeConfigurationsHasBeenSet = false;
   };
 
 } // namespace Model

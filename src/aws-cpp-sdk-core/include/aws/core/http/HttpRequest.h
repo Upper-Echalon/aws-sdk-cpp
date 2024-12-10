@@ -63,6 +63,7 @@ namespace Aws
         extern AWS_CORE_API const char CHUNKED_VALUE[];
         extern AWS_CORE_API const char AWS_CHUNKED_VALUE[];
         extern AWS_CORE_API const char X_AMZN_ERROR_TYPE[];
+        extern AWS_CORE_API const char X_AMZN_QUERY_MODE[];
 
         class HttpRequest;
         class HttpResponse;
@@ -395,6 +396,19 @@ namespace Aws
             {
                 SetHeaderValue(CONTENT_TYPE_HEADER, value);
             }
+
+            /**
+             * Has content-encoding header.
+             */
+            inline bool HasContentEncoding() const { return HasHeader(CONTENT_ENCODING_HEADER); }
+            /**
+             * Gets content-encoding header.
+             */
+            inline const Aws::String& GetContentEncoding() const { return GetHeaderValue(CONTENT_ENCODING_HEADER); }
+            /**
+             * Sets content-encoding header.
+             */
+            inline void SetContentEncoding(const Aws::String& value) { SetHeaderValue(CONTENT_ENCODING_HEADER, value); }
 
             inline bool HasTransferEncoding() const
             {

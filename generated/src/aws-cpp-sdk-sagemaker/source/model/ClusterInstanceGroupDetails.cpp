@@ -31,7 +31,12 @@ ClusterInstanceGroupDetails::ClusterInstanceGroupDetails() :
     m_threadsPerCore(0),
     m_threadsPerCoreHasBeenSet(false),
     m_instanceStorageConfigsHasBeenSet(false),
-    m_onStartDeepHealthChecksHasBeenSet(false)
+    m_onStartDeepHealthChecksHasBeenSet(false),
+    m_status(InstanceGroupStatus::NOT_SET),
+    m_statusHasBeenSet(false),
+    m_trainingPlanArnHasBeenSet(false),
+    m_trainingPlanStatusHasBeenSet(false),
+    m_overrideVpcConfigHasBeenSet(false)
 {
 }
 
@@ -112,6 +117,34 @@ ClusterInstanceGroupDetails& ClusterInstanceGroupDetails::operator =(JsonView js
     m_onStartDeepHealthChecksHasBeenSet = true;
   }
 
+  if(jsonValue.ValueExists("Status"))
+  {
+    m_status = InstanceGroupStatusMapper::GetInstanceGroupStatusForName(jsonValue.GetString("Status"));
+
+    m_statusHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("TrainingPlanArn"))
+  {
+    m_trainingPlanArn = jsonValue.GetString("TrainingPlanArn");
+
+    m_trainingPlanArnHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("TrainingPlanStatus"))
+  {
+    m_trainingPlanStatus = jsonValue.GetString("TrainingPlanStatus");
+
+    m_trainingPlanStatusHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("OverrideVpcConfig"))
+  {
+    m_overrideVpcConfig = jsonValue.GetObject("OverrideVpcConfig");
+
+    m_overrideVpcConfigHasBeenSet = true;
+  }
+
   return *this;
 }
 
@@ -179,6 +212,29 @@ JsonValue ClusterInstanceGroupDetails::Jsonize() const
      onStartDeepHealthChecksJsonList[onStartDeepHealthChecksIndex].AsString(DeepHealthCheckTypeMapper::GetNameForDeepHealthCheckType(m_onStartDeepHealthChecks[onStartDeepHealthChecksIndex]));
    }
    payload.WithArray("OnStartDeepHealthChecks", std::move(onStartDeepHealthChecksJsonList));
+
+  }
+
+  if(m_statusHasBeenSet)
+  {
+   payload.WithString("Status", InstanceGroupStatusMapper::GetNameForInstanceGroupStatus(m_status));
+  }
+
+  if(m_trainingPlanArnHasBeenSet)
+  {
+   payload.WithString("TrainingPlanArn", m_trainingPlanArn);
+
+  }
+
+  if(m_trainingPlanStatusHasBeenSet)
+  {
+   payload.WithString("TrainingPlanStatus", m_trainingPlanStatus);
+
+  }
+
+  if(m_overrideVpcConfigHasBeenSet)
+  {
+   payload.WithObject("OverrideVpcConfig", m_overrideVpcConfig.Jsonize());
 
   }
 

@@ -87,6 +87,7 @@ namespace
     static std::string BASE_EVENT_STREAM_LARGE_FILE_TEST_BUCKET_NAME = "largeeventstream";
     static std::string BASE_EVENT_STREAM_ERRORS_IN_EVENT_TEST_BUCKET_NAME = "errorsinevent";
     static std::string BASE_CHECKSUMS_BUCKET_NAME = "checksums";
+    static std::string BASE_CONTENT_ENCODING_BUCKET_NAME = "contentencoding";
     static std::string BASE_CROSS_REGION_BUCKET_NAME = "crossregion";
     static std::string BASE_ENDPOINT_OVERRIDE_BUCKET_NAME = "endpointoverride";
     static const char* ALLOCATION_TAG = "BucketAndObjectOperationTest";
@@ -115,32 +116,31 @@ namespace
 
     void EnsureUniqueBucketNames()
     {
-        Aws::Vector<std::reference_wrapper<std::string>> TEST_BUCKETS =
-            {
-              std::ref(BASE_CREATE_BUCKET_TEST_NAME),
-              std::ref(BASE_DNS_UNFRIENDLY_TEST_NAME),
-              std::ref(BASE_LOCATION_BUCKET_TEST_NAME),
-              std::ref(BASE_OBJECTS_BUCKET_NAME),
-              std::ref(BASE_OBJECTS_NEWLINE_BUCKET_NAME),
-              std::ref(BASE_PUT_OBJECTS_BUCKET_NAME),
-              std::ref(BASE_PUT_WEIRD_CHARSETS_OBJECTS_BUCKET_NAME),
-              std::ref(BASE_PUT_OBJECTS_PRESIGNED_URLS_BUCKET_NAME),
-              std::ref(BASE_PUT_MULTIPART_BUCKET_NAME),
-              std::ref(BASE_OBJECT_LOCK_BUCKET_NAME),
-              std::ref(BASE_ERRORS_TESTING_BUCKET),
-              std::ref(BASE_INTERRUPT_TESTING_BUCKET),
-              std::ref(BASE_EVENT_STREAM_TEST_BUCKET_NAME),
-              std::ref(BASE_EVENT_STREAM_LARGE_FILE_TEST_BUCKET_NAME),
-              std::ref(BASE_EVENT_STREAM_ERRORS_IN_EVENT_TEST_BUCKET_NAME),
-              std::ref(BASE_CHECKSUMS_BUCKET_NAME),
-              std::ref(BASE_CROSS_REGION_BUCKET_NAME),
-              std::ref(BASE_ENDPOINT_OVERRIDE_BUCKET_NAME),
-            };
+      Aws::Vector<std::reference_wrapper<std::string>> TEST_BUCKETS = {
+          std::ref(BASE_CREATE_BUCKET_TEST_NAME),
+          std::ref(BASE_DNS_UNFRIENDLY_TEST_NAME),
+          std::ref(BASE_LOCATION_BUCKET_TEST_NAME),
+          std::ref(BASE_OBJECTS_BUCKET_NAME),
+          std::ref(BASE_OBJECTS_NEWLINE_BUCKET_NAME),
+          std::ref(BASE_PUT_OBJECTS_BUCKET_NAME),
+          std::ref(BASE_PUT_WEIRD_CHARSETS_OBJECTS_BUCKET_NAME),
+          std::ref(BASE_PUT_OBJECTS_PRESIGNED_URLS_BUCKET_NAME),
+          std::ref(BASE_PUT_MULTIPART_BUCKET_NAME),
+          std::ref(BASE_OBJECT_LOCK_BUCKET_NAME),
+          std::ref(BASE_ERRORS_TESTING_BUCKET),
+          std::ref(BASE_INTERRUPT_TESTING_BUCKET),
+          std::ref(BASE_EVENT_STREAM_TEST_BUCKET_NAME),
+          std::ref(BASE_EVENT_STREAM_LARGE_FILE_TEST_BUCKET_NAME),
+          std::ref(BASE_EVENT_STREAM_ERRORS_IN_EVENT_TEST_BUCKET_NAME),
+          std::ref(BASE_CHECKSUMS_BUCKET_NAME),
+          std::ref(BASE_CONTENT_ENCODING_BUCKET_NAME),
+          std::ref(BASE_CROSS_REGION_BUCKET_NAME),
+          std::ref(BASE_ENDPOINT_OVERRIDE_BUCKET_NAME),
+      };
 
-        for (auto& testBucketName : TEST_BUCKETS)
-        {
-            AppendUUID(testBucketName);
-        }
+      for (auto& testBucketName : TEST_BUCKETS) {
+        AppendUUID(testBucketName);
+      }
     }
 
     class RetryFiveTimesRetryStrategy: public Aws::Client::RetryStrategy
@@ -2517,5 +2517,67 @@ namespace
                 ASSERT_TRUE(response.IsSuccess());
             }
         }
+    }
+
+    TEST_F(BucketAndObjectOperationTest, PutObjectChecksumWithGuarunteedChunkedObject) {
+      struct ChecksumTestCase {
+        std::function<PutObjectRequest(PutObjectRequest)> chucksumRequestMutator;
+        String body;
+      };
+
+      const String fullBucketName = CalculateBucketName(BASE_CHECKSUMS_BUCKET_NAME.c_str());
+      SCOPED_TRACE(Aws::String("FullBucketName ") + fullBucketName);
+      CreateBucketRequest createBucketRequest;
+      createBucketRequest.SetBucket(fullBucketName);
+      createBucketRequest.SetACL(BucketCannedACL::private_);
+      CreateBucketOutcome createBucketOutcome = CreateBucket(createBucketRequest);
+      AWS_ASSERT_SUCCESS(createBucketOutcome);
+
+      Vector<ChecksumTestCase> testCases{
+          {[](PutObjectRequest request) -> PutObjectRequest { return request.WithChecksumAlgorithm(ChecksumAlgorithm::CRC32); },
+           Aws::String(1024 * 1024, 'e')},
+          {[](PutObjectRequest request) -> PutObjectRequest { return request.WithChecksumAlgorithm(ChecksumAlgorithm::CRC32C); },
+           Aws::String(1024 * 1024, 'l')},
+          {[](PutObjectRequest request) -> PutObjectRequest { return request.WithChecksumAlgorithm(ChecksumAlgorithm::SHA1); },
+           Aws::String(1024 * 1024, 'd')},
+          {[](PutObjectRequest request) -> PutObjectRequest { return request.WithChecksumAlgorithm(ChecksumAlgorithm::SHA256); },
+           Aws::String(1024 * 1024, 'a')}};
+
+      for (const auto& testCase : testCases) {
+        auto request = testCase.chucksumRequestMutator(PutObjectRequest().WithBucket(fullBucketName).WithKey("Metaphor"));
+        std::shared_ptr<IOStream> body =
+            Aws::MakeShared<StringStream>(ALLOCATION_TAG, testCase.body, std::ios_base::in | std::ios_base::binary);
+        request.SetBody(body);
+        const auto response = Client->PutObject(request);
+        EXPECT_TRUE(response.IsSuccess());
+      }
+    }
+
+    TEST_F(BucketAndObjectOperationTest, ContentEncodingShouldPersistOnChunkedRequest) {
+      const String fullBucketName = CalculateBucketName(BASE_CONTENT_ENCODING_BUCKET_NAME.c_str());
+      SCOPED_TRACE(Aws::String("FullBucketName ") + fullBucketName);
+      CreateBucketRequest createBucketRequest;
+      createBucketRequest.SetBucket(fullBucketName);
+      createBucketRequest.SetACL(BucketCannedACL::private_);
+      CreateBucketOutcome createBucketOutcome = CreateBucket(createBucketRequest);
+      AWS_EXPECT_SUCCESS(createBucketOutcome);
+
+      auto request = PutObjectRequest()
+                         .WithBucket(fullBucketName)
+                         .WithKey("euchronia")
+                         .WithContentEncoding("gzip")
+                         .WithChecksumAlgorithm(ChecksumAlgorithm::CRC32);
+
+      std::shared_ptr<Aws::IOStream> body =
+          Aws::MakeShared<Aws::StringStream>(ALLOCATION_TAG, "another day passes, and the age of a new king draws near");
+
+      request.SetBody(body);
+
+      const auto putOutcome = Client->PutObject(request);
+      AWS_EXPECT_SUCCESS(putOutcome);
+
+      const auto headOutcome = Client->HeadObject(HeadObjectRequest().WithBucket(fullBucketName).WithKey("euchronia"));
+      AWS_EXPECT_SUCCESS(headOutcome);
+      EXPECT_EQ(headOutcome.GetResult().GetContentEncoding(), "gzip");
     }
 }

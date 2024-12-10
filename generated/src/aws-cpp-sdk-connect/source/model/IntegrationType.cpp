@@ -26,9 +26,13 @@ namespace Aws
         static const int WISDOM_ASSISTANT_HASH = HashingUtils::HashString("WISDOM_ASSISTANT");
         static const int WISDOM_KNOWLEDGE_BASE_HASH = HashingUtils::HashString("WISDOM_KNOWLEDGE_BASE");
         static const int WISDOM_QUICK_RESPONSES_HASH = HashingUtils::HashString("WISDOM_QUICK_RESPONSES");
+        static const int Q_MESSAGE_TEMPLATES_HASH = HashingUtils::HashString("Q_MESSAGE_TEMPLATES");
         static const int CASES_DOMAIN_HASH = HashingUtils::HashString("CASES_DOMAIN");
         static const int APPLICATION_HASH = HashingUtils::HashString("APPLICATION");
         static const int FILE_SCANNER_HASH = HashingUtils::HashString("FILE_SCANNER");
+        static const int SES_IDENTITY_HASH = HashingUtils::HashString("SES_IDENTITY");
+        static const int ANALYTICS_CONNECTOR_HASH = HashingUtils::HashString("ANALYTICS_CONNECTOR");
+        static const int CALL_TRANSFER_CONNECTOR_HASH = HashingUtils::HashString("CALL_TRANSFER_CONNECTOR");
 
 
         IntegrationType GetIntegrationTypeForName(const Aws::String& name)
@@ -58,6 +62,10 @@ namespace Aws
           {
             return IntegrationType::WISDOM_QUICK_RESPONSES;
           }
+          else if (hashCode == Q_MESSAGE_TEMPLATES_HASH)
+          {
+            return IntegrationType::Q_MESSAGE_TEMPLATES;
+          }
           else if (hashCode == CASES_DOMAIN_HASH)
           {
             return IntegrationType::CASES_DOMAIN;
@@ -69,6 +77,18 @@ namespace Aws
           else if (hashCode == FILE_SCANNER_HASH)
           {
             return IntegrationType::FILE_SCANNER;
+          }
+          else if (hashCode == SES_IDENTITY_HASH)
+          {
+            return IntegrationType::SES_IDENTITY;
+          }
+          else if (hashCode == ANALYTICS_CONNECTOR_HASH)
+          {
+            return IntegrationType::ANALYTICS_CONNECTOR;
+          }
+          else if (hashCode == CALL_TRANSFER_CONNECTOR_HASH)
+          {
+            return IntegrationType::CALL_TRANSFER_CONNECTOR;
           }
           EnumParseOverflowContainer* overflowContainer = Aws::GetEnumOverflowContainer();
           if(overflowContainer)
@@ -98,12 +118,20 @@ namespace Aws
             return "WISDOM_KNOWLEDGE_BASE";
           case IntegrationType::WISDOM_QUICK_RESPONSES:
             return "WISDOM_QUICK_RESPONSES";
+          case IntegrationType::Q_MESSAGE_TEMPLATES:
+            return "Q_MESSAGE_TEMPLATES";
           case IntegrationType::CASES_DOMAIN:
             return "CASES_DOMAIN";
           case IntegrationType::APPLICATION:
             return "APPLICATION";
           case IntegrationType::FILE_SCANNER:
             return "FILE_SCANNER";
+          case IntegrationType::SES_IDENTITY:
+            return "SES_IDENTITY";
+          case IntegrationType::ANALYTICS_CONNECTOR:
+            return "ANALYTICS_CONNECTOR";
+          case IntegrationType::CALL_TRANSFER_CONNECTOR:
+            return "CALL_TRANSFER_CONNECTOR";
           default:
             EnumParseOverflowContainer* overflowContainer = Aws::GetEnumOverflowContainer();
             if(overflowContainer)

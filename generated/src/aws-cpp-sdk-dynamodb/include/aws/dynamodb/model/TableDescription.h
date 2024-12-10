@@ -17,6 +17,8 @@
 #include <aws/dynamodb/model/ArchivalSummary.h>
 #include <aws/dynamodb/model/TableClassSummary.h>
 #include <aws/dynamodb/model/OnDemandThroughput.h>
+#include <aws/dynamodb/model/TableWarmThroughputDescription.h>
+#include <aws/dynamodb/model/MultiRegionConsistency.h>
 #include <aws/dynamodb/model/AttributeDefinition.h>
 #include <aws/dynamodb/model/KeySchemaElement.h>
 #include <aws/dynamodb/model/LocalSecondaryIndexDescription.h>
@@ -482,6 +484,40 @@ namespace Model
     inline TableDescription& WithOnDemandThroughput(const OnDemandThroughput& value) { SetOnDemandThroughput(value); return *this;}
     inline TableDescription& WithOnDemandThroughput(OnDemandThroughput&& value) { SetOnDemandThroughput(std::move(value)); return *this;}
     ///@}
+
+    ///@{
+    /**
+     * <p>Describes the warm throughput value of the base table.</p>
+     */
+    inline const TableWarmThroughputDescription& GetWarmThroughput() const{ return m_warmThroughput; }
+    inline bool WarmThroughputHasBeenSet() const { return m_warmThroughputHasBeenSet; }
+    inline void SetWarmThroughput(const TableWarmThroughputDescription& value) { m_warmThroughputHasBeenSet = true; m_warmThroughput = value; }
+    inline void SetWarmThroughput(TableWarmThroughputDescription&& value) { m_warmThroughputHasBeenSet = true; m_warmThroughput = std::move(value); }
+    inline TableDescription& WithWarmThroughput(const TableWarmThroughputDescription& value) { SetWarmThroughput(value); return *this;}
+    inline TableDescription& WithWarmThroughput(TableWarmThroughputDescription&& value) { SetWarmThroughput(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>Indicates one of the following consistency modes for a global table:</p> <ul>
+     * <li> <p> <code>EVENTUAL</code>: Indicates that the global table is configured
+     * for multi-Region eventual consistency.</p> </li> <li> <p> <code>STRONG</code>:
+     * Indicates that the global table is configured for multi-Region strong
+     * consistency (preview).</p>  <p>Multi-Region strong consistency (MRSC) is a
+     * new DynamoDB global tables capability currently available in preview mode. For
+     * more information, see <a
+     * href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/PreviewFeatures.html#multi-region-strong-consistency-gt">Global
+     * tables multi-Region strong consistency</a>.</p>  </li> </ul> <p>If you
+     * don't specify this field, the global table consistency mode defaults to
+     * <code>EVENTUAL</code>.</p>
+     */
+    inline const MultiRegionConsistency& GetMultiRegionConsistency() const{ return m_multiRegionConsistency; }
+    inline bool MultiRegionConsistencyHasBeenSet() const { return m_multiRegionConsistencyHasBeenSet; }
+    inline void SetMultiRegionConsistency(const MultiRegionConsistency& value) { m_multiRegionConsistencyHasBeenSet = true; m_multiRegionConsistency = value; }
+    inline void SetMultiRegionConsistency(MultiRegionConsistency&& value) { m_multiRegionConsistencyHasBeenSet = true; m_multiRegionConsistency = std::move(value); }
+    inline TableDescription& WithMultiRegionConsistency(const MultiRegionConsistency& value) { SetMultiRegionConsistency(value); return *this;}
+    inline TableDescription& WithMultiRegionConsistency(MultiRegionConsistency&& value) { SetMultiRegionConsistency(std::move(value)); return *this;}
+    ///@}
   private:
 
     Aws::Vector<AttributeDefinition> m_attributeDefinitions;
@@ -555,6 +591,12 @@ namespace Model
 
     OnDemandThroughput m_onDemandThroughput;
     bool m_onDemandThroughputHasBeenSet = false;
+
+    TableWarmThroughputDescription m_warmThroughput;
+    bool m_warmThroughputHasBeenSet = false;
+
+    MultiRegionConsistency m_multiRegionConsistency;
+    bool m_multiRegionConsistencyHasBeenSet = false;
   };
 
 } // namespace Model

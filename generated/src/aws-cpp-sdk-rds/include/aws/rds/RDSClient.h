@@ -543,15 +543,14 @@ namespace Aws
          * <p>Creates a blue/green deployment.</p> <p>A blue/green deployment creates a
          * staging environment that copies the production environment. In a blue/green
          * deployment, the blue environment is the current production environment. The
-         * green environment is the staging environment. The staging environment stays in
-         * sync with the current production environment using logical replication.</p>
-         * <p>You can make changes to the databases in the green environment without
-         * affecting production workloads. For example, you can upgrade the major or minor
-         * DB engine version, change database parameters, or make schema changes in the
-         * staging environment. You can thoroughly test changes in the green environment.
-         * When ready, you can switch over the environments to promote the green
-         * environment to be the new production environment. The switchover typically takes
-         * under a minute.</p> <p>For more information, see <a
+         * green environment is the staging environment, and it stays in sync with the
+         * current production environment.</p> <p>You can make changes to the databases in
+         * the green environment without affecting production workloads. For example, you
+         * can upgrade the major or minor DB engine version, change database parameters, or
+         * make schema changes in the staging environment. You can thoroughly test changes
+         * in the green environment. When ready, you can switch over the environments to
+         * promote the green environment to be the new production environment. The
+         * switchover typically takes under a minute.</p> <p>For more information, see <a
          * href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html">Using
          * Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon RDS
          * User Guide</i> and <a
@@ -3182,10 +3181,10 @@ namespace Aws
          * endpoint disables RDS Data API.</p> <p>For more information, see <a
          * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using
          * RDS Data API</a> in the <i>Amazon Aurora User Guide</i>.</p>  <p>This
-         * operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB
-         * clusters. To disable the HTTP endpoint for Aurora Serverless v1 DB clusters, use
-         * the <code>EnableHttpEndpoint</code> parameter of the
-         * <code>ModifyDBCluster</code> operation.</p> <p><h3>See Also:</h3>   <a
+         * operation applies only to Aurora Serverless v2 and provisioned DB clusters. To
+         * disable the HTTP endpoint for Aurora Serverless v1 DB clusters, use the
+         * <code>EnableHttpEndpoint</code> parameter of the <code>ModifyDBCluster</code>
+         * operation.</p> <p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DisableHttpEndpoint">AWS
          * API Reference</a></p>
          */
@@ -3243,10 +3242,10 @@ namespace Aws
          * editor.</p> <p>For more information, see <a
          * href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html">Using
          * RDS Data API</a> in the <i>Amazon Aurora User Guide</i>.</p>  <p>This
-         * operation applies only to Aurora PostgreSQL Serverless v2 and provisioned DB
-         * clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters, use
-         * the <code>EnableHttpEndpoint</code> parameter of the
-         * <code>ModifyDBCluster</code> operation.</p> <p><h3>See Also:</h3>   <a
+         * operation applies only to Aurora Serverless v2 and provisioned DB clusters. To
+         * enable the HTTP endpoint for Aurora Serverless v1 DB clusters, use the
+         * <code>EnableHttpEndpoint</code> parameter of the <code>ModifyDBCluster</code>
+         * operation.</p> <p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/EnableHttpEndpoint">AWS
          * API Reference</a></p>
          */

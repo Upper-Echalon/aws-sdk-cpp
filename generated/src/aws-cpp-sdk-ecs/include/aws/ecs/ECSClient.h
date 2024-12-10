@@ -375,7 +375,7 @@ namespace ECS
          * <code>FARGATE</code> and <code>FARGATE_SPOT</code> capacity providers are
          * reserved and can't be deleted. You can disassociate them from a cluster using
          * either <a
-         * href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProviderProviders.html">PutCapacityProviderProviders</a>
+         * href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a>
          * or by deleting the cluster.</p>  <p>Prior to a capacity provider being
          * deleted, the capacity provider must be removed from the capacity provider
          * strategy from all services. The <a
@@ -387,7 +387,7 @@ namespace ECS
          * remaining capacity providers. Only capacity providers that aren't associated
          * with a cluster can be deleted. To remove a capacity provider from a cluster, you
          * can either use <a
-         * href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutCapacityProviderProviders.html">PutCapacityProviderProviders</a>
+         * href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_PutClusterCapacityProviders.html">PutClusterCapacityProviders</a>
          * or delete the cluster.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteCapacityProvider">AWS
          * API Reference</a></p>
@@ -676,7 +676,9 @@ namespace ECS
         }
 
         /**
-         * <p>Describes one or more of your clusters.</p><p><h3>See Also:</h3>   <a
+         * <p>Describes one or more of your clusters.</p> <p> For CLI examples, see <a
+         * href="https://github.com/aws/aws-cli/blob/develop/awscli/examples/ecs/describe-clusters.rst">describe-clusters.rst</a>
+         * on GitHub.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeClusters">AWS
          * API Reference</a></p>
          */
@@ -724,6 +726,66 @@ namespace ECS
         void DescribeContainerInstancesAsync(const DescribeContainerInstancesRequestT& request, const DescribeContainerInstancesResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&ECSClient::DescribeContainerInstances, request, handler, context);
+        }
+
+        /**
+         * <p>Describes one or more of your service deployments.</p> <p>A service
+         * deployment happens when you release a software update for the service. For more
+         * information, see <a
+         * href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-deployments.html">Amazon
+         * ECS service deployments</a>.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceDeployments">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeServiceDeploymentsOutcome DescribeServiceDeployments(const Model::DescribeServiceDeploymentsRequest& request) const;
+
+        /**
+         * A Callable wrapper for DescribeServiceDeployments that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeServiceDeploymentsRequestT = Model::DescribeServiceDeploymentsRequest>
+        Model::DescribeServiceDeploymentsOutcomeCallable DescribeServiceDeploymentsCallable(const DescribeServiceDeploymentsRequestT& request) const
+        {
+            return SubmitCallable(&ECSClient::DescribeServiceDeployments, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeServiceDeployments that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeServiceDeploymentsRequestT = Model::DescribeServiceDeploymentsRequest>
+        void DescribeServiceDeploymentsAsync(const DescribeServiceDeploymentsRequestT& request, const DescribeServiceDeploymentsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&ECSClient::DescribeServiceDeployments, request, handler, context);
+        }
+
+        /**
+         * <p>Describes one or more service revisions.</p> <p>A service revision is a
+         * version of the service that includes the values for the Amazon ECS resources
+         * (for example, task definition) and the environment resources (for example, load
+         * balancers, subnets, and security groups). For more information, see <a
+         * href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-revision.html">Amazon
+         * ECS service revisions</a>.</p> <p>You can't describe a service revision that was
+         * created before October 25, 2024.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DescribeServiceRevisions">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DescribeServiceRevisionsOutcome DescribeServiceRevisions(const Model::DescribeServiceRevisionsRequest& request) const;
+
+        /**
+         * A Callable wrapper for DescribeServiceRevisions that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DescribeServiceRevisionsRequestT = Model::DescribeServiceRevisionsRequest>
+        Model::DescribeServiceRevisionsOutcomeCallable DescribeServiceRevisionsCallable(const DescribeServiceRevisionsRequestT& request) const
+        {
+            return SubmitCallable(&ECSClient::DescribeServiceRevisions, request);
+        }
+
+        /**
+         * An Async wrapper for DescribeServiceRevisions that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DescribeServiceRevisionsRequestT = Model::DescribeServiceRevisionsRequest>
+        void DescribeServiceRevisionsAsync(const DescribeServiceRevisionsRequestT& request, const DescribeServiceRevisionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&ECSClient::DescribeServiceRevisions, request, handler, context);
         }
 
         /**
@@ -1039,6 +1101,37 @@ namespace ECS
         void ListContainerInstancesAsync(const ListContainerInstancesResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr, const ListContainerInstancesRequestT& request = {}) const
         {
             return SubmitAsync(&ECSClient::ListContainerInstances, request, handler, context);
+        }
+
+        /**
+         * <p>This operation lists all the service deployments that meet the specified
+         * filter criteria.</p> <p>A service deployment happens when you release a softwre
+         * update for the service. You route traffic from the running service revisions to
+         * the new service revison and control the number of running tasks. </p> <p>This
+         * API returns the values that you use for the request parameters in <a
+         * href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceRevisions.html">DescribeServiceRevisions</a>.</p><p><h3>See
+         * Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ListServiceDeployments">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ListServiceDeploymentsOutcome ListServiceDeployments(const Model::ListServiceDeploymentsRequest& request) const;
+
+        /**
+         * A Callable wrapper for ListServiceDeployments that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ListServiceDeploymentsRequestT = Model::ListServiceDeploymentsRequest>
+        Model::ListServiceDeploymentsOutcomeCallable ListServiceDeploymentsCallable(const ListServiceDeploymentsRequestT& request) const
+        {
+            return SubmitCallable(&ECSClient::ListServiceDeployments, request);
+        }
+
+        /**
+         * An Async wrapper for ListServiceDeployments that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ListServiceDeploymentsRequestT = Model::ListServiceDeploymentsRequest>
+        void ListServiceDeploymentsAsync(const ListServiceDeploymentsRequestT& request, const ListServiceDeploymentsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&ECSClient::ListServiceDeployments, request, handler, context);
         }
 
         /**

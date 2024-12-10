@@ -21,6 +21,10 @@ namespace Aws
       {
 
         static const int SMS_PHONE_NUMBER_HASH = HashingUtils::HashString("SMS_PHONE_NUMBER");
+        static const int INBOUND_EMAIL_HASH = HashingUtils::HashString("INBOUND_EMAIL");
+        static const int OUTBOUND_EMAIL_HASH = HashingUtils::HashString("OUTBOUND_EMAIL");
+        static const int ANALYTICS_CONNECTOR_HASH = HashingUtils::HashString("ANALYTICS_CONNECTOR");
+        static const int WHATSAPP_MESSAGING_PHONE_NUMBER_HASH = HashingUtils::HashString("WHATSAPP_MESSAGING_PHONE_NUMBER");
 
 
         FlowAssociationResourceType GetFlowAssociationResourceTypeForName(const Aws::String& name)
@@ -29,6 +33,22 @@ namespace Aws
           if (hashCode == SMS_PHONE_NUMBER_HASH)
           {
             return FlowAssociationResourceType::SMS_PHONE_NUMBER;
+          }
+          else if (hashCode == INBOUND_EMAIL_HASH)
+          {
+            return FlowAssociationResourceType::INBOUND_EMAIL;
+          }
+          else if (hashCode == OUTBOUND_EMAIL_HASH)
+          {
+            return FlowAssociationResourceType::OUTBOUND_EMAIL;
+          }
+          else if (hashCode == ANALYTICS_CONNECTOR_HASH)
+          {
+            return FlowAssociationResourceType::ANALYTICS_CONNECTOR;
+          }
+          else if (hashCode == WHATSAPP_MESSAGING_PHONE_NUMBER_HASH)
+          {
+            return FlowAssociationResourceType::WHATSAPP_MESSAGING_PHONE_NUMBER;
           }
           EnumParseOverflowContainer* overflowContainer = Aws::GetEnumOverflowContainer();
           if(overflowContainer)
@@ -48,6 +68,14 @@ namespace Aws
             return {};
           case FlowAssociationResourceType::SMS_PHONE_NUMBER:
             return "SMS_PHONE_NUMBER";
+          case FlowAssociationResourceType::INBOUND_EMAIL:
+            return "INBOUND_EMAIL";
+          case FlowAssociationResourceType::OUTBOUND_EMAIL:
+            return "OUTBOUND_EMAIL";
+          case FlowAssociationResourceType::ANALYTICS_CONNECTOR:
+            return "ANALYTICS_CONNECTOR";
+          case FlowAssociationResourceType::WHATSAPP_MESSAGING_PHONE_NUMBER:
+            return "WHATSAPP_MESSAGING_PHONE_NUMBER";
           default:
             EnumParseOverflowContainer* overflowContainer = Aws::GetEnumOverflowContainer();
             if(overflowContainer)
