@@ -40,8 +40,7 @@ namespace Model
 
     ///@{
     /**
-     * <p>The user pool ID for the user pool on which the search should be
-     * performed.</p>
+     * <p>The ID of the user pool on which the search should be performed.</p>
      */
     inline const Aws::String& GetUserPoolId() const{ return m_userPoolId; }
     inline bool UserPoolIdHasBeenSet() const { return m_userPoolIdHasBeenSet; }
@@ -108,8 +107,8 @@ namespace Model
 
     ///@{
     /**
-     * <p>A filter string of the form "<i>AttributeName</i> <i>Filter-Type</i>
-     * "<i>AttributeValue</i>"". Quotation marks within the filter string must be
+     * <p>A filter string of the form <code>"AttributeName Filter-Type
+     * "AttributeValue"</code>. Quotation marks within the filter string must be
      * escaped using the backslash (<code>\</code>) character. For example,
      * <code>"family_name = \"Reddy\""</code>.</p> <ul> <li> <p> <i>AttributeName</i>:
      * The name of the attribute to search for. You can only search for one attribute

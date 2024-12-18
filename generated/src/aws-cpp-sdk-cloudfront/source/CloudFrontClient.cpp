@@ -23,6 +23,7 @@
 #include <aws/cloudfront/CloudFrontEndpointProvider.h>
 #include <aws/cloudfront/model/AssociateAlias2020_05_31Request.h>
 #include <aws/cloudfront/model/CopyDistribution2020_05_31Request.h>
+#include <aws/cloudfront/model/CreateAnycastIpList2020_05_31Request.h>
 #include <aws/cloudfront/model/CreateCachePolicy2020_05_31Request.h>
 #include <aws/cloudfront/model/CreateCloudFrontOriginAccessIdentity2020_05_31Request.h>
 #include <aws/cloudfront/model/CreateContinuousDeploymentPolicy2020_05_31Request.h>
@@ -42,6 +43,8 @@
 #include <aws/cloudfront/model/CreateResponseHeadersPolicy2020_05_31Request.h>
 #include <aws/cloudfront/model/CreateStreamingDistribution2020_05_31Request.h>
 #include <aws/cloudfront/model/CreateStreamingDistributionWithTags2020_05_31Request.h>
+#include <aws/cloudfront/model/CreateVpcOrigin2020_05_31Request.h>
+#include <aws/cloudfront/model/DeleteAnycastIpList2020_05_31Request.h>
 #include <aws/cloudfront/model/DeleteCachePolicy2020_05_31Request.h>
 #include <aws/cloudfront/model/DeleteCloudFrontOriginAccessIdentity2020_05_31Request.h>
 #include <aws/cloudfront/model/DeleteContinuousDeploymentPolicy2020_05_31Request.h>
@@ -58,8 +61,10 @@
 #include <aws/cloudfront/model/DeleteRealtimeLogConfig2020_05_31Request.h>
 #include <aws/cloudfront/model/DeleteResponseHeadersPolicy2020_05_31Request.h>
 #include <aws/cloudfront/model/DeleteStreamingDistribution2020_05_31Request.h>
+#include <aws/cloudfront/model/DeleteVpcOrigin2020_05_31Request.h>
 #include <aws/cloudfront/model/DescribeFunction2020_05_31Request.h>
 #include <aws/cloudfront/model/DescribeKeyValueStore2020_05_31Request.h>
+#include <aws/cloudfront/model/GetAnycastIpList2020_05_31Request.h>
 #include <aws/cloudfront/model/GetCachePolicy2020_05_31Request.h>
 #include <aws/cloudfront/model/GetCachePolicyConfig2020_05_31Request.h>
 #include <aws/cloudfront/model/GetCloudFrontOriginAccessIdentity2020_05_31Request.h>
@@ -88,16 +93,20 @@
 #include <aws/cloudfront/model/GetResponseHeadersPolicyConfig2020_05_31Request.h>
 #include <aws/cloudfront/model/GetStreamingDistribution2020_05_31Request.h>
 #include <aws/cloudfront/model/GetStreamingDistributionConfig2020_05_31Request.h>
+#include <aws/cloudfront/model/GetVpcOrigin2020_05_31Request.h>
+#include <aws/cloudfront/model/ListAnycastIpLists2020_05_31Request.h>
 #include <aws/cloudfront/model/ListCachePolicies2020_05_31Request.h>
 #include <aws/cloudfront/model/ListCloudFrontOriginAccessIdentities2020_05_31Request.h>
 #include <aws/cloudfront/model/ListConflictingAliases2020_05_31Request.h>
 #include <aws/cloudfront/model/ListContinuousDeploymentPolicies2020_05_31Request.h>
 #include <aws/cloudfront/model/ListDistributions2020_05_31Request.h>
+#include <aws/cloudfront/model/ListDistributionsByAnycastIpListId2020_05_31Request.h>
 #include <aws/cloudfront/model/ListDistributionsByCachePolicyId2020_05_31Request.h>
 #include <aws/cloudfront/model/ListDistributionsByKeyGroup2020_05_31Request.h>
 #include <aws/cloudfront/model/ListDistributionsByOriginRequestPolicyId2020_05_31Request.h>
 #include <aws/cloudfront/model/ListDistributionsByRealtimeLogConfig2020_05_31Request.h>
 #include <aws/cloudfront/model/ListDistributionsByResponseHeadersPolicyId2020_05_31Request.h>
+#include <aws/cloudfront/model/ListDistributionsByVpcOriginId2020_05_31Request.h>
 #include <aws/cloudfront/model/ListDistributionsByWebACLId2020_05_31Request.h>
 #include <aws/cloudfront/model/ListFieldLevelEncryptionConfigs2020_05_31Request.h>
 #include <aws/cloudfront/model/ListFieldLevelEncryptionProfiles2020_05_31Request.h>
@@ -112,6 +121,7 @@
 #include <aws/cloudfront/model/ListResponseHeadersPolicies2020_05_31Request.h>
 #include <aws/cloudfront/model/ListStreamingDistributions2020_05_31Request.h>
 #include <aws/cloudfront/model/ListTagsForResource2020_05_31Request.h>
+#include <aws/cloudfront/model/ListVpcOrigins2020_05_31Request.h>
 #include <aws/cloudfront/model/PublishFunction2020_05_31Request.h>
 #include <aws/cloudfront/model/TagResource2020_05_31Request.h>
 #include <aws/cloudfront/model/TestFunction2020_05_31Request.h>
@@ -132,6 +142,7 @@
 #include <aws/cloudfront/model/UpdateRealtimeLogConfig2020_05_31Request.h>
 #include <aws/cloudfront/model/UpdateResponseHeadersPolicy2020_05_31Request.h>
 #include <aws/cloudfront/model/UpdateStreamingDistribution2020_05_31Request.h>
+#include <aws/cloudfront/model/UpdateVpcOrigin2020_05_31Request.h>
 
 #include <smithy/tracing/TracingUtils.h>
 
@@ -343,6 +354,33 @@ CopyDistribution2020_05_31Outcome CloudFrontClient::CopyDistribution2020_05_31(c
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetPrimaryDistributionId());
       endpointResolutionOutcome.GetResult().AddPathSegments("/copy");
       return CopyDistribution2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+CreateAnycastIpList2020_05_31Outcome CloudFrontClient::CreateAnycastIpList2020_05_31(const CreateAnycastIpList2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(CreateAnycastIpList2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, CreateAnycastIpList2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, CreateAnycastIpList2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, CreateAnycastIpList2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<CreateAnycastIpList2020_05_31Outcome>(
+    [&]()-> CreateAnycastIpList2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, CreateAnycastIpList2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/anycast-ip-list");
+      return CreateAnycastIpList2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
     *meter,
@@ -648,7 +686,7 @@ CreateKeyValueStore2020_05_31Outcome CloudFrontClient::CreateKeyValueStore2020_0
           *meter,
           {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, CreateKeyValueStore2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/key-value-store/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/key-value-store");
       return CreateKeyValueStore2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -682,7 +720,7 @@ CreateMonitoringSubscription2020_05_31Outcome CloudFrontClient::CreateMonitoring
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, CreateMonitoringSubscription2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
       endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributions/");
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetDistributionId());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/monitoring-subscription/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/monitoring-subscription");
       return CreateMonitoringSubscription2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -876,6 +914,71 @@ CreateStreamingDistributionWithTags2020_05_31Outcome CloudFrontClient::CreateStr
       ss.str("?WithTags");
       endpointResolutionOutcome.GetResult().SetQueryString(ss.str());
       return CreateStreamingDistributionWithTags2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+CreateVpcOrigin2020_05_31Outcome CloudFrontClient::CreateVpcOrigin2020_05_31(const CreateVpcOrigin2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(CreateVpcOrigin2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, CreateVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, CreateVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, CreateVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<CreateVpcOrigin2020_05_31Outcome>(
+    [&]()-> CreateVpcOrigin2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, CreateVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/vpc-origin");
+      return CreateVpcOrigin2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+DeleteAnycastIpList2020_05_31Outcome CloudFrontClient::DeleteAnycastIpList2020_05_31(const DeleteAnycastIpList2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(DeleteAnycastIpList2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, DeleteAnycastIpList2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  if (!request.IdHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("DeleteAnycastIpList2020_05_31", "Required field: Id, is not set");
+    return DeleteAnycastIpList2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
+  }
+  if (!request.IfMatchHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("DeleteAnycastIpList2020_05_31", "Required field: IfMatch, is not set");
+    return DeleteAnycastIpList2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IfMatch]", false));
+  }
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, DeleteAnycastIpList2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, DeleteAnycastIpList2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<DeleteAnycastIpList2020_05_31Outcome>(
+    [&]()-> DeleteAnycastIpList2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, DeleteAnycastIpList2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/anycast-ip-list/");
+      endpointResolutionOutcome.GetResult().AddPathSegment(request.GetId());
+      return DeleteAnycastIpList2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_DELETE));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
     *meter,
@@ -1215,7 +1318,7 @@ DeleteMonitoringSubscription2020_05_31Outcome CloudFrontClient::DeleteMonitoring
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, DeleteMonitoringSubscription2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
       endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributions/");
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetDistributionId());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/monitoring-subscription/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/monitoring-subscription");
       return DeleteMonitoringSubscription2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_DELETE));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -1341,7 +1444,7 @@ DeleteRealtimeLogConfig2020_05_31Outcome CloudFrontClient::DeleteRealtimeLogConf
           *meter,
           {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, DeleteRealtimeLogConfig2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/delete-realtime-log-config/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/delete-realtime-log-config");
       return DeleteRealtimeLogConfig2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -1415,6 +1518,44 @@ DeleteStreamingDistribution2020_05_31Outcome CloudFrontClient::DeleteStreamingDi
     {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
 }
 
+DeleteVpcOrigin2020_05_31Outcome CloudFrontClient::DeleteVpcOrigin2020_05_31(const DeleteVpcOrigin2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(DeleteVpcOrigin2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, DeleteVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  if (!request.IdHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("DeleteVpcOrigin2020_05_31", "Required field: Id, is not set");
+    return DeleteVpcOrigin2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
+  }
+  if (!request.IfMatchHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("DeleteVpcOrigin2020_05_31", "Required field: IfMatch, is not set");
+    return DeleteVpcOrigin2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IfMatch]", false));
+  }
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, DeleteVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, DeleteVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<DeleteVpcOrigin2020_05_31Outcome>(
+    [&]()-> DeleteVpcOrigin2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, DeleteVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/vpc-origin/");
+      endpointResolutionOutcome.GetResult().AddPathSegment(request.GetId());
+      return DeleteVpcOrigin2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_DELETE));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
 DescribeFunction2020_05_31Outcome CloudFrontClient::DescribeFunction2020_05_31(const DescribeFunction2020_05_31Request& request) const
 {
   AWS_OPERATION_GUARD(DescribeFunction2020_05_31);
@@ -1476,6 +1617,39 @@ DescribeKeyValueStore2020_05_31Outcome CloudFrontClient::DescribeKeyValueStore20
       endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/key-value-store/");
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetName());
       return DescribeKeyValueStore2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+GetAnycastIpList2020_05_31Outcome CloudFrontClient::GetAnycastIpList2020_05_31(const GetAnycastIpList2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(GetAnycastIpList2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, GetAnycastIpList2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  if (!request.IdHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("GetAnycastIpList2020_05_31", "Required field: Id, is not set");
+    return GetAnycastIpList2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
+  }
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, GetAnycastIpList2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, GetAnycastIpList2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<GetAnycastIpList2020_05_31Outcome>(
+    [&]()-> GetAnycastIpList2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, GetAnycastIpList2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/anycast-ip-list/");
+      endpointResolutionOutcome.GetResult().AddPathSegment(request.GetId());
+      return GetAnycastIpList2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
     *meter,
@@ -2050,7 +2224,7 @@ GetMonitoringSubscription2020_05_31Outcome CloudFrontClient::GetMonitoringSubscr
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, GetMonitoringSubscription2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
       endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributions/");
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetDistributionId());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/monitoring-subscription/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/monitoring-subscription");
       return GetMonitoringSubscription2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -2278,7 +2452,7 @@ GetRealtimeLogConfig2020_05_31Outcome CloudFrontClient::GetRealtimeLogConfig2020
           *meter,
           {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, GetRealtimeLogConfig2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/get-realtime-log-config/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/get-realtime-log-config");
       return GetRealtimeLogConfig2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -2414,6 +2588,66 @@ GetStreamingDistributionConfig2020_05_31Outcome CloudFrontClient::GetStreamingDi
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetId());
       endpointResolutionOutcome.GetResult().AddPathSegments("/config");
       return GetStreamingDistributionConfig2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+GetVpcOrigin2020_05_31Outcome CloudFrontClient::GetVpcOrigin2020_05_31(const GetVpcOrigin2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(GetVpcOrigin2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, GetVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  if (!request.IdHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("GetVpcOrigin2020_05_31", "Required field: Id, is not set");
+    return GetVpcOrigin2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
+  }
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, GetVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, GetVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<GetVpcOrigin2020_05_31Outcome>(
+    [&]()-> GetVpcOrigin2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, GetVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/vpc-origin/");
+      endpointResolutionOutcome.GetResult().AddPathSegment(request.GetId());
+      return GetVpcOrigin2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+ListAnycastIpLists2020_05_31Outcome CloudFrontClient::ListAnycastIpLists2020_05_31(const ListAnycastIpLists2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(ListAnycastIpLists2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, ListAnycastIpLists2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, ListAnycastIpLists2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, ListAnycastIpLists2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<ListAnycastIpLists2020_05_31Outcome>(
+    [&]()-> ListAnycastIpLists2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, ListAnycastIpLists2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/anycast-ip-list");
+      return ListAnycastIpLists2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
     *meter,
@@ -2565,6 +2799,39 @@ ListDistributions2020_05_31Outcome CloudFrontClient::ListDistributions2020_05_31
     {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
 }
 
+ListDistributionsByAnycastIpListId2020_05_31Outcome CloudFrontClient::ListDistributionsByAnycastIpListId2020_05_31(const ListDistributionsByAnycastIpListId2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(ListDistributionsByAnycastIpListId2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, ListDistributionsByAnycastIpListId2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  if (!request.AnycastIpListIdHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("ListDistributionsByAnycastIpListId2020_05_31", "Required field: AnycastIpListId, is not set");
+    return ListDistributionsByAnycastIpListId2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [AnycastIpListId]", false));
+  }
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, ListDistributionsByAnycastIpListId2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, ListDistributionsByAnycastIpListId2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<ListDistributionsByAnycastIpListId2020_05_31Outcome>(
+    [&]()-> ListDistributionsByAnycastIpListId2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, ListDistributionsByAnycastIpListId2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributionsByAnycastIpListId/");
+      endpointResolutionOutcome.GetResult().AddPathSegment(request.GetAnycastIpListId());
+      return ListDistributionsByAnycastIpListId2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
 ListDistributionsByCachePolicyId2020_05_31Outcome CloudFrontClient::ListDistributionsByCachePolicyId2020_05_31(const ListDistributionsByCachePolicyId2020_05_31Request& request) const
 {
   AWS_OPERATION_GUARD(ListDistributionsByCachePolicyId2020_05_31);
@@ -2683,7 +2950,7 @@ ListDistributionsByRealtimeLogConfig2020_05_31Outcome CloudFrontClient::ListDist
           *meter,
           {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, ListDistributionsByRealtimeLogConfig2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributionsByRealtimeLogConfig/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributionsByRealtimeLogConfig");
       return ListDistributionsByRealtimeLogConfig2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_POST));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -2718,6 +2985,39 @@ ListDistributionsByResponseHeadersPolicyId2020_05_31Outcome CloudFrontClient::Li
       endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributionsByResponseHeadersPolicyId/");
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetResponseHeadersPolicyId());
       return ListDistributionsByResponseHeadersPolicyId2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+ListDistributionsByVpcOriginId2020_05_31Outcome CloudFrontClient::ListDistributionsByVpcOriginId2020_05_31(const ListDistributionsByVpcOriginId2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(ListDistributionsByVpcOriginId2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, ListDistributionsByVpcOriginId2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  if (!request.VpcOriginIdHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("ListDistributionsByVpcOriginId2020_05_31", "Required field: VpcOriginId, is not set");
+    return ListDistributionsByVpcOriginId2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [VpcOriginId]", false));
+  }
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, ListDistributionsByVpcOriginId2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, ListDistributionsByVpcOriginId2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<ListDistributionsByVpcOriginId2020_05_31Outcome>(
+    [&]()-> ListDistributionsByVpcOriginId2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, ListDistributionsByVpcOriginId2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/distributionsByVpcOriginId/");
+      endpointResolutionOutcome.GetResult().AddPathSegment(request.GetVpcOriginId());
+      return ListDistributionsByVpcOriginId2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
     *meter,
@@ -3114,6 +3414,33 @@ ListTagsForResource2020_05_31Outcome CloudFrontClient::ListTagsForResource2020_0
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, ListTagsForResource2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
       endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/tagging");
       return ListTagsForResource2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+ListVpcOrigins2020_05_31Outcome CloudFrontClient::ListVpcOrigins2020_05_31(const ListVpcOrigins2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(ListVpcOrigins2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, ListVpcOrigins2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, ListVpcOrigins2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, ListVpcOrigins2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<ListVpcOrigins2020_05_31Outcome>(
+    [&]()-> ListVpcOrigins2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, ListVpcOrigins2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/vpc-origin");
+      return ListVpcOrigins2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_GET));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
     *meter,
@@ -3733,7 +4060,7 @@ UpdateRealtimeLogConfig2020_05_31Outcome CloudFrontClient::UpdateRealtimeLogConf
           *meter,
           {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
       AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, UpdateRealtimeLogConfig2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
-      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/realtime-log-config/");
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/realtime-log-config");
       return UpdateRealtimeLogConfig2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_PUT));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
@@ -3802,6 +4129,44 @@ UpdateStreamingDistribution2020_05_31Outcome CloudFrontClient::UpdateStreamingDi
       endpointResolutionOutcome.GetResult().AddPathSegment(request.GetId());
       endpointResolutionOutcome.GetResult().AddPathSegments("/config");
       return UpdateStreamingDistribution2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_PUT));
+    },
+    TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
+    *meter,
+    {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+}
+
+UpdateVpcOrigin2020_05_31Outcome CloudFrontClient::UpdateVpcOrigin2020_05_31(const UpdateVpcOrigin2020_05_31Request& request) const
+{
+  AWS_OPERATION_GUARD(UpdateVpcOrigin2020_05_31);
+  AWS_OPERATION_CHECK_PTR(m_endpointProvider, UpdateVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE);
+  if (!request.IdHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("UpdateVpcOrigin2020_05_31", "Required field: Id, is not set");
+    return UpdateVpcOrigin2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [Id]", false));
+  }
+  if (!request.IfMatchHasBeenSet())
+  {
+    AWS_LOGSTREAM_ERROR("UpdateVpcOrigin2020_05_31", "Required field: IfMatch, is not set");
+    return UpdateVpcOrigin2020_05_31Outcome(Aws::Client::AWSError<CloudFrontErrors>(CloudFrontErrors::MISSING_PARAMETER, "MISSING_PARAMETER", "Missing required field [IfMatch]", false));
+  }
+  AWS_OPERATION_CHECK_PTR(m_telemetryProvider, UpdateVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto tracer = m_telemetryProvider->getTracer(this->GetServiceClientName(), {});
+  auto meter = m_telemetryProvider->getMeter(this->GetServiceClientName(), {});
+  AWS_OPERATION_CHECK_PTR(meter, UpdateVpcOrigin2020_05_31, CoreErrors, CoreErrors::NOT_INITIALIZED);
+  auto span = tracer->CreateSpan(Aws::String(this->GetServiceClientName()) + "." + request.GetServiceRequestName(),
+    {{ TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName() }, { TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName() }, { TracingUtils::SMITHY_SYSTEM_DIMENSION, TracingUtils::SMITHY_METHOD_AWS_VALUE }},
+    smithy::components::tracing::SpanKind::CLIENT);
+  return TracingUtils::MakeCallWithTiming<UpdateVpcOrigin2020_05_31Outcome>(
+    [&]()-> UpdateVpcOrigin2020_05_31Outcome {
+      auto endpointResolutionOutcome = TracingUtils::MakeCallWithTiming<ResolveEndpointOutcome>(
+          [&]() -> ResolveEndpointOutcome { return m_endpointProvider->ResolveEndpoint(request.GetEndpointContextParams()); },
+          TracingUtils::SMITHY_CLIENT_ENDPOINT_RESOLUTION_METRIC,
+          *meter,
+          {{TracingUtils::SMITHY_METHOD_DIMENSION, request.GetServiceRequestName()}, {TracingUtils::SMITHY_SERVICE_DIMENSION, this->GetServiceClientName()}});
+      AWS_OPERATION_CHECK_SUCCESS(endpointResolutionOutcome, UpdateVpcOrigin2020_05_31, CoreErrors, CoreErrors::ENDPOINT_RESOLUTION_FAILURE, endpointResolutionOutcome.GetError().GetMessage());
+      endpointResolutionOutcome.GetResult().AddPathSegments("/2020-05-31/vpc-origin/");
+      endpointResolutionOutcome.GetResult().AddPathSegment(request.GetId());
+      return UpdateVpcOrigin2020_05_31Outcome(MakeRequest(request, endpointResolutionOutcome.GetResult(), Aws::Http::HttpMethod::HTTP_PUT));
     },
     TracingUtils::SMITHY_CLIENT_DURATION_METRIC,
     *meter,

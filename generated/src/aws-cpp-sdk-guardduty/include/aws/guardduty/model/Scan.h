@@ -32,7 +32,8 @@ namespace Model
 {
 
   /**
-   * <p>Contains information about a malware scan.</p><p><h3>See Also:</h3>   <a
+   * <p>Contains information about malware scans associated with GuardDuty Malware
+   * Protection for EC2.</p><p><h3>See Also:</h3>   <a
    * href="http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Scan">AWS API
    * Reference</a></p>
    */
@@ -47,7 +48,11 @@ namespace Model
 
     ///@{
     /**
-     * <p>The unique ID of the detector that the request is associated with.</p>
+     * <p>The unique ID of the detector that is associated with the request.</p> <p>To
+     * find the <code>detectorId</code> in the current Region, see the Settings page in
+     * the GuardDuty console, or run the <a
+     * href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a>
+     * API.</p>
      */
     inline const Aws::String& GetDetectorId() const{ return m_detectorId; }
     inline bool DetectorIdHasBeenSet() const { return m_detectorIdHasBeenSet; }
@@ -64,7 +69,10 @@ namespace Model
      * <p>The unique detector ID of the administrator account that the request is
      * associated with. If the account is an administrator, the
      * <code>AdminDetectorId</code> will be the same as the one used for
-     * <code>DetectorId</code>.</p>
+     * <code>DetectorId</code>.</p> <p>To find the <code>detectorId</code> in the
+     * current Region, see the Settings page in the GuardDuty console, or run the <a
+     * href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_ListDetectors.html">ListDetectors</a>
+     * API.</p>
      */
     inline const Aws::String& GetAdminDetectorId() const{ return m_adminDetectorId; }
     inline bool AdminDetectorIdHasBeenSet() const { return m_adminDetectorIdHasBeenSet; }
@@ -104,7 +112,7 @@ namespace Model
 
     ///@{
     /**
-     * <p>Represents the reason for FAILED scan status.</p>
+     * <p>Represents the reason for <code>FAILED</code> scan status.</p>
      */
     inline const Aws::String& GetFailureReason() const{ return m_failureReason; }
     inline bool FailureReasonHasBeenSet() const { return m_failureReasonHasBeenSet; }

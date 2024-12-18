@@ -82,9 +82,9 @@ namespace Model
     /**
      * <p>Scopes the results to images with the specified owners. You can specify a
      * combination of Amazon Web Services account IDs, <code>self</code>,
-     * <code>amazon</code>, and <code>aws-marketplace</code>. If you omit this
-     * parameter, the results include all images for which you have launch permissions,
-     * regardless of ownership.</p>
+     * <code>amazon</code>, <code>aws-backup-vault</code>, and
+     * <code>aws-marketplace</code>. If you omit this parameter, the results include
+     * all images for which you have launch permissions, regardless of ownership.</p>
      */
     inline const Aws::Vector<Aws::String>& GetOwners() const{ return m_owners; }
     inline bool OwnersHasBeenSet() const { return m_ownersHasBeenSet; }
@@ -190,18 +190,21 @@ namespace Model
      * during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean
      * that indicates whether enhanced networking with ENA is enabled.</p> </li> <li>
      * <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |
-     * <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the
-     * image.</p> </li> <li> <p> <code>image-type</code> - The image type
-     * (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li>
-     * <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is
+     * <code>xen</code>).</p> </li> <li> <p> <code>image-allowed</code> - A Boolean
+     * that indicates whether the image meets the criteria specified for Allowed
+     * AMIs.</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li>
+     * <li> <p> <code>image-type</code> - The image type (<code>machine</code> |
+     * <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p>
+     * <code>is-public</code> - A Boolean that indicates whether the image is
      * public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li>
      * <li> <p> <code>manifest-location</code> - The location of the image
      * manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided
      * during image creation).</p> </li> <li> <p> <code>owner-alias</code> - The owner
-     * alias (<code>amazon</code> | <code>aws-marketplace</code>). The valid aliases
-     * are defined in an Amazon-maintained list. This is not the Amazon Web Services
-     * account alias that can be set using the IAM console. We recommend that you use
-     * the <b>Owner</b> request parameter instead of this filter.</p> </li> <li> <p>
+     * alias (<code>amazon</code> | <code>aws-backup-vault</code> |
+     * <code>aws-marketplace</code>). The valid aliases are defined in an
+     * Amazon-maintained list. This is not the Amazon Web Services account alias that
+     * can be set using the IAM console. We recommend that you use the <b>Owner</b>
+     * request parameter instead of this filter.</p> </li> <li> <p>
      * <code>owner-id</code> - The Amazon Web Services account ID of the owner. We
      * recommend that you use the <b>Owner</b> request parameter instead of this
      * filter.</p> </li> <li> <p> <code>platform</code> - The platform. The only
@@ -213,9 +216,11 @@ namespace Model
      * the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p>
      * <code>root-device-type</code> - The type of the root device volume
      * (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p>
-     * <code>source-instance-id</code> - The ID of the instance that the AMI was
-     * created from if the AMI was created using CreateImage. This filter is applicable
-     * only if the AMI was created using <a
+     * <code>source-image-id</code> - The ID of the source AMI from which the AMI was
+     * created.</p> </li> <li> <p> <code>source-image-region</code> - The Region of the
+     * source AMI.</p> </li> <li> <p> <code>source-instance-id</code> - The ID of the
+     * instance that the AMI was created from if the AMI was created using CreateImage.
+     * This filter is applicable only if the AMI was created using <a
      * href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html">CreateImage</a>.</p>
      * </li> <li> <p> <code>state</code> - The state of the image
      * (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li>

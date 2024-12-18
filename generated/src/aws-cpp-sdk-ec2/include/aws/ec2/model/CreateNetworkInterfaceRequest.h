@@ -10,6 +10,7 @@
 #include <aws/ec2/model/NetworkInterfaceCreationType.h>
 #include <aws/core/utils/memory/stl/AWSString.h>
 #include <aws/ec2/model/ConnectionTrackingSpecificationRequest.h>
+#include <aws/ec2/model/OperatorRequest.h>
 #include <aws/ec2/model/Ipv4PrefixSpecificationRequest.h>
 #include <aws/ec2/model/Ipv6PrefixSpecificationRequest.h>
 #include <aws/ec2/model/TagSpecification.h>
@@ -107,8 +108,10 @@ namespace Model
     ///@{
     /**
      * <p>The type of network interface. The default is <code>interface</code>.</p>
-     * <p>The only supported values are <code>interface</code>, <code>efa</code>, and
-     * <code>trunk</code>.</p>
+     * <p>If you specify <code>efa-only</code>, do not assign any IP addresses to the
+     * network interface. EFA-only network interfaces do not support IP addresses.</p>
+     * <p>The only supported values are <code>interface</code>, <code>efa</code>,
+     * <code>efa-only</code>, and <code>trunk</code>.</p>
      */
     inline const NetworkInterfaceCreationType& GetInterfaceType() const{ return m_interfaceType; }
     inline bool InterfaceTypeHasBeenSet() const { return m_interfaceTypeHasBeenSet; }
@@ -181,6 +184,18 @@ namespace Model
     inline void SetConnectionTrackingSpecification(ConnectionTrackingSpecificationRequest&& value) { m_connectionTrackingSpecificationHasBeenSet = true; m_connectionTrackingSpecification = std::move(value); }
     inline CreateNetworkInterfaceRequest& WithConnectionTrackingSpecification(const ConnectionTrackingSpecificationRequest& value) { SetConnectionTrackingSpecification(value); return *this;}
     inline CreateNetworkInterfaceRequest& WithConnectionTrackingSpecification(ConnectionTrackingSpecificationRequest&& value) { SetConnectionTrackingSpecification(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>Reserved for internal use.</p>
+     */
+    inline const OperatorRequest& GetOperator() const{ return m_operator; }
+    inline bool OperatorHasBeenSet() const { return m_operatorHasBeenSet; }
+    inline void SetOperator(const OperatorRequest& value) { m_operatorHasBeenSet = true; m_operator = value; }
+    inline void SetOperator(OperatorRequest&& value) { m_operatorHasBeenSet = true; m_operator = std::move(value); }
+    inline CreateNetworkInterfaceRequest& WithOperator(const OperatorRequest& value) { SetOperator(value); return *this;}
+    inline CreateNetworkInterfaceRequest& WithOperator(OperatorRequest&& value) { SetOperator(std::move(value)); return *this;}
     ///@}
 
     ///@{
@@ -349,6 +364,9 @@ namespace Model
 
     ConnectionTrackingSpecificationRequest m_connectionTrackingSpecification;
     bool m_connectionTrackingSpecificationHasBeenSet = false;
+
+    OperatorRequest m_operator;
+    bool m_operatorHasBeenSet = false;
 
     Aws::String m_subnetId;
     bool m_subnetIdHasBeenSet = false;

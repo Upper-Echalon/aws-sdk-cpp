@@ -230,6 +230,18 @@ DeleteEventSourceMappingResult& DeleteEventSourceMappingResult::operator =(const
 
   }
 
+  if(jsonValue.ValueExists("MetricsConfig"))
+  {
+    m_metricsConfig = jsonValue.GetObject("MetricsConfig");
+
+  }
+
+  if(jsonValue.ValueExists("ProvisionedPollerConfig"))
+  {
+    m_provisionedPollerConfig = jsonValue.GetObject("ProvisionedPollerConfig");
+
+  }
+
 
   const auto& headers = result.GetHeaderValueCollection();
   const auto& requestIdIter = headers.find("x-amzn-requestid");

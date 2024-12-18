@@ -96,12 +96,12 @@ namespace Model
      * <p>The bucket name to which the PUT action was initiated. </p> <p> <b>Directory
      * buckets</b> - When you use this operation with a directory bucket, you must use
      * virtual-hosted-style requests in the format <code>
-     * <i>Bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com</code>.
+     * <i>Bucket-name</i>.s3express-<i>zone-id</i>.<i>region-code</i>.amazonaws.com</code>.
      * Path-style requests are not supported. Directory bucket names must be unique in
-     * the chosen Availability Zone. Bucket names must follow the format <code>
-     * <i>bucket_base_name</i>--<i>az-id</i>--x-s3</code> (for example, <code>
-     * <i>DOC-EXAMPLE-BUCKET</i>--<i>usw2-az1</i>--x-s3</code>). For information about
-     * bucket naming restrictions, see <a
+     * the chosen Zone (Availability Zone or Local Zone). Bucket names must follow the
+     * format <code> <i>bucket-base-name</i>--<i>zone-id</i>--x-s3</code> (for example,
+     * <code> <i>DOC-EXAMPLE-BUCKET</i>--<i>usw2-az1</i>--x-s3</code>). For information
+     * about bucket naming restrictions, see <a
      * href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html">Directory
      * bucket naming rules</a> in the <i>Amazon S3 User Guide</i>.</p> <p> <b>Access
      * points</b> - When you use this action with an access point, you must provide the
@@ -366,6 +366,29 @@ namespace Model
 
     ///@{
     /**
+     * <p>Uploads the object only if the ETag (entity tag) value provided during the
+     * WRITE operation matches the ETag of the object in S3. If the ETag values do not
+     * match, the operation returns a <code>412 Precondition Failed</code> error.</p>
+     * <p>If a conflicting operation occurs during the upload S3 returns a <code>409
+     * ConditionalRequestConflict</code> response. On a 409 failure you should fetch
+     * the object's ETag and retry the upload.</p> <p>Expects the ETag value as a
+     * string.</p> <p>For more information about conditional requests, see <a
+     * href="https://tools.ietf.org/html/rfc7232">RFC 7232</a>, or <a
+     * href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-requests.html">Conditional
+     * requests</a> in the <i>Amazon S3 User Guide</i>.</p>
+     */
+    inline const Aws::String& GetIfMatch() const{ return m_ifMatch; }
+    inline bool IfMatchHasBeenSet() const { return m_ifMatchHasBeenSet; }
+    inline void SetIfMatch(const Aws::String& value) { m_ifMatchHasBeenSet = true; m_ifMatch = value; }
+    inline void SetIfMatch(Aws::String&& value) { m_ifMatchHasBeenSet = true; m_ifMatch = std::move(value); }
+    inline void SetIfMatch(const char* value) { m_ifMatchHasBeenSet = true; m_ifMatch.assign(value); }
+    inline PutObjectRequest& WithIfMatch(const Aws::String& value) { SetIfMatch(value); return *this;}
+    inline PutObjectRequest& WithIfMatch(Aws::String&& value) { SetIfMatch(std::move(value)); return *this;}
+    inline PutObjectRequest& WithIfMatch(const char* value) { SetIfMatch(value); return *this;}
+    ///@}
+
+    ///@{
+    /**
      * <p>Uploads the object only if the object key name does not already exist in the
      * bucket specified. Otherwise, Amazon S3 returns a <code>412 Precondition
      * Failed</code> error.</p> <p>If a conflicting operation occurs during the upload
@@ -466,6 +489,20 @@ namespace Model
     inline PutObjectRequest& WithKey(const Aws::String& value) { SetKey(value); return *this;}
     inline PutObjectRequest& WithKey(Aws::String&& value) { SetKey(std::move(value)); return *this;}
     inline PutObjectRequest& WithKey(const char* value) { SetKey(value); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p> Specifies the offset for appending data to existing objects in bytes. The
+     * offset must be equal to the size of the existing object being appended to. If no
+     * object exists, setting this header to 0 will create a new object. </p> 
+     * <p>This functionality is only supported for objects in the Amazon S3 Express One
+     * Zone storage class in directory buckets.</p> 
+     */
+    inline long long GetWriteOffsetBytes() const{ return m_writeOffsetBytes; }
+    inline bool WriteOffsetBytesHasBeenSet() const { return m_writeOffsetBytesHasBeenSet; }
+    inline void SetWriteOffsetBytes(long long value) { m_writeOffsetBytesHasBeenSet = true; m_writeOffsetBytes = value; }
+    inline PutObjectRequest& WithWriteOffsetBytes(long long value) { SetWriteOffsetBytes(value); return *this;}
     ///@}
 
     ///@{
@@ -895,6 +932,9 @@ namespace Model
     Aws::Utils::DateTime m_expires;
     bool m_expiresHasBeenSet = false;
 
+    Aws::String m_ifMatch;
+    bool m_ifMatchHasBeenSet = false;
+
     Aws::String m_ifNoneMatch;
     bool m_ifNoneMatchHasBeenSet = false;
 
@@ -912,6 +952,9 @@ namespace Model
 
     Aws::String m_key;
     bool m_keyHasBeenSet = false;
+
+    long long m_writeOffsetBytes;
+    bool m_writeOffsetBytesHasBeenSet = false;
 
     Aws::Map<Aws::String, Aws::String> m_metadata;
     bool m_metadataHasBeenSet = false;

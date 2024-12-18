@@ -8,10 +8,12 @@
 #include <aws/cleanrooms/CleanRoomsRequest.h>
 #include <aws/core/utils/memory/stl/AWSVector.h>
 #include <aws/core/utils/memory/stl/AWSString.h>
+#include <aws/cleanrooms/model/MLMemberAbilities.h>
 #include <aws/cleanrooms/model/DataEncryptionMetadata.h>
 #include <aws/cleanrooms/model/CollaborationQueryLogStatus.h>
 #include <aws/core/utils/memory/stl/AWSMap.h>
 #include <aws/cleanrooms/model/PaymentConfiguration.h>
+#include <aws/cleanrooms/model/AnalyticsEngine.h>
 #include <aws/cleanrooms/model/MemberSpecification.h>
 #include <aws/cleanrooms/model/MemberAbility.h>
 #include <utility>
@@ -98,6 +100,22 @@ namespace Model
 
     ///@{
     /**
+     * <p>The ML abilities granted to the collaboration creator.</p> <p>Custom ML
+     * modeling is in beta release and is subject to change. For beta terms and
+     * conditions, see <i>Betas and Previews</i> in the <a
+     * href="https://aws.amazon.com/service-terms/">Amazon Web Services Service
+     * Terms</a>.</p>
+     */
+    inline const MLMemberAbilities& GetCreatorMLMemberAbilities() const{ return m_creatorMLMemberAbilities; }
+    inline bool CreatorMLMemberAbilitiesHasBeenSet() const { return m_creatorMLMemberAbilitiesHasBeenSet; }
+    inline void SetCreatorMLMemberAbilities(const MLMemberAbilities& value) { m_creatorMLMemberAbilitiesHasBeenSet = true; m_creatorMLMemberAbilities = value; }
+    inline void SetCreatorMLMemberAbilities(MLMemberAbilities&& value) { m_creatorMLMemberAbilitiesHasBeenSet = true; m_creatorMLMemberAbilities = std::move(value); }
+    inline CreateCollaborationRequest& WithCreatorMLMemberAbilities(const MLMemberAbilities& value) { SetCreatorMLMemberAbilities(value); return *this;}
+    inline CreateCollaborationRequest& WithCreatorMLMemberAbilities(MLMemberAbilities&& value) { SetCreatorMLMemberAbilities(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
      * <p>The display name of the collaboration creator.</p>
      */
     inline const Aws::String& GetCreatorDisplayName() const{ return m_creatorDisplayName; }
@@ -172,6 +190,18 @@ namespace Model
     inline CreateCollaborationRequest& WithCreatorPaymentConfiguration(const PaymentConfiguration& value) { SetCreatorPaymentConfiguration(value); return *this;}
     inline CreateCollaborationRequest& WithCreatorPaymentConfiguration(PaymentConfiguration&& value) { SetCreatorPaymentConfiguration(std::move(value)); return *this;}
     ///@}
+
+    ///@{
+    /**
+     * <p> The analytics engine.</p>
+     */
+    inline const AnalyticsEngine& GetAnalyticsEngine() const{ return m_analyticsEngine; }
+    inline bool AnalyticsEngineHasBeenSet() const { return m_analyticsEngineHasBeenSet; }
+    inline void SetAnalyticsEngine(const AnalyticsEngine& value) { m_analyticsEngineHasBeenSet = true; m_analyticsEngine = value; }
+    inline void SetAnalyticsEngine(AnalyticsEngine&& value) { m_analyticsEngineHasBeenSet = true; m_analyticsEngine = std::move(value); }
+    inline CreateCollaborationRequest& WithAnalyticsEngine(const AnalyticsEngine& value) { SetAnalyticsEngine(value); return *this;}
+    inline CreateCollaborationRequest& WithAnalyticsEngine(AnalyticsEngine&& value) { SetAnalyticsEngine(std::move(value)); return *this;}
+    ///@}
   private:
 
     Aws::Vector<MemberSpecification> m_members;
@@ -185,6 +215,9 @@ namespace Model
 
     Aws::Vector<MemberAbility> m_creatorMemberAbilities;
     bool m_creatorMemberAbilitiesHasBeenSet = false;
+
+    MLMemberAbilities m_creatorMLMemberAbilities;
+    bool m_creatorMLMemberAbilitiesHasBeenSet = false;
 
     Aws::String m_creatorDisplayName;
     bool m_creatorDisplayNameHasBeenSet = false;
@@ -200,6 +233,9 @@ namespace Model
 
     PaymentConfiguration m_creatorPaymentConfiguration;
     bool m_creatorPaymentConfigurationHasBeenSet = false;
+
+    AnalyticsEngine m_analyticsEngine;
+    bool m_analyticsEngineHasBeenSet = false;
   };
 
 } // namespace Model

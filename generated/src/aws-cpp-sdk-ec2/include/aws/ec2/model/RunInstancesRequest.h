@@ -21,6 +21,8 @@
 #include <aws/ec2/model/EnclaveOptionsRequest.h>
 #include <aws/ec2/model/PrivateDnsNameOptionsRequest.h>
 #include <aws/ec2/model/InstanceMaintenanceOptionsRequest.h>
+#include <aws/ec2/model/InstanceNetworkPerformanceOptionsRequest.h>
+#include <aws/ec2/model/OperatorRequest.h>
 #include <aws/ec2/model/ShutdownBehavior.h>
 #include <aws/ec2/model/IamInstanceProfileSpecification.h>
 #include <aws/ec2/model/BlockDeviceMapping.h>
@@ -441,7 +443,8 @@ namespace Model
      * <p>Information about the Capacity Reservation targeting option. If you do not
      * specify this parameter, the instance's Capacity Reservation preference defaults
      * to <code>open</code>, which enables it to run in any open Capacity Reservation
-     * that has matching attributes (instance type, platform, Availability Zone).</p>
+     * that has matching attributes (instance type, platform, Availability Zone, and
+     * tenancy).</p>
      */
     inline const CapacityReservationSpecification& GetCapacityReservationSpecification() const{ return m_capacityReservationSpecification; }
     inline bool CapacityReservationSpecificationHasBeenSet() const { return m_capacityReservationSpecificationHasBeenSet; }
@@ -574,6 +577,30 @@ namespace Model
     inline bool EnablePrimaryIpv6HasBeenSet() const { return m_enablePrimaryIpv6HasBeenSet; }
     inline void SetEnablePrimaryIpv6(bool value) { m_enablePrimaryIpv6HasBeenSet = true; m_enablePrimaryIpv6 = value; }
     inline RunInstancesRequest& WithEnablePrimaryIpv6(bool value) { SetEnablePrimaryIpv6(value); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>Contains settings for the network performance options for the instance.</p>
+     */
+    inline const InstanceNetworkPerformanceOptionsRequest& GetNetworkPerformanceOptions() const{ return m_networkPerformanceOptions; }
+    inline bool NetworkPerformanceOptionsHasBeenSet() const { return m_networkPerformanceOptionsHasBeenSet; }
+    inline void SetNetworkPerformanceOptions(const InstanceNetworkPerformanceOptionsRequest& value) { m_networkPerformanceOptionsHasBeenSet = true; m_networkPerformanceOptions = value; }
+    inline void SetNetworkPerformanceOptions(InstanceNetworkPerformanceOptionsRequest&& value) { m_networkPerformanceOptionsHasBeenSet = true; m_networkPerformanceOptions = std::move(value); }
+    inline RunInstancesRequest& WithNetworkPerformanceOptions(const InstanceNetworkPerformanceOptionsRequest& value) { SetNetworkPerformanceOptions(value); return *this;}
+    inline RunInstancesRequest& WithNetworkPerformanceOptions(InstanceNetworkPerformanceOptionsRequest&& value) { SetNetworkPerformanceOptions(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>Reserved for internal use.</p>
+     */
+    inline const OperatorRequest& GetOperator() const{ return m_operator; }
+    inline bool OperatorHasBeenSet() const { return m_operatorHasBeenSet; }
+    inline void SetOperator(const OperatorRequest& value) { m_operatorHasBeenSet = true; m_operator = value; }
+    inline void SetOperator(OperatorRequest&& value) { m_operatorHasBeenSet = true; m_operator = std::move(value); }
+    inline RunInstancesRequest& WithOperator(const OperatorRequest& value) { SetOperator(value); return *this;}
+    inline RunInstancesRequest& WithOperator(OperatorRequest&& value) { SetOperator(std::move(value)); return *this;}
     ///@}
 
     ///@{
@@ -808,6 +835,12 @@ namespace Model
 
     bool m_enablePrimaryIpv6;
     bool m_enablePrimaryIpv6HasBeenSet = false;
+
+    InstanceNetworkPerformanceOptionsRequest m_networkPerformanceOptions;
+    bool m_networkPerformanceOptionsHasBeenSet = false;
+
+    OperatorRequest m_operator;
+    bool m_operatorHasBeenSet = false;
 
     bool m_dryRun;
     bool m_dryRunHasBeenSet = false;
