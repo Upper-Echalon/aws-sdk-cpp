@@ -46,7 +46,10 @@ TableDescription::TableDescription() :
     m_tableClassSummaryHasBeenSet(false),
     m_deletionProtectionEnabled(false),
     m_deletionProtectionEnabledHasBeenSet(false),
-    m_onDemandThroughputHasBeenSet(false)
+    m_onDemandThroughputHasBeenSet(false),
+    m_warmThroughputHasBeenSet(false),
+    m_multiRegionConsistency(MultiRegionConsistency::NOT_SET),
+    m_multiRegionConsistencyHasBeenSet(false)
 {
 }
 
@@ -241,6 +244,20 @@ TableDescription& TableDescription::operator =(JsonView jsonValue)
     m_onDemandThroughputHasBeenSet = true;
   }
 
+  if(jsonValue.ValueExists("WarmThroughput"))
+  {
+    m_warmThroughput = jsonValue.GetObject("WarmThroughput");
+
+    m_warmThroughputHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("MultiRegionConsistency"))
+  {
+    m_multiRegionConsistency = MultiRegionConsistencyMapper::GetMultiRegionConsistencyForName(jsonValue.GetString("MultiRegionConsistency"));
+
+    m_multiRegionConsistencyHasBeenSet = true;
+  }
+
   return *this;
 }
 
@@ -413,6 +430,17 @@ JsonValue TableDescription::Jsonize() const
   {
    payload.WithObject("OnDemandThroughput", m_onDemandThroughput.Jsonize());
 
+  }
+
+  if(m_warmThroughputHasBeenSet)
+  {
+   payload.WithObject("WarmThroughput", m_warmThroughput.Jsonize());
+
+  }
+
+  if(m_multiRegionConsistencyHasBeenSet)
+  {
+   payload.WithString("MultiRegionConsistency", MultiRegionConsistencyMapper::GetNameForMultiRegionConsistency(m_multiRegionConsistency));
   }
 
   return payload;

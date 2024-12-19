@@ -23,6 +23,8 @@
 #include <aws/ec2/model/InstanceRequirementsRequest.h>
 #include <aws/ec2/model/LaunchTemplatePrivateDnsNameOptionsRequest.h>
 #include <aws/ec2/model/LaunchTemplateInstanceMaintenanceOptionsRequest.h>
+#include <aws/ec2/model/OperatorRequest.h>
+#include <aws/ec2/model/LaunchTemplateNetworkPerformanceOptionsRequest.h>
 #include <aws/ec2/model/LaunchTemplateBlockDeviceMappingRequest.h>
 #include <aws/ec2/model/LaunchTemplateInstanceNetworkInterfaceSpecificationRequest.h>
 #include <aws/ec2/model/LaunchTemplateTagSpecificationRequest.h>
@@ -583,6 +585,31 @@ namespace Model
     inline void SetDisableApiStop(bool value) { m_disableApiStopHasBeenSet = true; m_disableApiStop = value; }
     inline RequestLaunchTemplateData& WithDisableApiStop(bool value) { SetDisableApiStop(value); return *this;}
     ///@}
+
+    ///@{
+    /**
+     * <p>The entity that manages the launch template.</p>
+     */
+    inline const OperatorRequest& GetOperator() const{ return m_operator; }
+    inline bool OperatorHasBeenSet() const { return m_operatorHasBeenSet; }
+    inline void SetOperator(const OperatorRequest& value) { m_operatorHasBeenSet = true; m_operator = value; }
+    inline void SetOperator(OperatorRequest&& value) { m_operatorHasBeenSet = true; m_operator = std::move(value); }
+    inline RequestLaunchTemplateData& WithOperator(const OperatorRequest& value) { SetOperator(value); return *this;}
+    inline RequestLaunchTemplateData& WithOperator(OperatorRequest&& value) { SetOperator(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>Contains launch template settings to boost network performance for the type
+     * of workload that runs on your instance.</p>
+     */
+    inline const LaunchTemplateNetworkPerformanceOptionsRequest& GetNetworkPerformanceOptions() const{ return m_networkPerformanceOptions; }
+    inline bool NetworkPerformanceOptionsHasBeenSet() const { return m_networkPerformanceOptionsHasBeenSet; }
+    inline void SetNetworkPerformanceOptions(const LaunchTemplateNetworkPerformanceOptionsRequest& value) { m_networkPerformanceOptionsHasBeenSet = true; m_networkPerformanceOptions = value; }
+    inline void SetNetworkPerformanceOptions(LaunchTemplateNetworkPerformanceOptionsRequest&& value) { m_networkPerformanceOptionsHasBeenSet = true; m_networkPerformanceOptions = std::move(value); }
+    inline RequestLaunchTemplateData& WithNetworkPerformanceOptions(const LaunchTemplateNetworkPerformanceOptionsRequest& value) { SetNetworkPerformanceOptions(value); return *this;}
+    inline RequestLaunchTemplateData& WithNetworkPerformanceOptions(LaunchTemplateNetworkPerformanceOptionsRequest&& value) { SetNetworkPerformanceOptions(std::move(value)); return *this;}
+    ///@}
   private:
 
     Aws::String m_kernelId;
@@ -677,6 +704,12 @@ namespace Model
 
     bool m_disableApiStop;
     bool m_disableApiStopHasBeenSet = false;
+
+    OperatorRequest m_operator;
+    bool m_operatorHasBeenSet = false;
+
+    LaunchTemplateNetworkPerformanceOptionsRequest m_networkPerformanceOptions;
+    bool m_networkPerformanceOptionsHasBeenSet = false;
   };
 
 } // namespace Model

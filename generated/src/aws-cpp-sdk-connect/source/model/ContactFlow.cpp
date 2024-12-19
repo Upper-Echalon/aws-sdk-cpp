@@ -30,7 +30,13 @@ ContactFlow::ContactFlow() :
     m_statusHasBeenSet(false),
     m_descriptionHasBeenSet(false),
     m_contentHasBeenSet(false),
-    m_tagsHasBeenSet(false)
+    m_tagsHasBeenSet(false),
+    m_flowContentSha256HasBeenSet(false),
+    m_version(0),
+    m_versionHasBeenSet(false),
+    m_versionDescriptionHasBeenSet(false),
+    m_lastModifiedTimeHasBeenSet(false),
+    m_lastModifiedRegionHasBeenSet(false)
 {
 }
 
@@ -108,6 +114,41 @@ ContactFlow& ContactFlow::operator =(JsonView jsonValue)
     m_tagsHasBeenSet = true;
   }
 
+  if(jsonValue.ValueExists("FlowContentSha256"))
+  {
+    m_flowContentSha256 = jsonValue.GetString("FlowContentSha256");
+
+    m_flowContentSha256HasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("Version"))
+  {
+    m_version = jsonValue.GetInt64("Version");
+
+    m_versionHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("VersionDescription"))
+  {
+    m_versionDescription = jsonValue.GetString("VersionDescription");
+
+    m_versionDescriptionHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("LastModifiedTime"))
+  {
+    m_lastModifiedTime = jsonValue.GetDouble("LastModifiedTime");
+
+    m_lastModifiedTimeHasBeenSet = true;
+  }
+
+  if(jsonValue.ValueExists("LastModifiedRegion"))
+  {
+    m_lastModifiedRegion = jsonValue.GetString("LastModifiedRegion");
+
+    m_lastModifiedRegionHasBeenSet = true;
+  }
+
   return *this;
 }
 
@@ -168,6 +209,35 @@ JsonValue ContactFlow::Jsonize() const
      tagsJsonMap.WithString(tagsItem.first, tagsItem.second);
    }
    payload.WithObject("Tags", std::move(tagsJsonMap));
+
+  }
+
+  if(m_flowContentSha256HasBeenSet)
+  {
+   payload.WithString("FlowContentSha256", m_flowContentSha256);
+
+  }
+
+  if(m_versionHasBeenSet)
+  {
+   payload.WithInt64("Version", m_version);
+
+  }
+
+  if(m_versionDescriptionHasBeenSet)
+  {
+   payload.WithString("VersionDescription", m_versionDescription);
+
+  }
+
+  if(m_lastModifiedTimeHasBeenSet)
+  {
+   payload.WithDouble("LastModifiedTime", m_lastModifiedTime.SecondsWithMSPrecision());
+  }
+
+  if(m_lastModifiedRegionHasBeenSet)
+  {
+   payload.WithString("LastModifiedRegion", m_lastModifiedRegion);
 
   }
 

@@ -44,7 +44,8 @@ namespace Model
 
     ///@{
     /**
-     * <p>The ID of the Amazon Cognito user pool.</p>
+     * <p>The ID of the user pool where you want to respond to an authentication
+     * challenge.</p>
      */
     inline const Aws::String& GetUserPoolId() const{ return m_userPoolId; }
     inline bool UserPoolIdHasBeenSet() const { return m_userPoolIdHasBeenSet; }
@@ -58,7 +59,7 @@ namespace Model
 
     ///@{
     /**
-     * <p>The app client ID.</p>
+     * <p>The ID of the app client where you initiated sign-in.</p>
      */
     inline const Aws::String& GetClientId() const{ return m_clientId; }
     inline bool ClientIdHasBeenSet() const { return m_clientIdHasBeenSet; }
@@ -72,8 +73,10 @@ namespace Model
 
     ///@{
     /**
-     * <p>The challenge name. For more information, see <a
-     * href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html">AdminInitiateAuth</a>.</p>
+     * <p>The name of the challenge that you are responding to. You can find more
+     * information about values for <code>ChallengeName</code> in the response
+     * parameters of <a
+     * href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html#CognitoUserPools-AdminInitiateAuth-response-ChallengeName">AdminInitiateAuth</a>.</p>
      */
     inline const ChallengeNameType& GetChallengeName() const{ return m_challengeName; }
     inline bool ChallengeNameHasBeenSet() const { return m_challengeNameHasBeenSet; }
@@ -89,11 +92,36 @@ namespace Model
      * Each challenge has its own required response parameters. The following examples
      * are partial JSON request bodies that highlight challenge-response
      * parameters.</p>  <p>You must provide a SECRET_HASH parameter in all
-     * challenge responses to an app client that has a client secret.</p> 
-     * <dl> <dt>SMS_MFA</dt> <dd> <p> <code>"ChallengeName": "SMS_MFA",
-     * "ChallengeResponses": {"SMS_MFA_CODE": "[code]", "USERNAME":
-     * "[username]"}</code> </p> </dd> <dt>EMAIL_OTP</dt> <dd> <p>
-     * <code>"ChallengeName": "EMAIL_OTP", "ChallengeResponses": {"EMAIL_OTP_CODE":
+     * challenge responses to an app client that has a client secret. Include a
+     * <code>DEVICE_KEY</code> for device authentication.</p>  <dl>
+     * <dt>SELECT_CHALLENGE</dt> <dd> <p> <code>"ChallengeName": "SELECT_CHALLENGE",
+     * "ChallengeResponses": { "USERNAME": "[username]", "ANSWER": "[Challenge
+     * name]"}</code> </p> <p>Available challenges are <code>PASSWORD</code>,
+     * <code>PASSWORD_SRP</code>, <code>EMAIL_OTP</code>, <code>SMS_OTP</code>, and
+     * <code>WEB_AUTHN</code>.</p> <p>Complete authentication in the
+     * <code>SELECT_CHALLENGE</code> response for <code>PASSWORD</code>,
+     * <code>PASSWORD_SRP</code>, and <code>WEB_AUTHN</code>:</p> <ul> <li> <p>
+     * <code>"ChallengeName": "SELECT_CHALLENGE", "ChallengeResponses": { "ANSWER":
+     * "WEB_AUTHN", "USERNAME": "[username]", "CREDENTIAL":
+     * "[AuthenticationResponseJSON]"}</code> </p> <p>See <a
+     * href="https://www.w3.org/TR/webauthn-3/#dictdef-authenticationresponsejson">
+     * AuthenticationResponseJSON</a>.</p> </li> <li> <p> <code>"ChallengeName":
+     * "SELECT_CHALLENGE", "ChallengeResponses": { "ANSWER": "PASSWORD", "USERNAME":
+     * "[username]", "PASSWORD": "[password]"}</code> </p> </li> <li> <p>
+     * <code>"ChallengeName": "SELECT_CHALLENGE", "ChallengeResponses": { "ANSWER":
+     * "PASSWORD_SRP", "USERNAME": "[username]", "SRP_A": "[SRP_A]"}</code> </p> </li>
+     * </ul> <p>For <code>SMS_OTP</code> and <code>EMAIL_OTP</code>, respond with the
+     * username and answer. Your user pool will send a code for the user to submit in
+     * the next challenge response.</p> <ul> <li> <p> <code>"ChallengeName":
+     * "SELECT_CHALLENGE", "ChallengeResponses": { "ANSWER": "SMS_OTP", "USERNAME":
+     * "[username]"}</code> </p> </li> <li> <p> <code>"ChallengeName":
+     * "SELECT_CHALLENGE", "ChallengeResponses": { "ANSWER": "EMAIL_OTP", "USERNAME":
+     * "[username]"}</code> </p> </li> </ul> </dd> <dt>SMS_OTP</dt> <dd> <p>
+     * <code>"ChallengeName": "SMS_OTP", "ChallengeResponses": {"SMS_OTP_CODE":
+     * "[code]", "USERNAME": "[username]"}</code> </p> </dd> <dt>EMAIL_OTP</dt> <dd>
+     * <p> <code>"ChallengeName": "EMAIL_OTP", "ChallengeResponses": {"EMAIL_OTP_CODE":
+     * "[code]", "USERNAME": "[username]"}</code> </p> </dd> <dt>SMS_MFA</dt> <dd> <p>
+     * <code>"ChallengeName": "SMS_MFA", "ChallengeResponses": {"SMS_MFA_CODE":
      * "[code]", "USERNAME": "[username]"}</code> </p> </dd> <dt>PASSWORD_VERIFIER</dt>
      * <dd> <p>This challenge response is part of the SRP flow. Amazon Cognito requires
      * that your application respond to this challenge within a few seconds. When the
@@ -156,12 +184,12 @@ namespace Model
 
     ///@{
     /**
-     * <p>The session that should be passed both ways in challenge-response calls to
-     * the service. If an <code>InitiateAuth</code> or
-     * <code>RespondToAuthChallenge</code> API call determines that the caller must
-     * pass another challenge, it returns a session with other challenge parameters.
-     * This session should be passed as it is to the next
-     * <code>RespondToAuthChallenge</code> API call.</p>
+     * <p>The session identifier that maintains the state of authentication requests
+     * and challenge responses. If an <code>AdminInitiateAuth</code> or
+     * <code>AdminRespondToAuthChallenge</code> API request results in a determination
+     * that your application must pass another challenge, Amazon Cognito returns a
+     * session with other challenge parameters. Send this session identifier,
+     * unmodified, to the next <code>AdminRespondToAuthChallenge</code> request.</p>
      */
     inline const Aws::String& GetSession() const{ return m_session; }
     inline bool SessionHasBeenSet() const { return m_sessionHasBeenSet; }
@@ -191,7 +219,9 @@ namespace Model
      * <p>Contextual data about your user session, such as the device fingerprint, IP
      * address, or location. Amazon Cognito advanced security evaluates the risk of an
      * authentication event based on the context that your app generates and passes to
-     * Amazon Cognito when it makes API requests.</p>
+     * Amazon Cognito when it makes API requests.</p> <p>For more information, see <a
+     * href="https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-viewing-threat-protection-app.html">Collecting
+     * data for threat protection in applications</a>.</p>
      */
     inline const ContextDataType& GetContextData() const{ return m_contextData; }
     inline bool ContextDataHasBeenSet() const { return m_contextDataHasBeenSet; }
@@ -207,11 +237,11 @@ namespace Model
      * workflows that this action triggers.</p> <p>You create custom workflows by
      * assigning Lambda functions to user pool triggers. When you use the
      * AdminRespondToAuthChallenge API action, Amazon Cognito invokes any functions
-     * that you have assigned to the following triggers: </p> <ul> <li> <p>pre
-     * sign-up</p> </li> <li> <p>custom message</p> </li> <li> <p>post
-     * authentication</p> </li> <li> <p>user migration</p> </li> <li> <p>pre token
-     * generation</p> </li> <li> <p>define auth challenge</p> </li> <li> <p>create auth
-     * challenge</p> </li> <li> <p>verify auth challenge response</p> </li> </ul>
+     * that you have assigned to the following triggers: </p> <ul> <li> <p>Pre
+     * sign-up</p> </li> <li> <p>custom message</p> </li> <li> <p>Post
+     * authentication</p> </li> <li> <p>User migration</p> </li> <li> <p>Pre token
+     * generation</p> </li> <li> <p>Define auth challenge</p> </li> <li> <p>Create auth
+     * challenge</p> </li> <li> <p>Verify auth challenge response</p> </li> </ul>
      * <p>When Amazon Cognito invokes any of these functions, it passes a JSON payload,
      * which the function receives as input. This payload contains a
      * <code>clientMetadata</code> attribute that provides the data that you assigned
@@ -221,14 +251,15 @@ namespace Model
      * information, see <a
      * href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html">
      * Customizing user pool Workflows with Lambda Triggers</a> in the <i>Amazon
-     * Cognito Developer Guide</i>.</p>  <p>When you use the ClientMetadata
-     * parameter, remember that Amazon Cognito won't do the following:</p> <ul> <li>
-     * <p>Store the ClientMetadata value. This data is available only to Lambda
-     * triggers that are assigned to a user pool to support custom workflows. If your
-     * user pool configuration doesn't include triggers, the ClientMetadata parameter
-     * serves no purpose.</p> </li> <li> <p>Validate the ClientMetadata value.</p>
-     * </li> <li> <p>Encrypt the ClientMetadata value. Don't use Amazon Cognito to
-     * provide sensitive information.</p> </li> </ul> 
+     * Cognito Developer Guide</i>.</p>  <p>When you use the
+     * <code>ClientMetadata</code> parameter, note that Amazon Cognito won't do the
+     * following:</p> <ul> <li> <p>Store the <code>ClientMetadata</code> value. This
+     * data is available only to Lambda triggers that are assigned to a user pool to
+     * support custom workflows. If your user pool configuration doesn't include
+     * triggers, the <code>ClientMetadata</code> parameter serves no purpose.</p> </li>
+     * <li> <p>Validate the <code>ClientMetadata</code> value.</p> </li> <li>
+     * <p>Encrypt the <code>ClientMetadata</code> value. Don't send sensitive
+     * information in this parameter.</p> </li> </ul> 
      */
     inline const Aws::Map<Aws::String, Aws::String>& GetClientMetadata() const{ return m_clientMetadata; }
     inline bool ClientMetadataHasBeenSet() const { return m_clientMetadataHasBeenSet; }

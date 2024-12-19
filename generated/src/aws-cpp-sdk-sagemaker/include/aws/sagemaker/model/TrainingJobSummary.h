@@ -8,6 +8,7 @@
 #include <aws/core/utils/memory/stl/AWSString.h>
 #include <aws/core/utils/DateTime.h>
 #include <aws/sagemaker/model/TrainingJobStatus.h>
+#include <aws/sagemaker/model/SecondaryStatus.h>
 #include <aws/sagemaker/model/WarmPoolStatus.h>
 #include <utility>
 
@@ -121,6 +122,18 @@ namespace Model
 
     ///@{
     /**
+     * <p>The secondary status of the training job.</p>
+     */
+    inline const SecondaryStatus& GetSecondaryStatus() const{ return m_secondaryStatus; }
+    inline bool SecondaryStatusHasBeenSet() const { return m_secondaryStatusHasBeenSet; }
+    inline void SetSecondaryStatus(const SecondaryStatus& value) { m_secondaryStatusHasBeenSet = true; m_secondaryStatus = value; }
+    inline void SetSecondaryStatus(SecondaryStatus&& value) { m_secondaryStatusHasBeenSet = true; m_secondaryStatus = std::move(value); }
+    inline TrainingJobSummary& WithSecondaryStatus(const SecondaryStatus& value) { SetSecondaryStatus(value); return *this;}
+    inline TrainingJobSummary& WithSecondaryStatus(SecondaryStatus&& value) { SetSecondaryStatus(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
      * <p>The status of the warm pool associated with the training job.</p>
      */
     inline const WarmPoolStatus& GetWarmPoolStatus() const{ return m_warmPoolStatus; }
@@ -129,6 +142,25 @@ namespace Model
     inline void SetWarmPoolStatus(WarmPoolStatus&& value) { m_warmPoolStatusHasBeenSet = true; m_warmPoolStatus = std::move(value); }
     inline TrainingJobSummary& WithWarmPoolStatus(const WarmPoolStatus& value) { SetWarmPoolStatus(value); return *this;}
     inline TrainingJobSummary& WithWarmPoolStatus(WarmPoolStatus&& value) { SetWarmPoolStatus(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>The Amazon Resource Name (ARN); of the training plan associated with this
+     * training job.</p> <p>For more information about how to reserve GPU capacity for
+     * your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see
+     * <code> <a
+     * href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingPlan.html">CreateTrainingPlan</a>
+     * </code>.</p>
+     */
+    inline const Aws::String& GetTrainingPlanArn() const{ return m_trainingPlanArn; }
+    inline bool TrainingPlanArnHasBeenSet() const { return m_trainingPlanArnHasBeenSet; }
+    inline void SetTrainingPlanArn(const Aws::String& value) { m_trainingPlanArnHasBeenSet = true; m_trainingPlanArn = value; }
+    inline void SetTrainingPlanArn(Aws::String&& value) { m_trainingPlanArnHasBeenSet = true; m_trainingPlanArn = std::move(value); }
+    inline void SetTrainingPlanArn(const char* value) { m_trainingPlanArnHasBeenSet = true; m_trainingPlanArn.assign(value); }
+    inline TrainingJobSummary& WithTrainingPlanArn(const Aws::String& value) { SetTrainingPlanArn(value); return *this;}
+    inline TrainingJobSummary& WithTrainingPlanArn(Aws::String&& value) { SetTrainingPlanArn(std::move(value)); return *this;}
+    inline TrainingJobSummary& WithTrainingPlanArn(const char* value) { SetTrainingPlanArn(value); return *this;}
     ///@}
   private:
 
@@ -150,8 +182,14 @@ namespace Model
     TrainingJobStatus m_trainingJobStatus;
     bool m_trainingJobStatusHasBeenSet = false;
 
+    SecondaryStatus m_secondaryStatus;
+    bool m_secondaryStatusHasBeenSet = false;
+
     WarmPoolStatus m_warmPoolStatus;
     bool m_warmPoolStatusHasBeenSet = false;
+
+    Aws::String m_trainingPlanArn;
+    bool m_trainingPlanArnHasBeenSet = false;
   };
 
 } // namespace Model

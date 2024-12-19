@@ -69,12 +69,17 @@ namespace Model
 
     ///@{
     /**
-     * <p>Specifies the ARNs of the security groups that provide access to your file
-     * system's preferred subnet.</p>  <p>If you choose a security group that
-     * doesn't allow connections from within itself, do one of the following:</p> <ul>
-     * <li> <p>Configure the security group to allow it to communicate within
-     * itself.</p> </li> <li> <p>Choose a different security group that can communicate
-     * with the mount target's security group.</p> </li> </ul> 
+     * <p>Specifies the ARNs of the Amazon EC2 security groups that provide access to
+     * your file system's preferred subnet.</p> <p>The security groups that you specify
+     * must be able to communicate with your file system's security groups. For
+     * information about configuring security groups for file system access, see the <a
+     * href="https://docs.aws.amazon.com/fsx/latest/WindowsGuide/limit-access-security-groups.html">
+     * <i>Amazon FSx for Windows File Server User Guide</i> </a>.</p>  <p>If you
+     * choose a security group that doesn't allow connections from within itself, do
+     * one of the following:</p> <ul> <li> <p>Configure the security group to allow it
+     * to communicate within itself.</p> </li> <li> <p>Choose a different security
+     * group that can communicate with the mount target's security group.</p> </li>
+     * </ul> 
      */
     inline const Aws::Vector<Aws::String>& GetSecurityGroupArns() const{ return m_securityGroupArns; }
     inline bool SecurityGroupArnsHasBeenSet() const { return m_securityGroupArnsHasBeenSet; }
@@ -124,10 +129,10 @@ namespace Model
 
     ///@{
     /**
-     * <p>Specifies the name of the Microsoft Active Directory domain that the FSx for
-     * Windows File Server file system belongs to.</p> <p>If you have multiple Active
-     * Directory domains in your environment, configuring this parameter makes sure
-     * that DataSync connects to the right file system.</p>
+     * <p>Specifies the name of the Windows domain that the FSx for Windows File Server
+     * file system belongs to.</p> <p>If you have multiple Active Directory domains in
+     * your environment, configuring this parameter makes sure that DataSync connects
+     * to the right file system.</p>
      */
     inline const Aws::String& GetDomain() const{ return m_domain; }
     inline bool DomainHasBeenSet() const { return m_domainHasBeenSet; }

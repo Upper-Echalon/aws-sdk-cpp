@@ -53,7 +53,9 @@ namespace Model
     nodejs20_x,
     provided_al2023,
     python3_12,
-    java21
+    java21,
+    python3_13,
+    nodejs22_x
   };
 
 namespace RuntimeMapper
