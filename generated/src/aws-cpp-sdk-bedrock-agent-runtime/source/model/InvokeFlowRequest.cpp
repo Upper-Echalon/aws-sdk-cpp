@@ -13,9 +13,12 @@ using namespace Aws::Utils::Json;
 using namespace Aws::Utils;
 
 InvokeFlowRequest::InvokeFlowRequest() : 
+    m_enableTrace(false),
+    m_enableTraceHasBeenSet(false),
     m_flowAliasIdentifierHasBeenSet(false),
     m_flowIdentifierHasBeenSet(false),
     m_inputsHasBeenSet(false),
+    m_modelPerformanceConfigurationHasBeenSet(false),
     m_handler(), m_decoder(Aws::Utils::Event::EventStreamDecoder(&m_handler))
 {
 }
@@ -23,6 +26,12 @@ InvokeFlowRequest::InvokeFlowRequest() :
 Aws::String InvokeFlowRequest::SerializePayload() const
 {
   JsonValue payload;
+
+  if(m_enableTraceHasBeenSet)
+  {
+   payload.WithBool("enableTrace", m_enableTrace);
+
+  }
 
   if(m_inputsHasBeenSet)
   {
@@ -32,6 +41,12 @@ Aws::String InvokeFlowRequest::SerializePayload() const
      inputsJsonList[inputsIndex].AsObject(m_inputs[inputsIndex].Jsonize());
    }
    payload.WithArray("inputs", std::move(inputsJsonList));
+
+  }
+
+  if(m_modelPerformanceConfigurationHasBeenSet)
+  {
+   payload.WithObject("modelPerformanceConfiguration", m_modelPerformanceConfiguration.Jsonize());
 
   }
 

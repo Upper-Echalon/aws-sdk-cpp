@@ -10,6 +10,7 @@
 #include <aws/core/utils/event/EventStreamDecoder.h>
 #include <aws/core/utils/memory/stl/AWSString.h>
 #include <aws/core/utils/memory/stl/AWSVector.h>
+#include <aws/bedrock-agent-runtime/model/ModelPerformanceConfiguration.h>
 #include <aws/bedrock-agent-runtime/model/FlowInput.h>
 #include <utility>
 
@@ -58,6 +59,19 @@ namespace Model
 
     ///@{
     /**
+     * <p>Specifies whether to return the trace for the flow or not. Traces track
+     * inputs and outputs for nodes in the flow. For more information, see <a
+     * href="https://docs.aws.amazon.com/bedrock/latest/userguide/flows-trace.html">Track
+     * each step in your prompt flow by viewing its trace in Amazon Bedrock</a>.</p>
+     */
+    inline bool GetEnableTrace() const{ return m_enableTrace; }
+    inline bool EnableTraceHasBeenSet() const { return m_enableTraceHasBeenSet; }
+    inline void SetEnableTrace(bool value) { m_enableTraceHasBeenSet = true; m_enableTrace = value; }
+    inline InvokeFlowRequest& WithEnableTrace(bool value) { SetEnableTrace(value); return *this;}
+    ///@}
+
+    ///@{
+    /**
      * <p>The unique identifier of the flow alias.</p>
      */
     inline const Aws::String& GetFlowAliasIdentifier() const{ return m_flowAliasIdentifier; }
@@ -98,7 +112,22 @@ namespace Model
     inline InvokeFlowRequest& AddInputs(const FlowInput& value) { m_inputsHasBeenSet = true; m_inputs.push_back(value); return *this; }
     inline InvokeFlowRequest& AddInputs(FlowInput&& value) { m_inputsHasBeenSet = true; m_inputs.push_back(std::move(value)); return *this; }
     ///@}
+
+    ///@{
+    /**
+     * <p>Model performance settings for the request.</p>
+     */
+    inline const ModelPerformanceConfiguration& GetModelPerformanceConfiguration() const{ return m_modelPerformanceConfiguration; }
+    inline bool ModelPerformanceConfigurationHasBeenSet() const { return m_modelPerformanceConfigurationHasBeenSet; }
+    inline void SetModelPerformanceConfiguration(const ModelPerformanceConfiguration& value) { m_modelPerformanceConfigurationHasBeenSet = true; m_modelPerformanceConfiguration = value; }
+    inline void SetModelPerformanceConfiguration(ModelPerformanceConfiguration&& value) { m_modelPerformanceConfigurationHasBeenSet = true; m_modelPerformanceConfiguration = std::move(value); }
+    inline InvokeFlowRequest& WithModelPerformanceConfiguration(const ModelPerformanceConfiguration& value) { SetModelPerformanceConfiguration(value); return *this;}
+    inline InvokeFlowRequest& WithModelPerformanceConfiguration(ModelPerformanceConfiguration&& value) { SetModelPerformanceConfiguration(std::move(value)); return *this;}
+    ///@}
   private:
+
+    bool m_enableTrace;
+    bool m_enableTraceHasBeenSet = false;
 
     Aws::String m_flowAliasIdentifier;
     bool m_flowAliasIdentifierHasBeenSet = false;
@@ -108,6 +137,9 @@ namespace Model
 
     Aws::Vector<FlowInput> m_inputs;
     bool m_inputsHasBeenSet = false;
+
+    ModelPerformanceConfiguration m_modelPerformanceConfiguration;
+    bool m_modelPerformanceConfigurationHasBeenSet = false;
     InvokeFlowHandler m_handler;
     Aws::Utils::Event::EventStreamDecoder m_decoder;
 

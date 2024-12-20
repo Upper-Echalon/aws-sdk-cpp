@@ -10,6 +10,7 @@
 #include <aws/core/utils/memory/stl/AWSMap.h>
 #include <aws/core/utils/DateTime.h>
 #include <aws/connect/model/Reference.h>
+#include <aws/connect/model/SegmentAttributeValue.h>
 #include <utility>
 #include <aws/core/utils/UUID.h>
 
@@ -73,9 +74,9 @@ namespace Model
     /**
      * <p>The identifier of the flow for initiating the tasks. To see the ContactFlowId
      * in the Amazon Connect admin website, on the navigation menu go to
-     * <b>Routing</b>, <b>Contact Flows</b>. Choose the flow. On the flow page, under
-     * the name of the flow, choose <b>Show additional flow information</b>. The
-     * ContactFlowId is the last part of the ARN, shown here in bold: </p>
+     * <b>Routing</b>, <b>Flows</b>. Choose the flow. On the flow page, under the name
+     * of the flow, choose <b>Show additional flow information</b>. The ContactFlowId
+     * is the last part of the ARN, shown here in bold: </p>
      * <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b>
      * </p>
      */
@@ -251,6 +252,37 @@ namespace Model
     inline StartTaskContactRequest& WithRelatedContactId(Aws::String&& value) { SetRelatedContactId(std::move(value)); return *this;}
     inline StartTaskContactRequest& WithRelatedContactId(const char* value) { SetRelatedContactId(value); return *this;}
     ///@}
+
+    ///@{
+    /**
+     * <p>A set of system defined key-value pairs stored on individual contact segments
+     * (unique contact ID) using an attribute map. The attributes are standard Amazon
+     * Connect attributes. They can be accessed in flows.</p> <p>Attribute keys can
+     * include only alphanumeric, -, and _.</p> <p>This field can be used to set
+     * Contact Expiry as a duration in minutes and set a UserId for the User who
+     * created a task.</p>  <p>To set contact expiry, a ValueMap must be
+     * specified containing the integer number of minutes the contact will be active
+     * for before expiring, with <code>SegmentAttributes</code> like { <code>
+     * "connect:ContactExpiry": {"ValueMap" : { "ExpiryDuration": { "ValueInteger":
+     * 135}}}}</code>. </p> <p>To set the created by user, a valid AgentResourceId must
+     * be supplied, with <code>SegmentAttributes</code> like {
+     * <code>"connect:CreatedByUser" { "ValueString":
+     * "arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/agent/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"}}}</code>.
+     * </p> 
+     */
+    inline const Aws::Map<Aws::String, SegmentAttributeValue>& GetSegmentAttributes() const{ return m_segmentAttributes; }
+    inline bool SegmentAttributesHasBeenSet() const { return m_segmentAttributesHasBeenSet; }
+    inline void SetSegmentAttributes(const Aws::Map<Aws::String, SegmentAttributeValue>& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes = value; }
+    inline void SetSegmentAttributes(Aws::Map<Aws::String, SegmentAttributeValue>&& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes = std::move(value); }
+    inline StartTaskContactRequest& WithSegmentAttributes(const Aws::Map<Aws::String, SegmentAttributeValue>& value) { SetSegmentAttributes(value); return *this;}
+    inline StartTaskContactRequest& WithSegmentAttributes(Aws::Map<Aws::String, SegmentAttributeValue>&& value) { SetSegmentAttributes(std::move(value)); return *this;}
+    inline StartTaskContactRequest& AddSegmentAttributes(const Aws::String& key, const SegmentAttributeValue& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes.emplace(key, value); return *this; }
+    inline StartTaskContactRequest& AddSegmentAttributes(Aws::String&& key, const SegmentAttributeValue& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes.emplace(std::move(key), value); return *this; }
+    inline StartTaskContactRequest& AddSegmentAttributes(const Aws::String& key, SegmentAttributeValue&& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes.emplace(key, std::move(value)); return *this; }
+    inline StartTaskContactRequest& AddSegmentAttributes(Aws::String&& key, SegmentAttributeValue&& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes.emplace(std::move(key), std::move(value)); return *this; }
+    inline StartTaskContactRequest& AddSegmentAttributes(const char* key, SegmentAttributeValue&& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes.emplace(key, std::move(value)); return *this; }
+    inline StartTaskContactRequest& AddSegmentAttributes(const char* key, const SegmentAttributeValue& value) { m_segmentAttributesHasBeenSet = true; m_segmentAttributes.emplace(key, value); return *this; }
+    ///@}
   private:
 
     Aws::String m_instanceId;
@@ -288,6 +320,9 @@ namespace Model
 
     Aws::String m_relatedContactId;
     bool m_relatedContactIdHasBeenSet = false;
+
+    Aws::Map<Aws::String, SegmentAttributeValue> m_segmentAttributes;
+    bool m_segmentAttributesHasBeenSet = false;
   };
 
 } // namespace Model

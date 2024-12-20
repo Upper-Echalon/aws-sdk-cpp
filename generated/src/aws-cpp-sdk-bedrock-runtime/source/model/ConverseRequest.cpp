@@ -20,7 +20,10 @@ ConverseRequest::ConverseRequest() :
     m_toolConfigHasBeenSet(false),
     m_guardrailConfigHasBeenSet(false),
     m_additionalModelRequestFieldsHasBeenSet(false),
-    m_additionalModelResponseFieldPathsHasBeenSet(false)
+    m_promptVariablesHasBeenSet(false),
+    m_additionalModelResponseFieldPathsHasBeenSet(false),
+    m_requestMetadataHasBeenSet(false),
+    m_performanceConfigHasBeenSet(false)
 {
 }
 
@@ -76,6 +79,17 @@ Aws::String ConverseRequest::SerializePayload() const
     }
   }
 
+  if(m_promptVariablesHasBeenSet)
+  {
+   JsonValue promptVariablesJsonMap;
+   for(auto& promptVariablesItem : m_promptVariables)
+   {
+     promptVariablesJsonMap.WithObject(promptVariablesItem.first, promptVariablesItem.second.Jsonize());
+   }
+   payload.WithObject("promptVariables", std::move(promptVariablesJsonMap));
+
+  }
+
   if(m_additionalModelResponseFieldPathsHasBeenSet)
   {
    Aws::Utils::Array<JsonValue> additionalModelResponseFieldPathsJsonList(m_additionalModelResponseFieldPaths.size());
@@ -84,6 +98,23 @@ Aws::String ConverseRequest::SerializePayload() const
      additionalModelResponseFieldPathsJsonList[additionalModelResponseFieldPathsIndex].AsString(m_additionalModelResponseFieldPaths[additionalModelResponseFieldPathsIndex]);
    }
    payload.WithArray("additionalModelResponseFieldPaths", std::move(additionalModelResponseFieldPathsJsonList));
+
+  }
+
+  if(m_requestMetadataHasBeenSet)
+  {
+   JsonValue requestMetadataJsonMap;
+   for(auto& requestMetadataItem : m_requestMetadata)
+   {
+     requestMetadataJsonMap.WithString(requestMetadataItem.first, requestMetadataItem.second);
+   }
+   payload.WithObject("requestMetadata", std::move(requestMetadataJsonMap));
+
+  }
+
+  if(m_performanceConfigHasBeenSet)
+  {
+   payload.WithObject("performanceConfig", m_performanceConfig.Jsonize());
 
   }
 

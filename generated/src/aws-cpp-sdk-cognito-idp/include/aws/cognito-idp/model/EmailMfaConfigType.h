@@ -28,7 +28,11 @@ namespace Model
    * subject and body of the email message template for MFA messages. To activate
    * this setting, <a
    * href="https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html">
-   * advanced security features</a> must be active in your user pool.</p><p><h3>See
+   * advanced security features</a> must be active in your user pool.</p> <p>This
+   * data type is a request parameter of <a
+   * href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html">SetUserPoolMfaConfig</a>
+   * and a response parameter of <a
+   * href="https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_GetUserPoolMfaConfig.html">GetUserPoolMfaConfig</a>.</p><p><h3>See
    * Also:</h3>   <a
    * href="http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailMfaConfigType">AWS
    * API Reference</a></p>
@@ -44,10 +48,11 @@ namespace Model
 
     ///@{
     /**
-     * <p>The template for the email message that your user pool sends to users with an
-     * MFA code. The message must contain the <code>{####}</code> placeholder. In the
-     * message, Amazon Cognito replaces this placeholder with the code. If you don't
-     * provide this parameter, Amazon Cognito sends messages in the default format.</p>
+     * <p>The template for the email message that your user pool sends to users with a
+     * code for MFA and sign-in with an email OTP. The message must contain the
+     * <code>{####}</code> placeholder. In the message, Amazon Cognito replaces this
+     * placeholder with the code. If you don't provide this parameter, Amazon Cognito
+     * sends messages in the default format.</p>
      */
     inline const Aws::String& GetMessage() const{ return m_message; }
     inline bool MessageHasBeenSet() const { return m_messageHasBeenSet; }
@@ -61,8 +66,8 @@ namespace Model
 
     ///@{
     /**
-     * <p>The subject of the email message that your user pool sends to users with an
-     * MFA code.</p>
+     * <p>The subject of the email message that your user pool sends to users with a
+     * code for MFA and email OTP sign-in.</p>
      */
     inline const Aws::String& GetSubject() const{ return m_subject; }
     inline bool SubjectHasBeenSet() const { return m_subjectHasBeenSet; }

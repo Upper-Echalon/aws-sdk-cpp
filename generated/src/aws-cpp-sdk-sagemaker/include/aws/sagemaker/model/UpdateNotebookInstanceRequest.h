@@ -67,11 +67,12 @@ namespace Model
 
     ///@{
     /**
-     * <p>The Amazon Resource Name (ARN) of the IAM role that SageMaker can assume to
-     * access the notebook instance. For more information, see <a
+     * <p>The Amazon Resource Name (ARN) of the IAM role that SageMaker AI can assume
+     * to access the notebook instance. For more information, see <a
      * href="https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html">SageMaker
-     * Roles</a>. </p>  <p>To be able to pass this role to SageMaker, the caller
-     * of this API must have the <code>iam:PassRole</code> permission.</p> 
+     * AI Roles</a>. </p>  <p>To be able to pass this role to SageMaker AI, the
+     * caller of this API must have the <code>iam:PassRole</code> permission.</p>
+     * 
      */
     inline const Aws::String& GetRoleArn() const{ return m_roleArn; }
     inline bool RoleArnHasBeenSet() const { return m_roleArnHasBeenSet; }
@@ -116,11 +117,11 @@ namespace Model
     ///@{
     /**
      * <p>The size, in GB, of the ML storage volume to attach to the notebook instance.
-     * The default value is 5 GB. ML storage volumes are encrypted, so SageMaker can't
-     * determine the amount of available free space on the volume. Because of this, you
-     * can increase the volume size when you update a notebook instance, but you can't
-     * decrease the volume size. If you want to decrease the size of the ML storage
-     * volume in use, create a new notebook instance with the desired size.</p>
+     * The default value is 5 GB. ML storage volumes are encrypted, so SageMaker AI
+     * can't determine the amount of available free space on the volume. Because of
+     * this, you can increase the volume size when you update a notebook instance, but
+     * you can't decrease the volume size. If you want to decrease the size of the ML
+     * storage volume in use, create a new notebook instance with the desired size.</p>
      */
     inline int GetVolumeSizeInGB() const{ return m_volumeSizeInGB; }
     inline bool VolumeSizeInGBHasBeenSet() const { return m_volumeSizeInGBHasBeenSet; }
@@ -138,7 +139,7 @@ namespace Model
      * notebook instance, it opens in the directory that contains this repository. For
      * more information, see <a
      * href="https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html">Associating
-     * Git Repositories with SageMaker Notebook Instances</a>.</p>
+     * Git Repositories with SageMaker AI Notebook Instances</a>.</p>
      */
     inline const Aws::String& GetDefaultCodeRepository() const{ return m_defaultCodeRepository; }
     inline bool DefaultCodeRepositoryHasBeenSet() const { return m_defaultCodeRepositoryHasBeenSet; }
@@ -160,7 +161,7 @@ namespace Model
      * are cloned at the same level as the default repository of your notebook
      * instance. For more information, see <a
      * href="https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html">Associating
-     * Git Repositories with SageMaker Notebook Instances</a>.</p>
+     * Git Repositories with SageMaker AI Notebook Instances</a>.</p>
      */
     inline const Aws::Vector<Aws::String>& GetAdditionalCodeRepositories() const{ return m_additionalCodeRepositories; }
     inline bool AdditionalCodeRepositoriesHasBeenSet() const { return m_additionalCodeRepositoriesHasBeenSet; }
@@ -175,11 +176,9 @@ namespace Model
 
     ///@{
     /**
-     * <p>A list of the Elastic Inference (EI) instance types to associate with this
-     * notebook instance. Currently only one EI instance type can be associated with a
-     * notebook instance. For more information, see <a
-     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html">Using Elastic
-     * Inference in Amazon SageMaker</a>.</p>
+     * <p>This parameter is no longer supported. Elastic Inference (EI) is no longer
+     * available.</p> <p>This parameter was used to specify a list of the EI instance
+     * types to associate with this notebook instance.</p>
      */
     inline const Aws::Vector<NotebookInstanceAcceleratorType>& GetAcceleratorTypes() const{ return m_acceleratorTypes; }
     inline bool AcceleratorTypesHasBeenSet() const { return m_acceleratorTypesHasBeenSet; }
@@ -193,10 +192,9 @@ namespace Model
 
     ///@{
     /**
-     * <p>A list of the Elastic Inference (EI) instance types to remove from this
-     * notebook instance. This operation is idempotent. If you specify an accelerator
-     * type that is not associated with the notebook instance when you call this
-     * method, it does not throw an error.</p>
+     * <p>This parameter is no longer supported. Elastic Inference (EI) is no longer
+     * available.</p> <p>This parameter was used to specify a list of the EI instance
+     * types to remove from this notebook instance.</p>
      */
     inline bool GetDisassociateAcceleratorTypes() const{ return m_disassociateAcceleratorTypes; }
     inline bool DisassociateAcceleratorTypesHasBeenSet() const { return m_disassociateAcceleratorTypesHasBeenSet; }

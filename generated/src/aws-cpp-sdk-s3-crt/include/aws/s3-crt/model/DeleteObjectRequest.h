@@ -8,6 +8,7 @@
 #include <aws/s3-crt/S3CrtRequest.h>
 #include <aws/core/utils/memory/stl/AWSString.h>
 #include <aws/s3-crt/model/RequestPayer.h>
+#include <aws/core/utils/DateTime.h>
 #include <aws/core/utils/memory/stl/AWSMap.h>
 #include <utility>
 
@@ -52,12 +53,12 @@ namespace Model
      * <p>The bucket name of the bucket containing the object. </p> <p> <b>Directory
      * buckets</b> - When you use this operation with a directory bucket, you must use
      * virtual-hosted-style requests in the format <code>
-     * <i>Bucket_name</i>.s3express-<i>az_id</i>.<i>region</i>.amazonaws.com</code>.
+     * <i>Bucket-name</i>.s3express-<i>zone-id</i>.<i>region-code</i>.amazonaws.com</code>.
      * Path-style requests are not supported. Directory bucket names must be unique in
-     * the chosen Availability Zone. Bucket names must follow the format <code>
-     * <i>bucket_base_name</i>--<i>az-id</i>--x-s3</code> (for example, <code>
-     * <i>DOC-EXAMPLE-BUCKET</i>--<i>usw2-az1</i>--x-s3</code>). For information about
-     * bucket naming restrictions, see <a
+     * the chosen Zone (Availability Zone or Local Zone). Bucket names must follow the
+     * format <code> <i>bucket-base-name</i>--<i>zone-id</i>--x-s3</code> (for example,
+     * <code> <i>DOC-EXAMPLE-BUCKET</i>--<i>usw2-az1</i>--x-s3</code>). For information
+     * about bucket naming restrictions, see <a
      * href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-naming-rules.html">Directory
      * bucket naming rules</a> in the <i>Amazon S3 User Guide</i>.</p> <p> <b>Access
      * points</b> - When you use this action with an access point, you must provide the
@@ -179,6 +180,62 @@ namespace Model
     ///@}
 
     ///@{
+    /**
+     * <p>The <code>If-Match</code> header field makes the request method conditional
+     * on ETags. If the ETag value does not match, the operation returns a <code>412
+     * Precondition Failed</code> error. If the ETag matches or if the object doesn't
+     * exist, the operation will return a <code>204 Success (No Content)
+     * response</code>.</p> <p>For more information about conditional requests, see <a
+     * href="https://docs.aws.amazon.com/https:/tools.ietf.org/html/rfc7232">RFC
+     * 7232</a>.</p>  <p>This functionality is only supported for directory
+     * buckets.</p> 
+     */
+    inline const Aws::String& GetIfMatch() const{ return m_ifMatch; }
+    inline bool IfMatchHasBeenSet() const { return m_ifMatchHasBeenSet; }
+    inline void SetIfMatch(const Aws::String& value) { m_ifMatchHasBeenSet = true; m_ifMatch = value; }
+    inline void SetIfMatch(Aws::String&& value) { m_ifMatchHasBeenSet = true; m_ifMatch = std::move(value); }
+    inline void SetIfMatch(const char* value) { m_ifMatchHasBeenSet = true; m_ifMatch.assign(value); }
+    inline DeleteObjectRequest& WithIfMatch(const Aws::String& value) { SetIfMatch(value); return *this;}
+    inline DeleteObjectRequest& WithIfMatch(Aws::String&& value) { SetIfMatch(std::move(value)); return *this;}
+    inline DeleteObjectRequest& WithIfMatch(const char* value) { SetIfMatch(value); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>If present, the object is deleted only if its modification times matches the
+     * provided <code>Timestamp</code>. If the <code>Timestamp</code> values do not
+     * match, the operation returns a <code>412 Precondition Failed</code> error. If
+     * the <code>Timestamp</code> matches or if the object doesn’t exist, the operation
+     * returns a <code>204 Success (No Content)</code> response.</p>  <p>This
+     * functionality is only supported for directory buckets.</p> 
+     */
+    inline const Aws::Utils::DateTime& GetIfMatchLastModifiedTime() const{ return m_ifMatchLastModifiedTime; }
+    inline bool IfMatchLastModifiedTimeHasBeenSet() const { return m_ifMatchLastModifiedTimeHasBeenSet; }
+    inline void SetIfMatchLastModifiedTime(const Aws::Utils::DateTime& value) { m_ifMatchLastModifiedTimeHasBeenSet = true; m_ifMatchLastModifiedTime = value; }
+    inline void SetIfMatchLastModifiedTime(Aws::Utils::DateTime&& value) { m_ifMatchLastModifiedTimeHasBeenSet = true; m_ifMatchLastModifiedTime = std::move(value); }
+    inline DeleteObjectRequest& WithIfMatchLastModifiedTime(const Aws::Utils::DateTime& value) { SetIfMatchLastModifiedTime(value); return *this;}
+    inline DeleteObjectRequest& WithIfMatchLastModifiedTime(Aws::Utils::DateTime&& value) { SetIfMatchLastModifiedTime(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>If present, the object is deleted only if its size matches the provided size
+     * in bytes. If the <code>Size</code> value does not match, the operation returns a
+     * <code>412 Precondition Failed</code> error. If the <code>Size</code> matches or
+     * if the object doesn’t exist, the operation returns a <code>204 Success (No
+     * Content)</code> response.</p>  <p>This functionality is only supported for
+     * directory buckets.</p>   <p>You can use the
+     * <code>If-Match</code>, <code>x-amz-if-match-last-modified-time</code> and
+     * <code>x-amz-if-match-size</code> conditional headers in conjunction with
+     * each-other or individually.</p> 
+     */
+    inline long long GetIfMatchSize() const{ return m_ifMatchSize; }
+    inline bool IfMatchSizeHasBeenSet() const { return m_ifMatchSizeHasBeenSet; }
+    inline void SetIfMatchSize(long long value) { m_ifMatchSizeHasBeenSet = true; m_ifMatchSize = value; }
+    inline DeleteObjectRequest& WithIfMatchSize(long long value) { SetIfMatchSize(value); return *this;}
+    ///@}
+
+    ///@{
     
     inline const Aws::Map<Aws::String, Aws::String>& GetCustomizedAccessLogTag() const{ return m_customizedAccessLogTag; }
     inline bool CustomizedAccessLogTagHasBeenSet() const { return m_customizedAccessLogTagHasBeenSet; }
@@ -216,6 +273,15 @@ namespace Model
 
     Aws::String m_expectedBucketOwner;
     bool m_expectedBucketOwnerHasBeenSet = false;
+
+    Aws::String m_ifMatch;
+    bool m_ifMatchHasBeenSet = false;
+
+    Aws::Utils::DateTime m_ifMatchLastModifiedTime;
+    bool m_ifMatchLastModifiedTimeHasBeenSet = false;
+
+    long long m_ifMatchSize;
+    bool m_ifMatchSizeHasBeenSet = false;
 
     Aws::Map<Aws::String, Aws::String> m_customizedAccessLogTag;
     bool m_customizedAccessLogTagHasBeenSet = false;

@@ -55,7 +55,7 @@ namespace Model
 
     ///@{
     /**
-     * <p>The name of the SageMaker notebook instance. </p>
+     * <p>The name of the SageMaker AI notebook instance. </p>
      */
     inline const Aws::String& GetNotebookInstanceName() const{ return m_notebookInstanceName; }
     inline void SetNotebookInstanceName(const Aws::String& value) { m_notebookInstanceName = value; }
@@ -158,7 +158,7 @@ namespace Model
 
     ///@{
     /**
-     * <p>The Amazon Web Services KMS key ID SageMaker uses to encrypt data when
+     * <p>The Amazon Web Services KMS key ID SageMaker AI uses to encrypt data when
      * storing it on the ML storage volume attached to the instance. </p>
      */
     inline const Aws::String& GetKmsKeyId() const{ return m_kmsKeyId; }
@@ -172,8 +172,8 @@ namespace Model
 
     ///@{
     /**
-     * <p>The network interface IDs that SageMaker created at the time of creating the
-     * instance. </p>
+     * <p>The network interface IDs that SageMaker AI created at the time of creating
+     * the instance. </p>
      */
     inline const Aws::String& GetNetworkInterfaceId() const{ return m_networkInterfaceId; }
     inline void SetNetworkInterfaceId(const Aws::String& value) { m_networkInterfaceId = value; }
@@ -226,10 +226,10 @@ namespace Model
 
     ///@{
     /**
-     * <p>Describes whether SageMaker provides internet access to the notebook
+     * <p>Describes whether SageMaker AI provides internet access to the notebook
      * instance. If this value is set to <i>Disabled</i>, the notebook instance does
-     * not have internet access, and cannot connect to SageMaker training and endpoint
-     * services.</p> <p>For more information, see <a
+     * not have internet access, and cannot connect to SageMaker AI training and
+     * endpoint services.</p> <p>For more information, see <a
      * href="https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access">Notebook
      * Instances Are Internet-Enabled by Default</a>.</p>
      */
@@ -252,11 +252,9 @@ namespace Model
 
     ///@{
     /**
-     * <p>A list of the Elastic Inference (EI) instance types associated with this
-     * notebook instance. Currently only one EI instance type can be associated with a
-     * notebook instance. For more information, see <a
-     * href="https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html">Using Elastic
-     * Inference in Amazon SageMaker</a>.</p>
+     * <p>This parameter is no longer supported. Elastic Inference (EI) is no longer
+     * available.</p> <p>This parameter was used to specify a list of the EI instance
+     * types associated with this notebook instance.</p>
      */
     inline const Aws::Vector<NotebookInstanceAcceleratorType>& GetAcceleratorTypes() const{ return m_acceleratorTypes; }
     inline void SetAcceleratorTypes(const Aws::Vector<NotebookInstanceAcceleratorType>& value) { m_acceleratorTypes = value; }
@@ -277,7 +275,7 @@ namespace Model
      * notebook instance, it opens in the directory that contains this repository. For
      * more information, see <a
      * href="https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html">Associating
-     * Git Repositories with SageMaker Notebook Instances</a>.</p>
+     * Git Repositories with SageMaker AI Notebook Instances</a>.</p>
      */
     inline const Aws::String& GetDefaultCodeRepository() const{ return m_defaultCodeRepository; }
     inline void SetDefaultCodeRepository(const Aws::String& value) { m_defaultCodeRepository = value; }
@@ -298,7 +296,7 @@ namespace Model
      * are cloned at the same level as the default repository of your notebook
      * instance. For more information, see <a
      * href="https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html">Associating
-     * Git Repositories with SageMaker Notebook Instances</a>.</p>
+     * Git Repositories with SageMaker AI Notebook Instances</a>.</p>
      */
     inline const Aws::Vector<Aws::String>& GetAdditionalCodeRepositories() const{ return m_additionalCodeRepositories; }
     inline void SetAdditionalCodeRepositories(const Aws::Vector<Aws::String>& value) { m_additionalCodeRepositories = value; }

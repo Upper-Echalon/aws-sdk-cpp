@@ -28,7 +28,11 @@ namespace Model
    * Connect instances that are created with the <code>EXISTING_DIRECTORY</code>
    * identity management type, <code>FirstName</code>, <code>LastName</code>, and
    * <code>Email</code> cannot be updated from within Amazon Connect because they are
-   * managed by the directory.</p> <p><h3>See Also:</h3>   <a
+   * managed by the directory.</p>   <p>The <code>FirstName</code>
+   * and <code>LastName</code> length constraints below apply only to instances using
+   * SAML for identity management. If you are using Amazon Connect for identity
+   * management, the length constraints are 1-255 for <code>FirstName</code>, and
+   * 1-256 for <code>LastName</code>. </p> <p><h3>See Also:</h3>   <a
    * href="http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserIdentityInfo">AWS
    * API Reference</a></p>
    */
@@ -44,7 +48,9 @@ namespace Model
     ///@{
     /**
      * <p>The first name. This is required if you are using Amazon Connect or SAML for
-     * identity management.</p>
+     * identity management. Inputs must be in Unicode Normalization Form C (NFC). Text
+     * containing characters in a non-NFC form (for example, decomposed characters or
+     * combining marks) are not accepted.</p>
      */
     inline const Aws::String& GetFirstName() const{ return m_firstName; }
     inline bool FirstNameHasBeenSet() const { return m_firstNameHasBeenSet; }
@@ -59,7 +65,9 @@ namespace Model
     ///@{
     /**
      * <p>The last name. This is required if you are using Amazon Connect or SAML for
-     * identity management.</p>
+     * identity management. Inputs must be in Unicode Normalization Form C (NFC). Text
+     * containing characters in a non-NFC form (for example, decomposed characters or
+     * combining marks) are not accepted.</p>
      */
     inline const Aws::String& GetLastName() const{ return m_lastName; }
     inline bool LastNameHasBeenSet() const { return m_lastNameHasBeenSet; }

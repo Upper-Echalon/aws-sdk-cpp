@@ -101,6 +101,34 @@ namespace QConnect
         virtual ~QConnectClient();
 
         /**
+         * <p>Activates a specific version of the Amazon Q in Connect message template.
+         * After the version is activated, the previous active version will be deactivated
+         * automatically. You can use the <code>$ACTIVE_VERSION</code> qualifier later to
+         * reference the version that is in active status.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ActivateMessageTemplate">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ActivateMessageTemplateOutcome ActivateMessageTemplate(const Model::ActivateMessageTemplateRequest& request) const;
+
+        /**
+         * A Callable wrapper for ActivateMessageTemplate that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ActivateMessageTemplateRequestT = Model::ActivateMessageTemplateRequest>
+        Model::ActivateMessageTemplateOutcomeCallable ActivateMessageTemplateCallable(const ActivateMessageTemplateRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::ActivateMessageTemplate, request);
+        }
+
+        /**
+         * An Async wrapper for ActivateMessageTemplate that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ActivateMessageTemplateRequestT = Model::ActivateMessageTemplateRequest>
+        void ActivateMessageTemplateAsync(const ActivateMessageTemplateRequestT& request, const ActivateMessageTemplateResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::ActivateMessageTemplate, request, handler, context);
+        }
+
+        /**
          * <p>Creates an Amazon Q in Connect AI Agent.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIAgent">AWS
          * API Reference</a></p>
@@ -149,6 +177,57 @@ namespace QConnect
         void CreateAIAgentVersionAsync(const CreateAIAgentVersionRequestT& request, const CreateAIAgentVersionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&QConnectClient::CreateAIAgentVersion, request, handler, context);
+        }
+
+        /**
+         * <p>Creates an Amazon Q in Connect AI Guardrail.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIGuardrail">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::CreateAIGuardrailOutcome CreateAIGuardrail(const Model::CreateAIGuardrailRequest& request) const;
+
+        /**
+         * A Callable wrapper for CreateAIGuardrail that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename CreateAIGuardrailRequestT = Model::CreateAIGuardrailRequest>
+        Model::CreateAIGuardrailOutcomeCallable CreateAIGuardrailCallable(const CreateAIGuardrailRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::CreateAIGuardrail, request);
+        }
+
+        /**
+         * An Async wrapper for CreateAIGuardrail that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename CreateAIGuardrailRequestT = Model::CreateAIGuardrailRequest>
+        void CreateAIGuardrailAsync(const CreateAIGuardrailRequestT& request, const CreateAIGuardrailResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::CreateAIGuardrail, request, handler, context);
+        }
+
+        /**
+         * <p>Creates an Amazon Q in Connect AI Guardrail version.</p><p><h3>See Also:</h3>
+         * <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIGuardrailVersion">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::CreateAIGuardrailVersionOutcome CreateAIGuardrailVersion(const Model::CreateAIGuardrailVersionRequest& request) const;
+
+        /**
+         * A Callable wrapper for CreateAIGuardrailVersion that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename CreateAIGuardrailVersionRequestT = Model::CreateAIGuardrailVersionRequest>
+        Model::CreateAIGuardrailVersionOutcomeCallable CreateAIGuardrailVersionCallable(const CreateAIGuardrailVersionRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::CreateAIGuardrailVersion, request);
+        }
+
+        /**
+         * An Async wrapper for CreateAIGuardrailVersion that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename CreateAIGuardrailVersionRequestT = Model::CreateAIGuardrailVersionRequest>
+        void CreateAIGuardrailVersionAsync(const CreateAIGuardrailVersionRequestT& request, const CreateAIGuardrailVersionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::CreateAIGuardrailVersion, request, handler, context);
         }
 
         /**
@@ -361,6 +440,102 @@ namespace QConnect
         }
 
         /**
+         * <p>Creates an Amazon Q in Connect message template. The name of the message
+         * template has to be unique for each knowledge base. The channel subtype of the
+         * message template is immutable and cannot be modified after creation. After the
+         * message template is created, you can use the <code>$LATEST</code> qualifier to
+         * reference the created message template.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplate">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::CreateMessageTemplateOutcome CreateMessageTemplate(const Model::CreateMessageTemplateRequest& request) const;
+
+        /**
+         * A Callable wrapper for CreateMessageTemplate that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename CreateMessageTemplateRequestT = Model::CreateMessageTemplateRequest>
+        Model::CreateMessageTemplateOutcomeCallable CreateMessageTemplateCallable(const CreateMessageTemplateRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::CreateMessageTemplate, request);
+        }
+
+        /**
+         * An Async wrapper for CreateMessageTemplate that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename CreateMessageTemplateRequestT = Model::CreateMessageTemplateRequest>
+        void CreateMessageTemplateAsync(const CreateMessageTemplateRequestT& request, const CreateMessageTemplateResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::CreateMessageTemplate, request, handler, context);
+        }
+
+        /**
+         * <p>Uploads an attachment file to the specified Amazon Q in Connect message
+         * template. The name of the message template attachment has to be unique for each
+         * message template referenced by the <code>$LATEST</code> qualifier. The body of
+         * the attachment file should be encoded using base64 encoding. After the file is
+         * uploaded, you can use the pre-signed Amazon S3 URL returned in response to
+         * download the uploaded file.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateAttachment">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::CreateMessageTemplateAttachmentOutcome CreateMessageTemplateAttachment(const Model::CreateMessageTemplateAttachmentRequest& request) const;
+
+        /**
+         * A Callable wrapper for CreateMessageTemplateAttachment that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename CreateMessageTemplateAttachmentRequestT = Model::CreateMessageTemplateAttachmentRequest>
+        Model::CreateMessageTemplateAttachmentOutcomeCallable CreateMessageTemplateAttachmentCallable(const CreateMessageTemplateAttachmentRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::CreateMessageTemplateAttachment, request);
+        }
+
+        /**
+         * An Async wrapper for CreateMessageTemplateAttachment that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename CreateMessageTemplateAttachmentRequestT = Model::CreateMessageTemplateAttachmentRequest>
+        void CreateMessageTemplateAttachmentAsync(const CreateMessageTemplateAttachmentRequestT& request, const CreateMessageTemplateAttachmentResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::CreateMessageTemplateAttachment, request, handler, context);
+        }
+
+        /**
+         * <p>Creates a new Amazon Q in Connect message template version from the current
+         * content and configuration of a message template. Versions are immutable and
+         * monotonically increasing. Once a version is created, you can reference a
+         * specific version of the message template by passing in
+         * <code>&lt;message-template-id&gt;:&lt;versionNumber&gt;</code> as the message
+         * template identifier. An error is displayed if the supplied
+         * <code>messageTemplateContentSha256</code> is different from the
+         * <code>messageTemplateContentSha256</code> of the message template with
+         * <code>$LATEST</code> qualifier. If multiple
+         * <code>CreateMessageTemplateVersion</code> requests are made while the message
+         * template remains the same, only the first invocation creates a new version and
+         * the succeeding requests will return the same response as the first
+         * invocation.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateMessageTemplateVersion">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::CreateMessageTemplateVersionOutcome CreateMessageTemplateVersion(const Model::CreateMessageTemplateVersionRequest& request) const;
+
+        /**
+         * A Callable wrapper for CreateMessageTemplateVersion that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename CreateMessageTemplateVersionRequestT = Model::CreateMessageTemplateVersionRequest>
+        Model::CreateMessageTemplateVersionOutcomeCallable CreateMessageTemplateVersionCallable(const CreateMessageTemplateVersionRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::CreateMessageTemplateVersion, request);
+        }
+
+        /**
+         * An Async wrapper for CreateMessageTemplateVersion that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename CreateMessageTemplateVersionRequestT = Model::CreateMessageTemplateVersionRequest>
+        void CreateMessageTemplateVersionAsync(const CreateMessageTemplateVersionRequestT& request, const CreateMessageTemplateVersionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::CreateMessageTemplateVersion, request, handler, context);
+        }
+
+        /**
          * <p>Creates an Amazon Q in Connect quick response.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateQuickResponse">AWS
          * API Reference</a></p>
@@ -414,6 +589,34 @@ namespace QConnect
         }
 
         /**
+         * <p>Deactivates a specific version of the Amazon Q in Connect message template .
+         * After the version is deactivated, you can no longer use the
+         * <code>$ACTIVE_VERSION</code> qualifier to reference the version in active
+         * status.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeactivateMessageTemplate">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DeactivateMessageTemplateOutcome DeactivateMessageTemplate(const Model::DeactivateMessageTemplateRequest& request) const;
+
+        /**
+         * A Callable wrapper for DeactivateMessageTemplate that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DeactivateMessageTemplateRequestT = Model::DeactivateMessageTemplateRequest>
+        Model::DeactivateMessageTemplateOutcomeCallable DeactivateMessageTemplateCallable(const DeactivateMessageTemplateRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::DeactivateMessageTemplate, request);
+        }
+
+        /**
+         * An Async wrapper for DeactivateMessageTemplate that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DeactivateMessageTemplateRequestT = Model::DeactivateMessageTemplateRequest>
+        void DeactivateMessageTemplateAsync(const DeactivateMessageTemplateRequestT& request, const DeactivateMessageTemplateResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::DeactivateMessageTemplate, request, handler, context);
+        }
+
+        /**
          * <p>Deletes an Amazon Q in Connect AI Agent.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteAIAgent">AWS
          * API Reference</a></p>
@@ -462,6 +665,57 @@ namespace QConnect
         void DeleteAIAgentVersionAsync(const DeleteAIAgentVersionRequestT& request, const DeleteAIAgentVersionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&QConnectClient::DeleteAIAgentVersion, request, handler, context);
+        }
+
+        /**
+         * <p>Deletes an Amazon Q in Connect AI Guardrail.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteAIGuardrail">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DeleteAIGuardrailOutcome DeleteAIGuardrail(const Model::DeleteAIGuardrailRequest& request) const;
+
+        /**
+         * A Callable wrapper for DeleteAIGuardrail that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DeleteAIGuardrailRequestT = Model::DeleteAIGuardrailRequest>
+        Model::DeleteAIGuardrailOutcomeCallable DeleteAIGuardrailCallable(const DeleteAIGuardrailRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::DeleteAIGuardrail, request);
+        }
+
+        /**
+         * An Async wrapper for DeleteAIGuardrail that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DeleteAIGuardrailRequestT = Model::DeleteAIGuardrailRequest>
+        void DeleteAIGuardrailAsync(const DeleteAIGuardrailRequestT& request, const DeleteAIGuardrailResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::DeleteAIGuardrail, request, handler, context);
+        }
+
+        /**
+         * <p>Delete and Amazon Q in Connect AI Guardrail version.</p><p><h3>See Also:</h3>
+         * <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteAIGuardrailVersion">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DeleteAIGuardrailVersionOutcome DeleteAIGuardrailVersion(const Model::DeleteAIGuardrailVersionRequest& request) const;
+
+        /**
+         * A Callable wrapper for DeleteAIGuardrailVersion that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DeleteAIGuardrailVersionRequestT = Model::DeleteAIGuardrailVersionRequest>
+        Model::DeleteAIGuardrailVersionOutcomeCallable DeleteAIGuardrailVersionCallable(const DeleteAIGuardrailVersionRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::DeleteAIGuardrailVersion, request);
+        }
+
+        /**
+         * An Async wrapper for DeleteAIGuardrailVersion that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DeleteAIGuardrailVersionRequestT = Model::DeleteAIGuardrailVersionRequest>
+        void DeleteAIGuardrailVersionAsync(const DeleteAIGuardrailVersionRequestT& request, const DeleteAIGuardrailVersionResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::DeleteAIGuardrailVersion, request, handler, context);
         }
 
         /**
@@ -681,6 +935,64 @@ namespace QConnect
         }
 
         /**
+         * <p>Deletes an Amazon Q in Connect message template entirely or a specific
+         * version of the message template if version is supplied in the request. You can
+         * provide the message template identifier as
+         * <code>&lt;message-template-id&gt;:&lt;versionNumber&gt;</code> to delete a
+         * specific version of the message template. If it is not supplied, the message
+         * template and all available versions will be deleted.</p><p><h3>See Also:</h3>  
+         * <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplate">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DeleteMessageTemplateOutcome DeleteMessageTemplate(const Model::DeleteMessageTemplateRequest& request) const;
+
+        /**
+         * A Callable wrapper for DeleteMessageTemplate that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DeleteMessageTemplateRequestT = Model::DeleteMessageTemplateRequest>
+        Model::DeleteMessageTemplateOutcomeCallable DeleteMessageTemplateCallable(const DeleteMessageTemplateRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::DeleteMessageTemplate, request);
+        }
+
+        /**
+         * An Async wrapper for DeleteMessageTemplate that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DeleteMessageTemplateRequestT = Model::DeleteMessageTemplateRequest>
+        void DeleteMessageTemplateAsync(const DeleteMessageTemplateRequestT& request, const DeleteMessageTemplateResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::DeleteMessageTemplate, request, handler, context);
+        }
+
+        /**
+         * <p>Deletes the attachment file from the Amazon Q in Connect message template
+         * that is referenced by <code>$LATEST</code> qualifier. Attachments on available
+         * message template versions will remain unchanged.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteMessageTemplateAttachment">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::DeleteMessageTemplateAttachmentOutcome DeleteMessageTemplateAttachment(const Model::DeleteMessageTemplateAttachmentRequest& request) const;
+
+        /**
+         * A Callable wrapper for DeleteMessageTemplateAttachment that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename DeleteMessageTemplateAttachmentRequestT = Model::DeleteMessageTemplateAttachmentRequest>
+        Model::DeleteMessageTemplateAttachmentOutcomeCallable DeleteMessageTemplateAttachmentCallable(const DeleteMessageTemplateAttachmentRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::DeleteMessageTemplateAttachment, request);
+        }
+
+        /**
+         * An Async wrapper for DeleteMessageTemplateAttachment that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename DeleteMessageTemplateAttachmentRequestT = Model::DeleteMessageTemplateAttachmentRequest>
+        void DeleteMessageTemplateAttachmentAsync(const DeleteMessageTemplateAttachmentRequestT& request, const DeleteMessageTemplateAttachmentResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::DeleteMessageTemplateAttachment, request, handler, context);
+        }
+
+        /**
          * <p>Deletes a quick response.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DeleteQuickResponse">AWS
          * API Reference</a></p>
@@ -728,6 +1040,31 @@ namespace QConnect
         void GetAIAgentAsync(const GetAIAgentRequestT& request, const GetAIAgentResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&QConnectClient::GetAIAgent, request, handler, context);
+        }
+
+        /**
+         * <p>Gets the Amazon Q in Connect AI Guardrail.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetAIGuardrail">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::GetAIGuardrailOutcome GetAIGuardrail(const Model::GetAIGuardrailRequest& request) const;
+
+        /**
+         * A Callable wrapper for GetAIGuardrail that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename GetAIGuardrailRequestT = Model::GetAIGuardrailRequest>
+        Model::GetAIGuardrailOutcomeCallable GetAIGuardrailCallable(const GetAIGuardrailRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::GetAIGuardrail, request);
+        }
+
+        /**
+         * An Async wrapper for GetAIGuardrail that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename GetAIGuardrailRequestT = Model::GetAIGuardrailRequest>
+        void GetAIGuardrailAsync(const GetAIGuardrailRequestT& request, const GetAIGuardrailResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::GetAIGuardrail, request, handler, context);
         }
 
         /**
@@ -938,6 +1275,62 @@ namespace QConnect
         }
 
         /**
+         * <p>Retrieves the Amazon Q in Connect message template. The message template
+         * identifier can contain an optional qualifier, for example,
+         * <code>&lt;message-template-id&gt;:&lt;qualifier&gt;</code>, which is either an
+         * actual version number or an Amazon Q Connect managed qualifier
+         * <code>$ACTIVE_VERSION</code> | <code>$LATEST</code>. If it is not supplied, then
+         * <code>$LATEST</code> is assumed implicitly.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetMessageTemplate">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::GetMessageTemplateOutcome GetMessageTemplate(const Model::GetMessageTemplateRequest& request) const;
+
+        /**
+         * A Callable wrapper for GetMessageTemplate that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename GetMessageTemplateRequestT = Model::GetMessageTemplateRequest>
+        Model::GetMessageTemplateOutcomeCallable GetMessageTemplateCallable(const GetMessageTemplateRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::GetMessageTemplate, request);
+        }
+
+        /**
+         * An Async wrapper for GetMessageTemplate that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename GetMessageTemplateRequestT = Model::GetMessageTemplateRequest>
+        void GetMessageTemplateAsync(const GetMessageTemplateRequestT& request, const GetMessageTemplateResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::GetMessageTemplate, request, handler, context);
+        }
+
+        /**
+         * <p>Retrieves next message on an Amazon Q in Connect session.</p><p><h3>See
+         * Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetNextMessage">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::GetNextMessageOutcome GetNextMessage(const Model::GetNextMessageRequest& request) const;
+
+        /**
+         * A Callable wrapper for GetNextMessage that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename GetNextMessageRequestT = Model::GetNextMessageRequest>
+        Model::GetNextMessageOutcomeCallable GetNextMessageCallable(const GetNextMessageRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::GetNextMessage, request);
+        }
+
+        /**
+         * An Async wrapper for GetNextMessage that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename GetNextMessageRequestT = Model::GetNextMessageRequest>
+        void GetNextMessageAsync(const GetNextMessageRequestT& request, const GetNextMessageResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::GetNextMessage, request, handler, context);
+        }
+
+        /**
          * <p>Retrieves the quick response.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetQuickResponse">AWS
          * API Reference</a></p>
@@ -1035,6 +1428,57 @@ namespace QConnect
         void ListAIAgentsAsync(const ListAIAgentsRequestT& request, const ListAIAgentsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&QConnectClient::ListAIAgents, request, handler, context);
+        }
+
+        /**
+         * <p>Lists AI Guardrail versions.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAIGuardrailVersions">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ListAIGuardrailVersionsOutcome ListAIGuardrailVersions(const Model::ListAIGuardrailVersionsRequest& request) const;
+
+        /**
+         * A Callable wrapper for ListAIGuardrailVersions that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ListAIGuardrailVersionsRequestT = Model::ListAIGuardrailVersionsRequest>
+        Model::ListAIGuardrailVersionsOutcomeCallable ListAIGuardrailVersionsCallable(const ListAIGuardrailVersionsRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::ListAIGuardrailVersions, request);
+        }
+
+        /**
+         * An Async wrapper for ListAIGuardrailVersions that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ListAIGuardrailVersionsRequestT = Model::ListAIGuardrailVersionsRequest>
+        void ListAIGuardrailVersionsAsync(const ListAIGuardrailVersionsRequestT& request, const ListAIGuardrailVersionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::ListAIGuardrailVersions, request, handler, context);
+        }
+
+        /**
+         * <p>Lists the AI Guardrails available on the Amazon Q in Connect
+         * assistant.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAIGuardrails">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ListAIGuardrailsOutcome ListAIGuardrails(const Model::ListAIGuardrailsRequest& request) const;
+
+        /**
+         * A Callable wrapper for ListAIGuardrails that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ListAIGuardrailsRequestT = Model::ListAIGuardrailsRequest>
+        Model::ListAIGuardrailsOutcomeCallable ListAIGuardrailsCallable(const ListAIGuardrailsRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::ListAIGuardrails, request);
+        }
+
+        /**
+         * An Async wrapper for ListAIGuardrails that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ListAIGuardrailsRequestT = Model::ListAIGuardrailsRequest>
+        void ListAIGuardrailsAsync(const ListAIGuardrailsRequestT& request, const ListAIGuardrailsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::ListAIGuardrails, request, handler, context);
         }
 
         /**
@@ -1243,6 +1687,84 @@ namespace QConnect
         }
 
         /**
+         * <p>Lists all the available versions for the specified Amazon Q in Connect
+         * message template.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplateVersions">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ListMessageTemplateVersionsOutcome ListMessageTemplateVersions(const Model::ListMessageTemplateVersionsRequest& request) const;
+
+        /**
+         * A Callable wrapper for ListMessageTemplateVersions that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ListMessageTemplateVersionsRequestT = Model::ListMessageTemplateVersionsRequest>
+        Model::ListMessageTemplateVersionsOutcomeCallable ListMessageTemplateVersionsCallable(const ListMessageTemplateVersionsRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::ListMessageTemplateVersions, request);
+        }
+
+        /**
+         * An Async wrapper for ListMessageTemplateVersions that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ListMessageTemplateVersionsRequestT = Model::ListMessageTemplateVersionsRequest>
+        void ListMessageTemplateVersionsAsync(const ListMessageTemplateVersionsRequestT& request, const ListMessageTemplateVersionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::ListMessageTemplateVersions, request, handler, context);
+        }
+
+        /**
+         * <p>Lists all the available Amazon Q in Connect message templates for the
+         * specified knowledge base.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessageTemplates">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ListMessageTemplatesOutcome ListMessageTemplates(const Model::ListMessageTemplatesRequest& request) const;
+
+        /**
+         * A Callable wrapper for ListMessageTemplates that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ListMessageTemplatesRequestT = Model::ListMessageTemplatesRequest>
+        Model::ListMessageTemplatesOutcomeCallable ListMessageTemplatesCallable(const ListMessageTemplatesRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::ListMessageTemplates, request);
+        }
+
+        /**
+         * An Async wrapper for ListMessageTemplates that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ListMessageTemplatesRequestT = Model::ListMessageTemplatesRequest>
+        void ListMessageTemplatesAsync(const ListMessageTemplatesRequestT& request, const ListMessageTemplatesResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::ListMessageTemplates, request, handler, context);
+        }
+
+        /**
+         * <p>Lists messages on an Amazon Q in Connect session.</p><p><h3>See Also:</h3>  
+         * <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListMessages">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::ListMessagesOutcome ListMessages(const Model::ListMessagesRequest& request) const;
+
+        /**
+         * A Callable wrapper for ListMessages that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename ListMessagesRequestT = Model::ListMessagesRequest>
+        Model::ListMessagesOutcomeCallable ListMessagesCallable(const ListMessagesRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::ListMessages, request);
+        }
+
+        /**
+         * An Async wrapper for ListMessages that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename ListMessagesRequestT = Model::ListMessagesRequest>
+        void ListMessagesAsync(const ListMessagesRequestT& request, const ListMessagesResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::ListMessages, request, handler, context);
+        }
+
+        /**
          * <p>Lists information about quick response.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListQuickResponses">AWS
          * API Reference</a></p>
@@ -1399,6 +1921,36 @@ namespace QConnect
         }
 
         /**
+         * <p>Renders the Amazon Q in Connect message template based on the attribute
+         * values provided and generates the message content. For any variable present in
+         * the message template, if the attribute value is neither provided in the
+         * attribute request parameter nor the default attribute of the message template,
+         * the rendered message content will keep the variable placeholder as it is and
+         * return the attribute keys that are missing.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RenderMessageTemplate">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::RenderMessageTemplateOutcome RenderMessageTemplate(const Model::RenderMessageTemplateRequest& request) const;
+
+        /**
+         * A Callable wrapper for RenderMessageTemplate that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename RenderMessageTemplateRequestT = Model::RenderMessageTemplateRequest>
+        Model::RenderMessageTemplateOutcomeCallable RenderMessageTemplateCallable(const RenderMessageTemplateRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::RenderMessageTemplate, request);
+        }
+
+        /**
+         * An Async wrapper for RenderMessageTemplate that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename RenderMessageTemplateRequestT = Model::RenderMessageTemplateRequest>
+        void RenderMessageTemplateAsync(const RenderMessageTemplateRequestT& request, const RenderMessageTemplateResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::RenderMessageTemplate, request, handler, context);
+        }
+
+        /**
          * <p>Searches for content in a specified knowledge base. Can be used to get a
          * specific content resource by its name.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SearchContent">AWS
@@ -1422,6 +1974,32 @@ namespace QConnect
         void SearchContentAsync(const SearchContentRequestT& request, const SearchContentResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&QConnectClient::SearchContent, request, handler, context);
+        }
+
+        /**
+         * <p>Searches for Amazon Q in Connect message templates in the specified knowledge
+         * base.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SearchMessageTemplates">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::SearchMessageTemplatesOutcome SearchMessageTemplates(const Model::SearchMessageTemplatesRequest& request) const;
+
+        /**
+         * A Callable wrapper for SearchMessageTemplates that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename SearchMessageTemplatesRequestT = Model::SearchMessageTemplatesRequest>
+        Model::SearchMessageTemplatesOutcomeCallable SearchMessageTemplatesCallable(const SearchMessageTemplatesRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::SearchMessageTemplates, request);
+        }
+
+        /**
+         * An Async wrapper for SearchMessageTemplates that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename SearchMessageTemplatesRequestT = Model::SearchMessageTemplatesRequest>
+        void SearchMessageTemplatesAsync(const SearchMessageTemplatesRequestT& request, const SearchMessageTemplatesResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::SearchMessageTemplates, request, handler, context);
         }
 
         /**
@@ -1473,6 +2051,32 @@ namespace QConnect
         void SearchSessionsAsync(const SearchSessionsRequestT& request, const SearchSessionsResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&QConnectClient::SearchSessions, request, handler, context);
+        }
+
+        /**
+         * <p>Submits a message to the Amazon Q in Connect session.</p><p><h3>See
+         * Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SendMessage">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::SendMessageOutcome SendMessage(const Model::SendMessageRequest& request) const;
+
+        /**
+         * A Callable wrapper for SendMessage that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename SendMessageRequestT = Model::SendMessageRequest>
+        Model::SendMessageOutcomeCallable SendMessageCallable(const SendMessageRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::SendMessage, request);
+        }
+
+        /**
+         * An Async wrapper for SendMessage that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename SendMessageRequestT = Model::SendMessageRequest>
+        void SendMessageAsync(const SendMessageRequestT& request, const SendMessageResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::SendMessage, request, handler, context);
         }
 
         /**
@@ -1618,6 +2222,31 @@ namespace QConnect
         }
 
         /**
+         * <p>Updates an AI Guardrail.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAIGuardrail">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::UpdateAIGuardrailOutcome UpdateAIGuardrail(const Model::UpdateAIGuardrailRequest& request) const;
+
+        /**
+         * A Callable wrapper for UpdateAIGuardrail that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename UpdateAIGuardrailRequestT = Model::UpdateAIGuardrailRequest>
+        Model::UpdateAIGuardrailOutcomeCallable UpdateAIGuardrailCallable(const UpdateAIGuardrailRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::UpdateAIGuardrail, request);
+        }
+
+        /**
+         * An Async wrapper for UpdateAIGuardrail that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename UpdateAIGuardrailRequestT = Model::UpdateAIGuardrailRequest>
+        void UpdateAIGuardrailAsync(const UpdateAIGuardrailRequestT& request, const UpdateAIGuardrailResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::UpdateAIGuardrail, request, handler, context);
+        }
+
+        /**
          * <p>Updates an AI Prompt.</p><p><h3>See Also:</h3>   <a
          * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAIPrompt">AWS
          * API Reference</a></p>
@@ -1722,6 +2351,66 @@ namespace QConnect
         void UpdateKnowledgeBaseTemplateUriAsync(const UpdateKnowledgeBaseTemplateUriRequestT& request, const UpdateKnowledgeBaseTemplateUriResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
         {
             return SubmitAsync(&QConnectClient::UpdateKnowledgeBaseTemplateUri, request, handler, context);
+        }
+
+        /**
+         * <p>Updates the Amazon Q in Connect message template. Partial update is
+         * supported. If any field is not supplied, it will remain unchanged for the
+         * message template that is referenced by the <code>$LATEST</code> qualifier. Any
+         * modification will only apply to the message template that is referenced by the
+         * <code>$LATEST</code> qualifier. The fields for all available versions will
+         * remain unchanged.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplate">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::UpdateMessageTemplateOutcome UpdateMessageTemplate(const Model::UpdateMessageTemplateRequest& request) const;
+
+        /**
+         * A Callable wrapper for UpdateMessageTemplate that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename UpdateMessageTemplateRequestT = Model::UpdateMessageTemplateRequest>
+        Model::UpdateMessageTemplateOutcomeCallable UpdateMessageTemplateCallable(const UpdateMessageTemplateRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::UpdateMessageTemplate, request);
+        }
+
+        /**
+         * An Async wrapper for UpdateMessageTemplate that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename UpdateMessageTemplateRequestT = Model::UpdateMessageTemplateRequest>
+        void UpdateMessageTemplateAsync(const UpdateMessageTemplateRequestT& request, const UpdateMessageTemplateResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::UpdateMessageTemplate, request, handler, context);
+        }
+
+        /**
+         * <p>Updates the Amazon Q in Connect message template metadata. Note that any
+         * modification to the message template’s name, description and grouping
+         * configuration will applied to the message template pointed by the
+         * <code>$LATEST</code> qualifier and all available versions. Partial update is
+         * supported. If any field is not supplied, it will remain unchanged for the
+         * message template.</p><p><h3>See Also:</h3>   <a
+         * href="http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateMessageTemplateMetadata">AWS
+         * API Reference</a></p>
+         */
+        virtual Model::UpdateMessageTemplateMetadataOutcome UpdateMessageTemplateMetadata(const Model::UpdateMessageTemplateMetadataRequest& request) const;
+
+        /**
+         * A Callable wrapper for UpdateMessageTemplateMetadata that returns a future to the operation so that it can be executed in parallel to other requests.
+         */
+        template<typename UpdateMessageTemplateMetadataRequestT = Model::UpdateMessageTemplateMetadataRequest>
+        Model::UpdateMessageTemplateMetadataOutcomeCallable UpdateMessageTemplateMetadataCallable(const UpdateMessageTemplateMetadataRequestT& request) const
+        {
+            return SubmitCallable(&QConnectClient::UpdateMessageTemplateMetadata, request);
+        }
+
+        /**
+         * An Async wrapper for UpdateMessageTemplateMetadata that queues the request into a thread executor and triggers associated callback when operation has finished.
+         */
+        template<typename UpdateMessageTemplateMetadataRequestT = Model::UpdateMessageTemplateMetadataRequest>
+        void UpdateMessageTemplateMetadataAsync(const UpdateMessageTemplateMetadataRequestT& request, const UpdateMessageTemplateMetadataResponseReceivedHandler& handler, const std::shared_ptr<const Aws::Client::AsyncCallerContext>& context = nullptr) const
+        {
+            return SubmitAsync(&QConnectClient::UpdateMessageTemplateMetadata, request, handler, context);
         }
 
         /**

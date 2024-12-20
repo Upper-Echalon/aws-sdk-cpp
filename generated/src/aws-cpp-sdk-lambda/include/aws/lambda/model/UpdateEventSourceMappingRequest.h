@@ -12,6 +12,8 @@
 #include <aws/core/utils/memory/stl/AWSVector.h>
 #include <aws/lambda/model/ScalingConfig.h>
 #include <aws/lambda/model/DocumentDBEventSourceConfig.h>
+#include <aws/lambda/model/EventSourceMappingMetricsConfig.h>
+#include <aws/lambda/model/ProvisionedPollerConfig.h>
 #include <aws/lambda/model/SourceAccessConfiguration.h>
 #include <aws/lambda/model/FunctionResponseType.h>
 #include <utility>
@@ -290,6 +292,35 @@ namespace Model
     inline UpdateEventSourceMappingRequest& WithKMSKeyArn(Aws::String&& value) { SetKMSKeyArn(std::move(value)); return *this;}
     inline UpdateEventSourceMappingRequest& WithKMSKeyArn(const char* value) { SetKMSKeyArn(value); return *this;}
     ///@}
+
+    ///@{
+    /**
+     * <p>The metrics configuration for your event source. For more information, see <a
+     * href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics">Event
+     * source mapping metrics</a>.</p>
+     */
+    inline const EventSourceMappingMetricsConfig& GetMetricsConfig() const{ return m_metricsConfig; }
+    inline bool MetricsConfigHasBeenSet() const { return m_metricsConfigHasBeenSet; }
+    inline void SetMetricsConfig(const EventSourceMappingMetricsConfig& value) { m_metricsConfigHasBeenSet = true; m_metricsConfig = value; }
+    inline void SetMetricsConfig(EventSourceMappingMetricsConfig&& value) { m_metricsConfigHasBeenSet = true; m_metricsConfig = std::move(value); }
+    inline UpdateEventSourceMappingRequest& WithMetricsConfig(const EventSourceMappingMetricsConfig& value) { SetMetricsConfig(value); return *this;}
+    inline UpdateEventSourceMappingRequest& WithMetricsConfig(EventSourceMappingMetricsConfig&& value) { SetMetricsConfig(std::move(value)); return *this;}
+    ///@}
+
+    ///@{
+    /**
+     * <p>(Amazon MSK and self-managed Apache Kafka only) The Provisioned Mode
+     * configuration for the event source. For more information, see <a
+     * href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode">Provisioned
+     * Mode</a>.</p>
+     */
+    inline const ProvisionedPollerConfig& GetProvisionedPollerConfig() const{ return m_provisionedPollerConfig; }
+    inline bool ProvisionedPollerConfigHasBeenSet() const { return m_provisionedPollerConfigHasBeenSet; }
+    inline void SetProvisionedPollerConfig(const ProvisionedPollerConfig& value) { m_provisionedPollerConfigHasBeenSet = true; m_provisionedPollerConfig = value; }
+    inline void SetProvisionedPollerConfig(ProvisionedPollerConfig&& value) { m_provisionedPollerConfigHasBeenSet = true; m_provisionedPollerConfig = std::move(value); }
+    inline UpdateEventSourceMappingRequest& WithProvisionedPollerConfig(const ProvisionedPollerConfig& value) { SetProvisionedPollerConfig(value); return *this;}
+    inline UpdateEventSourceMappingRequest& WithProvisionedPollerConfig(ProvisionedPollerConfig&& value) { SetProvisionedPollerConfig(std::move(value)); return *this;}
+    ///@}
   private:
 
     Aws::String m_uUID;
@@ -342,6 +373,12 @@ namespace Model
 
     Aws::String m_kMSKeyArn;
     bool m_kMSKeyArnHasBeenSet = false;
+
+    EventSourceMappingMetricsConfig m_metricsConfig;
+    bool m_metricsConfigHasBeenSet = false;
+
+    ProvisionedPollerConfig m_provisionedPollerConfig;
+    bool m_provisionedPollerConfigHasBeenSet = false;
   };
 
 } // namespace Model

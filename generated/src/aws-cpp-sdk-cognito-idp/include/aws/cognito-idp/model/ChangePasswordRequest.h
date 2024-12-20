@@ -40,7 +40,9 @@ namespace Model
 
     ///@{
     /**
-     * <p>The old password.</p>
+     * <p>The user's previous password. Required if the user has a password. If the
+     * user has no password and only signs in with passwordless authentication options,
+     * you can omit this parameter.</p>
      */
     inline const Aws::String& GetPreviousPassword() const{ return m_previousPassword; }
     inline bool PreviousPasswordHasBeenSet() const { return m_previousPasswordHasBeenSet; }
@@ -54,7 +56,7 @@ namespace Model
 
     ///@{
     /**
-     * <p>The new password.</p>
+     * <p>A new password that you prompted the user to enter in your application.</p>
      */
     inline const Aws::String& GetProposedPassword() const{ return m_proposedPassword; }
     inline bool ProposedPasswordHasBeenSet() const { return m_proposedPasswordHasBeenSet; }
